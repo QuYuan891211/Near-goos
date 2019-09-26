@@ -66,6 +66,7 @@ public class RoleServiceImp extends BaseServiceImp<Role,RoleExample,Integer>  im
         RoleExample example = new RoleExample();
         RoleExample.Criteria criteria = example.createCriteria();
         criteria.andGmtModifiedEqualTo(role.getGmtModified());
+
         List<Role> list = new ArrayList<Role>();
         try{
             list  = roleMapper.selectByExample(example);
