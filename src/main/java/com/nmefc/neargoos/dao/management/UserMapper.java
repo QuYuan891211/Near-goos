@@ -7,7 +7,6 @@ import com.nmefc.neargoos.entity.management.UserExample;
 import java.util.List;
 
 import com.nmefc.neargoos.entity.management.association.UserRoleAssociation;
-import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper extends BaseMapper<User, UserExample, Integer> {
 

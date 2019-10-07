@@ -3,7 +3,6 @@ package com.nmefc.neargoos.service.management;
 import com.nmefc.neargoos.entity.management.Role;
 import com.nmefc.neargoos.entity.management.User;
 import com.nmefc.neargoos.entity.management.UserExample;
-import com.nmefc.neargoos.entity.management.association.UserRoleAssociation;
 import com.nmefc.neargoos.exception.ServiceException;
 import com.nmefc.neargoos.service.BaseService;
 

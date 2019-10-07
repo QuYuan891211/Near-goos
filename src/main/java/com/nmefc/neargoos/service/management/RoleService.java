@@ -1,6 +1,5 @@
 package com.nmefc.neargoos.service.management;
 
-import com.nmefc.neargoos.common.transPara.RolesRelate;
 import com.nmefc.neargoos.entity.management.Role;
 import com.nmefc.neargoos.entity.management.RoleExample;
 import com.nmefc.neargoos.entity.management.User;

@@ -8,7 +8,6 @@ import java.util.List;
 import com.nmefc.neargoos.entity.management.User;
 import com.nmefc.neargoos.entity.management.Action;
 import com.nmefc.neargoos.entity.management.association.*;
-import org.apache.ibatis.annotations.Param;
 
 public interface RoleMapper extends BaseMapper<Role, RoleExample, Integer> {
     /**
