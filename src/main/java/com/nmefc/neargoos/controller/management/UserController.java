@@ -121,6 +121,7 @@ public class UserController {
     @GetMapping(value = "/findAllUser")
     public List<User> findAllUserInfo() throws ControllerException {
         UserExample userExample = new UserExample();
+        //
         UserExample.Criteria criteria = userExample.createCriteria();
         criteria.andIsDeleteNotEqualTo(true);
         List<User> userList = new ArrayList<>();

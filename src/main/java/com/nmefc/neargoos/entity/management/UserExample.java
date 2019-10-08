@@ -45,7 +45,12 @@ public class UserExample {
         return criteria;
     }
 
+    /**
+     *  此方法的用处？
+     * @return
+     */
     public Criteria createCriteria() {
+
         Criteria criteria = createCriteriaInternal();
         if (oredCriteria.size() == 0) {
             oredCriteria.add(criteria);
