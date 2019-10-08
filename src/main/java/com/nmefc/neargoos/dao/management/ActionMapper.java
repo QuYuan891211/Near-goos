@@ -7,7 +7,6 @@ import com.nmefc.neargoos.entity.management.*;
 import java.util.List;
 
 import com.nmefc.neargoos.entity.management.association.RoleActionAssociation;
-import org.apache.ibatis.annotations.Param;
 
 public interface ActionMapper extends BaseMapper<Action, ActionExample, Integer> {
 
