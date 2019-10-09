@@ -1,6 +1,6 @@
 package com.nmefc.neargoos.common.filter;
 
-import com.nmefc.neargoos.entity.management.User;
+import com.nmefc.neargoos.entity_test.management.User;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.session.Session;

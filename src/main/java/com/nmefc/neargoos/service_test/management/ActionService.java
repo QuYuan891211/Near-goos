@@ -1,15 +1,20 @@
-//package com.nmefc.neargoos.dao.management;
+package com.nmefc.neargoos.service_test.management;
 //
-//import com.nmefc.neargoos.dao.BaseMapper;
 //import com.nmefc.neargoos.entity_test.management.Action;
 //import com.nmefc.neargoos.entity_test.management.ActionExample;
-//import com.nmefc.neargoos.entity_test.management.*;
+//import com.nmefc.neargoos.entity_test.management.Role;
+//import com.nmefc.neargoos.exception.ServiceException;
+//import com.nmefc.neargoos.service_test.BaseService;
+//
 //import java.util.List;
 //
-//import com.nmefc.neargoos.entity_test.management.association.RoleActionAssociation;
-//
-//public interface ActionMapper extends BaseMapper<Action, ActionExample, Integer> {
-//
+///**
+// * @Author: QuYuan
+// * @Description:
+// * @Date: Created in 9:54 2019/2/22
+// * @Modified By:
+// */
+//public interface ActionService extends BaseService<Action,ActionExample,Integer> {
 //    /**
 //     *@description:根据action的ID查找所有与之关联的role
 //     *@date:2019.03.08
@@ -17,7 +22,7 @@
 //     * @param:
 //     * @return:
 //     */
-//    List<Role> selectRelateRoleByActionID(Integer id);
+//    List<Role> selectRelateRoleByActionID(Action action);
 //
 //    /**
 //     *@description:根据name、remark、controllerName、areaName、methodName模糊查找action
@@ -53,14 +58,14 @@
 //     * @param:
 //     * @return:
 //     */
-//    int saveRoleRelativity(RoleActionAssociation roleActionAssociation);
+//    int saveRoleRelativity(Action action) throws ServiceException;
 //
 //    /**
-//     *@description:检测URL
+//     *@description:检测URL是否唯一
 //     *@date:2019.03.08
 //     *@author:Li Fei
 //     * @param:
 //     * @return:
 //     */
-//    List<Action> checkURL(String url);
+//    boolean checkURL(String url);
 //}

@@ -1,11 +1,11 @@
 package com.nmefc.neargoos.securityEngine;
 
-import com.nmefc.neargoos.entity.management.Action;
-import com.nmefc.neargoos.entity.management.Role;
-import com.nmefc.neargoos.entity.management.User;
+import com.nmefc.neargoos.entity_test.management.Action;
+import com.nmefc.neargoos.entity_test.management.Role;
+import com.nmefc.neargoos.entity_test.management.User;
 import com.nmefc.neargoos.exception.ServiceException;
-import com.nmefc.neargoos.service.management.RoleService;
-import com.nmefc.neargoos.service.management.UserService;
+import com.nmefc.neargoos.service_test.management.RoleService;
+import com.nmefc.neargoos.service_test.management.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;

@@ -1,5 +1,6 @@
-//package com.nmefc.neargoos.dao;
+//package com.nmefc.neargoos.service;
 //
+//import com.nmefc.neargoos.exception.ServiceException;
 //import org.apache.ibatis.annotations.Param;
 //
 //import java.io.Serializable;
@@ -7,27 +8,24 @@
 //
 ///**
 // * @Author: QuYuan
-// * @Description: 公共Dao方法抽取
-// *  T表示与table表对应的实体类（Entity）
-//    E表示Entity对应的Example类
-//    PK表示可能会用到主键 (比如Integer等)
-// * @Date: Created in 9:23 2019/2/22
+// * @Description: 公共Service方法抽取
+// * @Date: Created in 9:46 2019/2/22
 // * @Modified By:
 // */
-//public interface BaseMapper<T,E,PK> {
+//public interface BaseService<T,E,PK extends Serializable> {
 //    int deleteByPrimaryKey(PK pk);
 //
 //    int insert(T record);
 //
-//    int insertSelective(T record);
+//    int insertSelective(T record) throws ServiceException;
 //
-//    T selectByPrimaryKey(PK pk);
+//    T selectByPrimaryKey(PK pk) throws ServiceException;
 //
-//    int updateByPrimaryKeySelective(T record);
+//    int updateByPrimaryKeySelective(T record) throws ServiceException;
 //
 //    int updateByPrimaryKey(T record);
 //
-////    使用Example的方法
+//    //    使用Example的方法
 //    long countByExample(E example);
 //
 //    int deleteByExample(E example);
@@ -40,7 +38,12 @@
 //    int updateByExample(@Param("record") T record, @Param("example") E example);
 //
 //
-//
-//
-//
+//    /**
+//     * @description: 数据校验
+//     * @author: QuYuan
+//     * @date: 0:39 2019/2/27
+//     * @param: [user, response]
+//     * @return: java.lang.String
+//     */
+//    String check(T record, String response) throws ServiceException;
 //}

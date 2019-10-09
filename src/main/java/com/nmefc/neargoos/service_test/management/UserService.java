@@ -1,23 +1,36 @@
-//package com.nmefc.neargoos.dao.management;
+//package com.nmefc.neargoos.service.management;
 //
-//import com.nmefc.neargoos.dao.BaseMapper;
 //import com.nmefc.neargoos.entity_test.management.Role;
 //import com.nmefc.neargoos.entity_test.management.User;
 //import com.nmefc.neargoos.entity_test.management.UserExample;
+//import com.nmefc.neargoos.exception.ServiceException;
+//import com.nmefc.neargoos.service_test.BaseService;
+//
 //import java.util.List;
 //
-//import com.nmefc.neargoos.entity_test.management.association.UserRoleAssociation;
-//
-//public interface UserMapper extends BaseMapper<User, UserExample, Integer> {
-//
+///**
+// * @Author: QuYuan
+// * @Description:
+// * @Date: Created in 9:53 2019/2/22
+// * @Modified By:
+// */
+//public interface UserService extends BaseService<User,UserExample,Integer>{
 //    /**
-//     * @description: 存储用户及角色关系
+//     * @description: 查询账号是否唯一
 //     * @author: QuYuan
-//     * @date: 20:20 2019/2/27
-//     * @param: [userRoleAssociation]
+//     * @date: 21:36 2019/2/24
+//     * @param: [user, example]
+//     * @return: java.util.List<com.nmefc.neargoos.entity_test.management.User>
+//     */
+//    List<User> accountDetected(User user) throws ServiceException;
+//    /**
+//     * @description: 将用户与角色关联
+//     * @author: QuYuan
+//     * @date: 19:32 2019/2/26
+//     * @param: [user]
 //     * @return: int
 //     */
-//    int saveRelativity(UserRoleAssociation userRoleAssociation) ;
+//    int saveRelativity(User user) throws ServiceException;
 //
 //    /**
 //     * @description: 根据id解除所有相关的角色关联
@@ -26,7 +39,9 @@
 //     * @param: [id]
 //     * @return: int
 //     */
-//    int deleteRelativityByUserID(Integer id);
+//    int deleteRelativity(Integer id) ;
+//
+//
 //    /**
 //     * @description: 查找指定id的用户信息及其角色信息
 //     * @author: QuYuan

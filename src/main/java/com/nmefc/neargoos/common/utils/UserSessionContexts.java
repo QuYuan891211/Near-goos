@@ -1,6 +1,6 @@
 package com.nmefc.neargoos.common.utils;
 
-import com.nmefc.neargoos.entity.management.User;
+import com.nmefc.neargoos.entity_test.management.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 
