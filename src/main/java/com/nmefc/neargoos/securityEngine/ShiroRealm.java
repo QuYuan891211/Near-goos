@@ -1,11 +1,11 @@
 package com.nmefc.neargoos.securityEngine;
-
-import com.nmefc.neargoos.entity.management.Action;
-import com.nmefc.neargoos.entity.management.Role;
-import com.nmefc.neargoos.entity.management.User;
-import com.nmefc.neargoos.exception.ServiceException;
-import com.nmefc.neargoos.service.management.RoleService;
-import com.nmefc.neargoos.service.management.UserService;
+//
+//import com.nmefc.neargoos.entity.management.Action;
+//import com.nmefc.neargoos.entity.management.Role;
+//import com.nmefc.neargoos.entity.management.User;
+//import com.nmefc.neargoos.exception.ServiceException;
+//import com.nmefc.neargoos.service.management.RoleService;
+//import com.nmefc.neargoos.service.management.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -24,10 +24,10 @@ import java.util.List;
  * @Modified By:
  */
 public class ShiroRealm extends AuthorizingRealm{
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private RoleService roleService;
+//    @Autowired
+//    private UserService userService;
+//    @Autowired
+//    private RoleService roleService;
 
     /**
      * @description: 进行用户身份认证
@@ -38,32 +38,33 @@ public class ShiroRealm extends AuthorizingRealm{
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) authenticationToken;
-        String account = usernamePasswordToken.getUsername();
-        String password = new String(usernamePasswordToken.getPassword());
-        User user = new User();
-        user.setAccount(account);
-        user.setPassword(password);
-        List<User> userList = new ArrayList<>();
-        try {
-            userList = userService.accountDetected(user);
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
-
-        if(userList.size() == 0){
-            throw new UnknownAccountException("该用户名未注册");
-        }
-//        将密码的比较交给底层密码比较器
-//        if (!password.equals(userList.get(0).getPassword())){
-//            throw new IncorrectCredentialsException("密码错误");
+//        UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) authenticationToken;
+//        String account = usernamePasswordToken.getUsername();
+//        String password = new String(usernamePasswordToken.getPassword());
+//        User user = new User();
+//        user.setAccount(account);
+//        user.setPassword(password);
+//        List<User> userList = new ArrayList<>();
+//        try {
+//            userList = userService.accountDetected(user);
+//        } catch (ServiceException e) {
+//            e.printStackTrace();
 //        }
-        if(userList.get(0).getIsLocked()){
-            throw new LockedAccountException("该账户已被锁定，请联系管理员");
-        }
-        //配置自定义权限登录器，参考博客
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userList.get(0),userList.get(0).getPassword(),getName());
-        return info;
+//
+//        if(userList.size() == 0){
+//            throw new UnknownAccountException("该用户名未注册");
+//        }
+////        将密码的比较交给底层密码比较器
+////        if (!password.equals(userList.get(0).getPassword())){
+////            throw new IncorrectCredentialsException("密码错误");
+////        }
+//        if(userList.get(0).getIsLocked()){
+//            throw new LockedAccountException("该账户已被锁定，请联系管理员");
+//        }
+//        //配置自定义权限登录器，参考博客
+//        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userList.get(0),userList.get(0).getPassword(),getName());
+//        return info;
+        return null;
     }
 
 /**
@@ -95,19 +96,20 @@ public class ShiroRealm extends AuthorizingRealm{
  */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        User user = (User) SecurityUtils.getSubject().getPrincipal();
-        List<Role> roleList =  userService.selectUserRoleByUserID(user.getId());
-        SimpleAuthorizationInfo authorizationInfo =  new SimpleAuthorizationInfo();
-
-        for(Role role:roleList){
-            authorizationInfo.addRole(role.getName());
-            List<Action> actionList = new ArrayList<>();
-            actionList = roleService.selectRelateActionByRole(role);
-            for(Action action:actionList){
-                authorizationInfo.addStringPermission(action.getName());
-            }
-        }
-        return authorizationInfo;
+//        User user = (User) SecurityUtils.getSubject().getPrincipal();
+//        List<Role> roleList =  userService.selectUserRoleByUserID(user.getId());
+//        SimpleAuthorizationInfo authorizationInfo =  new SimpleAuthorizationInfo();
+//
+//        for(Role role:roleList){
+//            authorizationInfo.addRole(role.getName());
+//            List<Action> actionList = new ArrayList<>();
+//            actionList = roleService.selectRelateActionByRole(role);
+//            for(Action action:actionList){
+//                authorizationInfo.addStringPermission(action.getName());
+//            }
+//        }
+//        return authorizationInfo;
+        return null;
     }
 
 
