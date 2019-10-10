@@ -1,8 +1,8 @@
 package com.nmefc.neargoos.securityEngine;
 
-import com.nmefc.neargoos.entity.management.User;
+//import com.nmefc.neargoos.entity.management.User;
 import com.nmefc.neargoos.exception.ServiceException;
-import com.nmefc.neargoos.service.management.UserService;
+//import com.nmefc.neargoos.service.management.UserService;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.LockedAccountException;
@@ -22,8 +22,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @Modified By:
  */
 public class RetryLimitHashedCredentialsMatcher extends SimpleCredentialsMatcher {
-    @Autowired
-    private UserService userService;
+//    @Autowired
+//    private UserService userService;
     private Cache<String,AtomicInteger> passwordRetryCache;
 
     public RetryLimitHashedCredentialsMatcher(CacheManager cacheManager){
@@ -32,44 +32,45 @@ public class RetryLimitHashedCredentialsMatcher extends SimpleCredentialsMatcher
 
     @Override
     public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
-        String account = (String)token.getPrincipal();
-        //尝试次数
-        AtomicInteger retryCount = passwordRetryCache.get(account);
-        //首次登陆
-        if(retryCount == null){
-            retryCount = new AtomicInteger(0);
-            passwordRetryCache.put(account,retryCount);
-        }
-        if (retryCount.incrementAndGet() > 5){
-            //如果用户登陆失败次数大于5次 抛出锁定用户异常  并修改数据库字段
-            User user = new User();
-            User record = null;
-            user.setAccount(account);
-            try {
-                record = userService.accountDetected(user).get(0);
-            } catch (ServiceException e) {
-                e.printStackTrace();
-            }
-
-            if(record != null && !record.getIsLocked()){
-                //数据库字段 默认为 0  就是正常状态 所以 要改为1
-                //修改数据库的状态字段为锁定
-                record.setIsLocked(true);
-                try {
-                    userService.updateByPrimaryKeySelective(record);
-                } catch (ServiceException e) {
-                    e.printStackTrace();
-                }
-            }
-            throw new LockedAccountException();
-        }
-
-        //判断用户是否登陆正确
-        boolean matches = super.doCredentialsMatch(token,info);
-        if(matches){
-            passwordRetryCache.remove(account);
-        }
-        return matches;
+//        String account = (String)token.getPrincipal();
+//        //尝试次数
+//        AtomicInteger retryCount = passwordRetryCache.get(account);
+//        //首次登陆
+//        if(retryCount == null){
+//            retryCount = new AtomicInteger(0);
+//            passwordRetryCache.put(account,retryCount);
+//        }
+//        if (retryCount.incrementAndGet() > 5){
+//            //如果用户登陆失败次数大于5次 抛出锁定用户异常  并修改数据库字段
+//            User user = new User();
+//            User record = null;
+//            user.setAccount(account);
+//            try {
+//                record = userService.accountDetected(user).get(0);
+//            } catch (ServiceException e) {
+//                e.printStackTrace();
+//            }
+//
+//            if(record != null && !record.getIsLocked()){
+//                //数据库字段 默认为 0  就是正常状态 所以 要改为1
+//                //修改数据库的状态字段为锁定
+//                record.setIsLocked(true);
+//                try {
+//                    userService.updateByPrimaryKeySelective(record);
+//                } catch (ServiceException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            throw new LockedAccountException();
+//        }
+//
+//        //判断用户是否登陆正确
+//        boolean matches = super.doCredentialsMatch(token,info);
+//        if(matches){
+//            passwordRetryCache.remove(account);
+//        }
+//        return matches;
+        return true;
     }
 /**
  * @description: 解锁用户
@@ -79,23 +80,23 @@ public class RetryLimitHashedCredentialsMatcher extends SimpleCredentialsMatcher
  * @return: void
  */
     public void unlockAccount(String account) {
-        User user = new User();
-        user.setAccount(account);
-        List<User> userList = new ArrayList<>();
-        try {
-            userList = userService.accountDetected(user);
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
-        if (userList.size() == 1) {
-            //修改数据库的状态字段为解锁
-            userList.get(0).setIsLocked(false);
-            try {
-                userService.updateByPrimaryKeySelective(userList.get(0));
-            } catch (ServiceException e) {
-                e.printStackTrace();
-            }
-            passwordRetryCache.remove(account);
-        }
+//        User user = new User();
+//        user.setAccount(account);
+//        List<User> userList = new ArrayList<>();
+//        try {
+//            userList = userService.accountDetected(user);
+//        } catch (ServiceException e) {
+//            e.printStackTrace();
+//        }
+//        if (userList.size() == 1) {
+//            //修改数据库的状态字段为解锁
+//            userList.get(0).setIsLocked(false);
+//            try {
+//                userService.updateByPrimaryKeySelective(userList.get(0));
+//            } catch (ServiceException e) {
+//                e.printStackTrace();
+//            }
+//            passwordRetryCache.remove(account);
+//        }
     }
 }
