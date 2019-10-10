@@ -2,7 +2,7 @@
 //
 //import com.nmefc.neargoos.securityEngine.RetryLimitHashedCredentialsMatcher;
 //import com.nmefc.neargoos.securityEngine.ShiroSessionListener;
-//import com.nmefc.neargoos.entity_test.management.User;
+//import com.nmefc.neargoos.entity.management.User;
 //import org.apache.shiro.SecurityUtils;
 //import org.apache.shiro.authc.IncorrectCredentialsException;
 //import org.apache.shiro.authc.LockedAccountException;

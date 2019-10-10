@@ -2,8 +2,8 @@
 //
 //import com.nmefc.neargoos.common.enumPackage.Area;
 //import com.nmefc.neargoos.common.enumPackage.ProductType;
-//import com.nmefc.neargoos.entity_test.management.Product;
-//import com.nmefc.neargoos.entity_test.management.ProductExample;
+//import com.nmefc.neargoos.entity.management.Product;
+//import com.nmefc.neargoos.entity.management.ProductExample;
 //
 //import java.util.Date;
 //import java.util.List;

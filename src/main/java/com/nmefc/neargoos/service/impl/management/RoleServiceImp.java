@@ -1,12 +1,12 @@
 //package com.nmefc.neargoos.service.impl.management;
 //
 //import com.nmefc.neargoos.common.utils.CacheUtils;
-//import com.nmefc.neargoos.entity_test.management.*;
-//import com.nmefc.neargoos.entity_test.management.association.UserRoleAssociation;
-//import com.nmefc.neargoos.entity_test.management.association.*;
+//import com.nmefc.neargoos.entity.management.*;
+//import com.nmefc.neargoos.entity.management.association.UserRoleAssociation;
+//import com.nmefc.neargoos.entity.management.association.*;
 //import com.nmefc.neargoos.exception.ServiceException;
-//import com.nmefc.neargoos.service_test.impl.BaseServiceImp;
-//import com.nmefc.neargoos.service_test.management.RoleService;
+//import com.nmefc.neargoos.service.impl.BaseServiceImp;
+//import com.nmefc.neargoos.service.management.RoleService;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Service;
 //import com.nmefc.neargoos.dao.management.RoleMapper;

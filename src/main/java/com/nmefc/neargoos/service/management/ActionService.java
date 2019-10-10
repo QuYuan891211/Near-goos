@@ -1,10 +1,10 @@
-package com.nmefc.neargoos.service_test.management;
+package com.nmefc.neargoos.service.management;
 //
-//import com.nmefc.neargoos.entity_test.management.Action;
-//import com.nmefc.neargoos.entity_test.management.ActionExample;
-//import com.nmefc.neargoos.entity_test.management.Role;
+//import com.nmefc.neargoos.entity.management.Action;
+//import com.nmefc.neargoos.entity.management.ActionExample;
+//import com.nmefc.neargoos.entity.management.Role;
 //import com.nmefc.neargoos.exception.ServiceException;
-//import com.nmefc.neargoos.service_test.BaseService;
+//import com.nmefc.neargoos.service.BaseService;
 //
 //import java.util.List;
 //

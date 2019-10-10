@@ -2,13 +2,13 @@
 //
 //import com.nmefc.neargoos.common.enumPackage.Regex;
 //import com.nmefc.neargoos.common.enumPackage.ResponseMsg;
-//import com.nmefc.neargoos.entity_test.management.Action;
-//import com.nmefc.neargoos.entity_test.management.ActionExample;
-//import com.nmefc.neargoos.entity_test.management.Role;
-//import com.nmefc.neargoos.entity_test.management.association.RoleActionAssociation;
+//import com.nmefc.neargoos.entity.management.Action;
+//import com.nmefc.neargoos.entity.management.ActionExample;
+//import com.nmefc.neargoos.entity.management.Role;
+//import com.nmefc.neargoos.entity.management.association.RoleActionAssociation;
 //import com.nmefc.neargoos.exception.ServiceException;
-//import com.nmefc.neargoos.service_test.impl.BaseServiceImp;
-//import com.nmefc.neargoos.service_test.management.ActionService;
+//import com.nmefc.neargoos.service.impl.BaseServiceImp;
+//import com.nmefc.neargoos.service.management.ActionService;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Service;
 //import com.nmefc.neargoos.dao.management.ActionMapper;

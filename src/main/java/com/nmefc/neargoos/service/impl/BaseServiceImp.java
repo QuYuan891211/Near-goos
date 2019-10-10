@@ -2,7 +2,7 @@
 //
 //import com.nmefc.neargoos.dao.BaseMapper;
 //import com.nmefc.neargoos.exception.ServiceException;
-//import com.nmefc.neargoos.service_test.BaseService;
+//import com.nmefc.neargoos.service.BaseService;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.transaction.annotation.Isolation;
 //import org.springframework.transaction.annotation.Propagation;

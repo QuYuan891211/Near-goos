@@ -1,12 +1,12 @@
 //package com.nmefc.neargoos.dao.management;
 //
 //import com.nmefc.neargoos.dao.BaseMapper;
-//import com.nmefc.neargoos.entity_test.management.Action;
-//import com.nmefc.neargoos.entity_test.management.ActionExample;
-//import com.nmefc.neargoos.entity_test.management.*;
+//import com.nmefc.neargoos.entity.management.Action;
+//import com.nmefc.neargoos.entity.management.ActionExample;
+//import com.nmefc.neargoos.entity.management.*;
 //import java.util.List;
 //
-//import com.nmefc.neargoos.entity_test.management.association.RoleActionAssociation;
+//import com.nmefc.neargoos.entity.management.association.RoleActionAssociation;
 //
 //public interface ActionMapper extends BaseMapper<Action, ActionExample, Integer> {
 //

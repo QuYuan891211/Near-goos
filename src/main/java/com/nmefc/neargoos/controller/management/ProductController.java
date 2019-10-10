@@ -1,9 +1,9 @@
 //package com.nmefc.neargoos.controller.management;
 //
-//import com.nmefc.neargoos.entity_test.management.Product;
+//import com.nmefc.neargoos.entity.management.Product;
 //import com.nmefc.neargoos.middleModel.AreaMidModel;
 //import com.nmefc.neargoos.middleModel.ProductTypeMidModel;
-//import com.nmefc.neargoos.service_test.management.ProductService;
+//import com.nmefc.neargoos.service.management.ProductService;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Controller;
 //import org.springframework.web.bind.annotation.GetMapping;
@@ -47,7 +47,7 @@
 //    @ResponseBody
 //    @GetMapping(value = "/getproducttype")
 //    public List<ProductTypeMidModel> getProductTypes() {
-//        // 以下封装至dal层中了（service_test）
+//        // 以下封装至dal层中了（service）
 ////        List<ProductTypeMidModel> list=new ArrayList();
 ////        for(ProductType temp : ProductType.values()){
 //////            System.out.print(temp.toString());

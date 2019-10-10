@@ -1,11 +1,11 @@
 //package com.nmefc.neargoos.service.management;
 //
 //import com.nmefc.neargoos.common.enumPackage.ProductType;
-//import com.nmefc.neargoos.entity_test.management.Product;
-//import com.nmefc.neargoos.entity_test.management.ProductExample;
+//import com.nmefc.neargoos.entity.management.Product;
+//import com.nmefc.neargoos.entity.management.ProductExample;
 //import com.nmefc.neargoos.middleModel.AreaMidModel;
 //import com.nmefc.neargoos.middleModel.ProductTypeMidModel;
-//import com.nmefc.neargoos.service_test.BaseService;
+//import com.nmefc.neargoos.service.BaseService;
 //import com.nmefc.neargoos.common.enumPackage.Area;
 //
 //import java.util.Date;

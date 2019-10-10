@@ -2,10 +2,10 @@
 //
 //import com.nmefc.neargoos.common.enumPackage.ResponseMsg;
 //import com.nmefc.neargoos.common.utils.DateTimeUtils;
-//import com.nmefc.neargoos.entity_test.management.Action;
-//import com.nmefc.neargoos.entity_test.management.Role;
+//import com.nmefc.neargoos.entity.management.Action;
+//import com.nmefc.neargoos.entity.management.Role;
 //import com.nmefc.neargoos.exception.ControllerException;
-//import com.nmefc.neargoos.service_test.management.ActionService;
+//import com.nmefc.neargoos.service.management.ActionService;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Controller;
 //import org.springframework.web.bind.annotation.*;

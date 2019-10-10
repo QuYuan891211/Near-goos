@@ -1,10 +1,10 @@
 //package com.nmefc.neargoos.service.management;
 //
-//import com.nmefc.neargoos.entity_test.management.Role;
-//import com.nmefc.neargoos.entity_test.management.User;
-//import com.nmefc.neargoos.entity_test.management.UserExample;
+//import com.nmefc.neargoos.entity.management.Role;
+//import com.nmefc.neargoos.entity.management.User;
+//import com.nmefc.neargoos.entity.management.UserExample;
 //import com.nmefc.neargoos.exception.ServiceException;
-//import com.nmefc.neargoos.service_test.BaseService;
+//import com.nmefc.neargoos.service.BaseService;
 //
 //import java.util.List;
 //
@@ -20,7 +20,7 @@
 //     * @author: QuYuan
 //     * @date: 21:36 2019/2/24
 //     * @param: [user, example]
-//     * @return: java.util.List<com.nmefc.neargoos.entity_test.management.User>
+//     * @return: java.util.List<com.nmefc.neargoos.entity.management.User>
 //     */
 //    List<User> accountDetected(User user) throws ServiceException;
 //    /**
@@ -47,7 +47,7 @@
 //     * @author: QuYuan
 //     * @date: 20:19 2019/2/27
 //     * @param: [id]
-//     * @return: com.nmefc.neargoos.entity_test.management.User
+//     * @return: com.nmefc.neargoos.entity.management.User
 //     */
 //    List<Role> selectUserRoleByUserID(Integer id);
 //    /**
@@ -55,7 +55,7 @@
 //     * @author: QuYuan
 //     * @date: 20:19 2019/2/27
 //     * @param: []
-//     * @return: java.util.List<com.nmefc.neargoos.entity_test.management.User>
+//     * @return: java.util.List<com.nmefc.neargoos.entity.management.User>
 //     */
 ////    List<User> selectAllUserWithRoleInfo();
 //}

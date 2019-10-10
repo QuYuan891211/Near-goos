@@ -40,7 +40,7 @@
        <!--targetProject：目标项目，指定一个存在的目录下，生成的内容会放到指定目录中，如果目录不存在，MBG不会自动建目录-->
     <!--&ndash;&gt;-->
         <!--&lt;!&ndash;TODO:[*] 19-10-04 此处有错误，暂时注释掉&ndash;&gt;-->
-        <!--&lt;!&ndash;<javaModelGenerator targetPackage="com.nmefc.hpcmmp.entity_test.management" targetProject="D:\WebProjects\nmefc\IDEAWorkSpace\HPC-Monitoring-Management-Platform\src\main\java">&ndash;&gt;-->
+        <!--&lt;!&ndash;<javaModelGenerator targetPackage="com.nmefc.hpcmmp.entity.management" targetProject="D:\WebProjects\nmefc\IDEAWorkSpace\HPC-Monitoring-Management-Platform\src\main\java">&ndash;&gt;-->
         <!--&lt;!&ndash;数据表对应的model层&ndash;&gt;-->
         <!--<javaModelGenerator targetPackage="com.nmefc.neargoos.entity_test_test.management" targetProject="src/main/java">-->
             <!--&lt;!&ndash; 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false &ndash;&gt;-->

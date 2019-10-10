@@ -1,6 +1,6 @@
 package com.nmefc.neargoos.common.utils;
 
-import com.nmefc.neargoos.entity_test.management.User;
+//import com.nmefc.neargoos.entity.management.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 
@@ -12,9 +12,10 @@ import org.apache.shiro.subject.Subject;
  */
 public class UserSessionContexts {
     public static final String GLOBLE_USER_SESSION = "globle_user";
-    public static User getUser(){
-        Subject subject = SecurityUtils.getSubject();
-        User user=(User) subject.getPrincipal();
-        return user;
-    }
+//    public static User getUser(){
+//        Subject subject = SecurityUtils.getSubject();
+//        User user=(User) subject.getPrincipal();
+//        return user;
+//
+//    }
 }

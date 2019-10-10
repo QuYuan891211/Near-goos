@@ -1,6 +1,6 @@
 package com.nmefc.neargoos.common.filter;
 
-import com.nmefc.neargoos.entity_test.management.User;
+//import com.nmefc.neargoos.entity.management.User;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.session.Session;
@@ -48,58 +48,59 @@ public class KickoutSessionControllerFilter extends AccessControlFilter {
      */
     @Override
     protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
-        Subject subject = getSubject(servletRequest, servletResponse);
-        if(!subject.isAuthenticated()&&!subject.isRemembered()){
-            return true;
-        }
-        Session session = subject.getSession();
-        //这里获取的User是实体 因为我在 自定义ShiroRealm中的doGetAuthenticationInfo方法中
-        //new SimpleAuthenticationInfo(user, password, getName()); 传的是 User实体 所以这里拿到的也是实体,如果传的是userName 这里拿到的就是userName
-        String account = ((User)subject.getPrincipal()).getAccount();
-        Serializable sessionId = session.getId();
-        // 初始化用户的队列放到缓存里
-        Deque<Serializable> deque = cache.get(account);
-        if(deque == null) {
-            deque = new LinkedList<Serializable>();
-            cache.put(account, deque);
-        }
-    //如果队列里没有此sessionId，且用户没有被踢出；放入队列
-        if(!deque.contains(sessionId) && session.getAttribute("kickout") == null) {
-            deque.push(sessionId);
-        }
-    //如果队列里的sessionId数超出最大会话数，开始踢人
-        while(deque.size() > maxSession) {
-            Serializable kickoutSessionId = null;
-            if (kickoutAfter) { //如果踢出后者
-                kickoutSessionId = deque.getFirst();
-                kickoutSessionId = deque.removeFirst();
-            } else { //否则踢出前者
-                kickoutSessionId = deque.removeLast();
-            }
-            //交给SessionManager去执行
-            try {
-                Session kickoutSession = sessionManager.getSession(new DefaultSessionKey(kickoutSessionId));
-                if (kickoutSession != null) {
-                    //设置会话的kickout属性表示踢出了
-                    kickoutSession.setAttribute("kickout", true);
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-            //如果已经被踢出了
-            if(session.getAttribute("kickout") != null){
-                try{
-                    subject.logout();
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-                WebUtils.issueRedirect(servletRequest,servletResponse,kickoutUrl);
-                return false;
-            }
-           return true;
+//        Subject subject = getSubject(servletRequest, servletResponse);
+//        if(!subject.isAuthenticated()&&!subject.isRemembered()){
+//            return true;
+//        }
+//        Session session = subject.getSession();
+//        //这里获取的User是实体 因为我在 自定义ShiroRealm中的doGetAuthenticationInfo方法中
+//        //new SimpleAuthenticationInfo(user, password, getName()); 传的是 User实体 所以这里拿到的也是实体,如果传的是userName 这里拿到的就是userName
+//        String account = ((User)subject.getPrincipal()).getAccount();
+//        Serializable sessionId = session.getId();
+//        // 初始化用户的队列放到缓存里
+//        Deque<Serializable> deque = cache.get(account);
+//        if(deque == null) {
+//            deque = new LinkedList<Serializable>();
+//            cache.put(account, deque);
+//        }
+//    //如果队列里没有此sessionId，且用户没有被踢出；放入队列
+//        if(!deque.contains(sessionId) && session.getAttribute("kickout") == null) {
+//            deque.push(sessionId);
+//        }
+//    //如果队列里的sessionId数超出最大会话数，开始踢人
+//        while(deque.size() > maxSession) {
+//            Serializable kickoutSessionId = null;
+//            if (kickoutAfter) { //如果踢出后者
+//                kickoutSessionId = deque.getFirst();
+//                kickoutSessionId = deque.removeFirst();
+//            } else { //否则踢出前者
+//                kickoutSessionId = deque.removeLast();
+//            }
+//            //交给SessionManager去执行
+//            try {
+//                Session kickoutSession = sessionManager.getSession(new DefaultSessionKey(kickoutSessionId));
+//                if (kickoutSession != null) {
+//                    //设置会话的kickout属性表示踢出了
+//                    kickoutSession.setAttribute("kickout", true);
+//                }
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//            //如果已经被踢出了
+//            if(session.getAttribute("kickout") != null){
+//                try{
+//                    subject.logout();
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
+//                WebUtils.issueRedirect(servletRequest,servletResponse,kickoutUrl);
+//                return false;
+//            }
+//           return true;
+        return true;
     }
 
     public void setKickoutUrl(String kickoutUrl) {

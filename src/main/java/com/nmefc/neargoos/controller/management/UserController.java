@@ -1,11 +1,11 @@
 //package com.nmefc.neargoos.controller.management;
 //
 //import com.nmefc.neargoos.common.enumPackage.ResponseMsg;
-//import com.nmefc.neargoos.entity_test.management.User;
-//import com.nmefc.neargoos.entity_test.management.UserExample;
+//import com.nmefc.neargoos.entity.management.User;
+//import com.nmefc.neargoos.entity.management.UserExample;
 //import com.nmefc.neargoos.exception.ControllerException;
 //import com.nmefc.neargoos.exception.ServiceException;
-//import com.nmefc.neargoos.service_test.management.UserService;
+//import com.nmefc.neargoos.service.management.UserService;
 //import com.nmefc.neargoos.common.utils.DateTimeUtils;
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -113,7 +113,7 @@
 //     * @author: QuYuan
 //     * @date: 21:03 2019/2/27
 //     * @param: []
-//     * @return: java.util.List<com.nmefc.neargoos.entity_test.management.User>
+//     * @return: java.util.List<com.nmefc.neargoos.entity.management.User>
 //     */
 //    @ResponseBody
 //    @GetMapping(value = "/findAllUser")
@@ -165,7 +165,7 @@
 //     * @author: QuYuan
 //     * @date: 21:03 2019/2/27
 //     * @param: []
-//     * @return: java.util.List<com.nmefc.neargoos.entity_test.management.User>
+//     * @return: java.util.List<com.nmefc.neargoos.entity.management.User>
 //     */
 //    @ResponseBody
 //    @GetMapping("/findUserById")
@@ -187,7 +187,7 @@
 //     * @author: QuYuan
 //     * @date: 21:03 2019/2/27
 //     * @param: []
-//     * @return: java.util.List<com.nmefc.neargoos.entity_test.management.User>
+//     * @return: java.util.List<com.nmefc.neargoos.entity.management.User>
 //     */
 ////    @ResponseBody
 ////    @GetMapping("/findAllUserWithRoleInfo")

@@ -1,7 +1,7 @@
 //package com.nmefc.neargoos.common.transPara;
 //
-//import com.nmefc.neargoos.entity_test.management.Action;
-//import com.nmefc.neargoos.entity_test.management.User;
+//import com.nmefc.neargoos.entity.management.Action;
+//import com.nmefc.neargoos.entity.management.User;
 //
 //import java.util.ArrayList;
 //import java.util.List;

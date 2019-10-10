@@ -1,7 +1,7 @@
 //package com.nmefc.neargoos.entity.management.association;
 //
-//import com.nmefc.neargoos.entity_test.management.Role;
-//import com.nmefc.neargoos.entity_test.management.User;
+//import com.nmefc.neargoos.entity.management.Role;
+//import com.nmefc.neargoos.entity.management.User;
 //
 ///**
 // * @Author: QuYuan

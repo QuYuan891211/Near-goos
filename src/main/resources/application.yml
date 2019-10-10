@@ -54,3 +54,6 @@ pagehelper:
     supportMethodsArguments: true
     params: count=countSql
     returnPageInfo: check
+jpa:
+    spring.jpa.hibernate.ddl-auto: update
+    spring.jpa.show-sql: true
