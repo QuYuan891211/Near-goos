@@ -6,28 +6,28 @@ import java.util.Objects;
 
 /**
  * @Author:evaseemeflye
- * @Date:Created in 20:50 2019/10/10
+ * @Date:Created in 21:10 2019/10/11
  */
 @Entity
 @Table(name = "product_info", schema = "neargoos", catalog = "")
 public class ProductInfoEntity {
-    private long id;
+    private int id;
     private String name;
-    private String area;
+    private Integer area;
     private Integer interval;
     private String imageUrl;
     private Timestamp targetDate;
     private Timestamp gmtCreate;
     private Timestamp gmtModified;
-    private String productInfocol;
+    private Integer type;
 
     @Id
     @Column(name = "id")
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -43,11 +43,11 @@ public class ProductInfoEntity {
 
     @Basic
     @Column(name = "area")
-    public String getArea() {
+    public Integer getArea() {
         return area;
     }
 
-    public void setArea(String area) {
+    public void setArea(Integer area) {
         this.area = area;
     }
 
@@ -102,13 +102,13 @@ public class ProductInfoEntity {
     }
 
     @Basic
-    @Column(name = "product_infocol")
-    public String getProductInfocol() {
-        return productInfocol;
+    @Column(name = "type")
+    public Integer getType() {
+        return type;
     }
 
-    public void setProductInfocol(String productInfocol) {
-        this.productInfocol = productInfocol;
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     @Override
@@ -124,11 +124,11 @@ public class ProductInfoEntity {
                 Objects.equals(targetDate, that.targetDate) &&
                 Objects.equals(gmtCreate, that.gmtCreate) &&
                 Objects.equals(gmtModified, that.gmtModified) &&
-                Objects.equals(productInfocol, that.productInfocol);
+                Objects.equals(type, that.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, area, interval, imageUrl, targetDate, gmtCreate, gmtModified, productInfocol);
+        return Objects.hash(id, name, area, interval, imageUrl, targetDate, gmtCreate, gmtModified, type);
     }
 }
