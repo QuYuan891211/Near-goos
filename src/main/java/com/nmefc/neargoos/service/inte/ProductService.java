@@ -1,4 +1,4 @@
-package com.nmefc.neargoos.service.inte.product;
+package com.nmefc.neargoos.service.inte;
 
 import com.nmefc.neargoos.common.enumPackage.Area;
 import com.nmefc.neargoos.common.enumPackage.ProductType;
