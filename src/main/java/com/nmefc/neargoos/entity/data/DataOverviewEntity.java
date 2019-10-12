@@ -11,43 +11,43 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name = "data_overview", schema = "neargoos", catalog = "")
-public class DataOverviewEntity {
-    private long id;
-    private Timestamp gmtCreate;
-    private Timestamp gmtModified;
+public class DataOverviewEntity extends DataBaseEntity {
+//    private long id;
+//    private Timestamp gmtCreate;
+//    private Timestamp gmtModified;
     private String content;
     private String title;
-    private byte isDelete;
+//    private byte isDelete;
 
-    @Id
-    @Column(name = "id")
-    public long getId() {
-        return id;
-    }
+//    @Id
+//    @Column(name = "id")
+//    public long getId() {
+//        return id;
+//    }
+//
+//    public void setId(long id) {
+//        this.id = id;
+//    }
+//
+//    @Basic
+//    @Column(name = "gmt_create")
+//    public Timestamp getGmtCreate() {
+//        return gmtCreate;
+//    }
+//
+//    public void setGmtCreate(Timestamp gmtCreate) {
+//        this.gmtCreate = gmtCreate;
+//    }
+//
+//    @Basic
+//    @Column(name = "gmt_modified")
+//    public Timestamp getGmtModified() {
+//        return gmtModified;
+//    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    @Basic
-    @Column(name = "gmt_create")
-    public Timestamp getGmtCreate() {
-        return gmtCreate;
-    }
-
-    public void setGmtCreate(Timestamp gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
-
-    @Basic
-    @Column(name = "gmt_modified")
-    public Timestamp getGmtModified() {
-        return gmtModified;
-    }
-
-    public void setGmtModified(Timestamp gmtModified) {
-        this.gmtModified = gmtModified;
-    }
+//    public void setGmtModified(Timestamp gmtModified) {
+//        this.gmtModified = gmtModified;
+//    }
 
     @Basic
     @Column(name = "content")
@@ -69,15 +69,15 @@ public class DataOverviewEntity {
         this.title = title;
     }
 
-    @Basic
-    @Column(name = "is_delete")
-    public byte getIsDelete() {
-        return isDelete;
-    }
-
-    public void setIsDelete(byte isDelete) {
-        this.isDelete = isDelete;
-    }
+//    @Basic
+//    @Column(name = "is_delete")
+//    public byte getIsDelete() {
+//        return isDelete;
+//    }
+//
+//    public void setIsDelete(byte isDelete) {
+//        this.isDelete = isDelete;
+//    }
 
     @Override
     public boolean equals(Object o) {

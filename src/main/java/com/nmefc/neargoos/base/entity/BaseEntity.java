@@ -9,23 +9,45 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.util.Date;
 
-    @Data
     @MappedSuperclass
-    @EntityListeners({AuditingEntityListener.class})
     public class BaseEntity {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "id", nullable = false, length = 22, unique = true)
+        @javax.persistence.Id
+        @Column(name = "id")
         protected Long id;
 
-        @CreatedDate
-        @Column(name = "gmt_create", nullable = false)
+
+        @Basic
+        @Column(name = "gmt_create")
         protected Date gmtCreate;
 
-        @LastModifiedDate
+        @Basic
         @Column(name = "gmt_modified")
         protected Date gmtModified;
 
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public Date getGmtCreate() {
+            return gmtCreate;
+        }
+
+        public void setGmtCreate(Date gmtCreate) {
+            this.gmtCreate = gmtCreate;
+        }
+
+        public Date getGmtModified() {
+            return gmtModified;
+        }
+
+        public void setGmtModified(Date gmtModified) {
+            this.gmtModified = gmtModified;
+        }
     }
 
