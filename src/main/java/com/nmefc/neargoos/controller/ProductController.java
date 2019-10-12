@@ -10,11 +10,14 @@ import com.sun.deploy.security.BadCertificateDialog;
 import com.sun.org.apache.bcel.internal.generic.FADD;
 import com.sun.org.apache.bcel.internal.generic.IADD;
 import com.sun.org.apache.bcel.internal.generic.LADD;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sun.awt.image.BadDepthException;
 
+import java.sql.Timestamp;
+//import com.sun.jmx.snmp.Timestamp;
 import java.util.List;
 
 /**
@@ -44,8 +47,9 @@ public class ProductController {
     @ResponseBody
     @GetMapping(value = "/list")
     public List<ProductInfoEntity> getListByCondition(ProductInfoEntity product) {
-
-        List<ProductInfoEntity> list = productService.getMatchConditionImageList(ProductType.values()[product.getType()], product.getInterval(), product.getTargetDate(), Area.values()[product.getArea()]);
+        Timestamp ts= product.getTargetDate();
+        DateTime dt=new DateTime(ts.getTime());
+        List<ProductInfoEntity> list = productService.getMatchConditionImageList(ProductType.values()[product.getType()], product.getInterval(), ts, Area.values()[product.getArea()]);
         return list;
     }
 

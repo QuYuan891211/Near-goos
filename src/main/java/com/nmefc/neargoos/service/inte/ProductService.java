@@ -5,6 +5,9 @@ import com.nmefc.neargoos.common.enumPackage.ProductType;
 import com.nmefc.neargoos.entity.product.ProductInfoEntity;
 import com.nmefc.neargoos.middleModel.AreaMidModel;
 import com.nmefc.neargoos.middleModel.ProductTypeMidModel;
+//import com.sun.jmx.snmp.Timestamp;
+import java.sql.Timestamp;
+import org.joda.time.DateTime;
 
 import java.util.Date;
 import java.util.List;
@@ -23,7 +26,7 @@ public interface ProductService {
      * @param: * @param null
      * @Date:22:01 2019/10/11
      */
-    List<ProductInfoEntity> getMatchConditionImageList(ProductType type, Integer interval, Date targetDate, Area area);
+    List<ProductInfoEntity> getMatchConditionImageList(ProductType type, Integer interval, Timestamp targetDate, Area area);
 
     /**
      * @Author:evaseemefly

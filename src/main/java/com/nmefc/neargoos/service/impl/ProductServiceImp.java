@@ -10,13 +10,18 @@ import com.nmefc.neargoos.repository.ProductRepository;
 import com.nmefc.neargoos.service.inte.ProductService;
 import com.sun.deploy.security.BadCertificateDialog;
 import com.sun.org.apache.bcel.internal.generic.FADD;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+// TODO[*] 19-10-12 以下两种类型的区别
+import java.sql.Timestamp;
+//import com.sun.jmx.snmp.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 /**
  * @Author:evaseemeflye
@@ -28,9 +33,19 @@ public class ProductServiceImp implements ProductService {
     @Resource
     private ProductRepository productRepository;
 
-    @Override
-    public List<ProductInfoEntity> getMatchConditionImageList(ProductType type, Integer interval, Date targetDate, Area area) {
-        return productRepository.findAll();
+    public List<ProductInfoEntity> getMatchConditionImageList(ProductType type, Integer interval, Timestamp targetDate, Area area) {
+//        return productRepository.findAll();
+//        return productRepository.findByAreaAndTypeAndIntervalAndTargetDate(area.ordinal(),type.ordinal(),interval,targetDate);
+        return productRepository.findByAreaAndTypeAndIntervalAndTargetDate(area.ordinal(),type.ordinal(),interval,targetDate);
+//        List<ProductInfoEntity> list=productRepository.
+//        return productRepository.findAll(
+//                (root,query,cb)->{
+//                    List<Predicate> predicates=new ArrayList<Predicate>();
+//                    predicates.add(cb.equal(root.get("area"),area.ordinal()));
+//                    predicates.add(cb.equal(root.get("type"),type.ordinal()));
+//                    predicates.add(cb.equal(root.get("target_data",targetDate)));
+//                }
+//        )
     }
 
     public List<ProductTypeMidModel> getProductTypes() {
