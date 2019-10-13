@@ -24,4 +24,7 @@ public interface ProductRepository extends JpaSpecificationExecutor<ProductInfoE
     */
 //    List<ProductInfoEntity> findByAreaAndTypeAndInterval(int area, int type,int interval);
     List<ProductInfoEntity> findByAreaAndTypeAndIntervalAndTargetDate(int area, int type,int interval, Timestamp targetDate);
+
+
+
 }

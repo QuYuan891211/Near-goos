@@ -8,20 +8,19 @@ import com.nmefc.neargoos.middleModel.AreaMidModel;
 import com.nmefc.neargoos.middleModel.ProductTypeMidModel;
 import com.nmefc.neargoos.repository.ProductRepository;
 import com.nmefc.neargoos.service.inte.ProductService;
-import com.sun.deploy.security.BadCertificateDialog;
-import com.sun.org.apache.bcel.internal.generic.FADD;
-import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-// TODO[*] 19-10-12 以下两种类型的区别
 import java.sql.Timestamp;
-//import com.sun.jmx.snmp.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
+//TODO[*] 注意这两个包的区别
+//import java.util.function.Predicate;
+import javax.persistence.criteria.Predicate;
+
+// TODO[*] 19-10-12 以下两种类型的区别
+//import com.sun.jmx.snmp.Timestamp;
 
 /**
  * @Author:evaseemeflye
@@ -38,14 +37,33 @@ public class ProductServiceImp implements ProductService {
 //        return productRepository.findByAreaAndTypeAndIntervalAndTargetDate(area.ordinal(),type.ordinal(),interval,targetDate);
         return productRepository.findByAreaAndTypeAndIntervalAndTargetDate(area.ordinal(),type.ordinal(),interval,targetDate);
 //        List<ProductInfoEntity> list=productRepository.
-//        return productRepository.findAll(
-//                (root,query,cb)->{
-//                    List<Predicate> predicates=new ArrayList<Predicate>();
+
+    }
+
+    public List<ProductInfoEntity> getMatchListByProduct(ProductInfoEntity product){
+        return productRepository.findAll(
+                (root,query,cb)->{
+                    List<Predicate> predicates=new ArrayList<Predicate>();
+
+//                    StringUtils.isNullOrEmpty("")
+                    if(product.getArea()!=null){
+                        predicates.add(cb.equal(root.get("area"),product.getArea()));
+                    }
+                    if(product.getInterval()!=null){
+                        predicates.add(cb.equal(root.get("interval"),product.getInterval()));
+                    }
+                    if(product.getType()!=null){
+                        predicates.add(cb.equal(root.get("type"),product.getType()));
+                    }
+                    if(product.getTargetDate()!=null){
+                        predicates.add(cb.equal(root.get("targetDate"),product.getTargetDate()));
+                    }
+                    return query.where(predicates.toArray(new Predicate[predicates.size()])).getRestriction();
 //                    predicates.add(cb.equal(root.get("area"),area.ordinal()));
 //                    predicates.add(cb.equal(root.get("type"),type.ordinal()));
 //                    predicates.add(cb.equal(root.get("target_data",targetDate)));
-//                }
-//        )
+                }
+        );
     }
 
     public List<ProductTypeMidModel> getProductTypes() {

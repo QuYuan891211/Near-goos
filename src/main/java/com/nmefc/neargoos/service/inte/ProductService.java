@@ -29,6 +29,14 @@ public interface ProductService {
     List<ProductInfoEntity> getMatchConditionImageList(ProductType type, Integer interval, Timestamp targetDate, Area area);
 
     /**
+    * @Author : evaseemefly
+    * @Description : 获取指定条件的预报产品 list
+    * @params :
+    * @Date : 2019/10/13 4:35 下午
+    * @return :
+    */
+    List<ProductInfoEntity> getMatchListByProduct(ProductInfoEntity product);
+    /**
      * @Author:evaseemefly
      * @Description:根据 产品类型，间隔，起始时间，以及区域获取对应的图片名称
      * @param: * @param null

@@ -6,10 +6,6 @@ import com.nmefc.neargoos.entity.product.ProductInfoEntity;
 import com.nmefc.neargoos.middleModel.AreaMidModel;
 import com.nmefc.neargoos.middleModel.ProductTypeMidModel;
 import com.nmefc.neargoos.service.inte.ProductService;
-import com.sun.deploy.security.BadCertificateDialog;
-import com.sun.org.apache.bcel.internal.generic.FADD;
-import com.sun.org.apache.bcel.internal.generic.IADD;
-import com.sun.org.apache.bcel.internal.generic.LADD;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,7 +35,7 @@ public class ProductController {
 
     /**
     * @Author : evaseemefly
-    * @Description : 
+    * @Description : 根据 area,interval,targetdate,type（可多选可单选） 获取对应的 product
     * @params : 
     * @Date : 2019/10/12 11:12 
     * @return : 
@@ -47,10 +43,13 @@ public class ProductController {
     @ResponseBody
     @GetMapping(value = "/list")
     public List<ProductInfoEntity> getListByCondition(ProductInfoEntity product) {
-        Timestamp ts= product.getTargetDate();
-        DateTime dt=new DateTime(ts.getTime());
-        List<ProductInfoEntity> list = productService.getMatchConditionImageList(ProductType.values()[product.getType()], product.getInterval(), ts, Area.values()[product.getArea()]);
-        return list;
+//        Timestamp ts= product.getTargetDate();
+//        DateTime dt=new DateTime(ts.getTime());
+//        List<ProductInfoEntity> list = productService.getMatchConditionImageList(ProductType.values()[product.getType()], product.getInterval(), ts, Area.values()[product.getArea()]);
+
+        // TODO[*] 2019/10/13:此处修改为可以传入单一条件或多种条件
+        List<ProductInfoEntity> list = productService.getMatchListByProduct(product);
+       return list;
     }
 
 
