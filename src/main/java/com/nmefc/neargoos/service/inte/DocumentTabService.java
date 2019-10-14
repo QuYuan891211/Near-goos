@@ -31,5 +31,5 @@ public interface DocumentTabService {
     * @Date : 2019/10/13 4:34 下午
     * @return :
     */
-    List<DocumentTabEntity> getTargetLevelTab();
+    List<DocumentTabEntity> getTargetLevelTab(int num);
 }

@@ -48,7 +48,8 @@ public class DocumentTabServiceImpl implements DocumentTabService {
      * @Date : 2019/10/13 4:34 下午
      */
     @Override
-    public List<DocumentTabEntity> getTargetLevelTab() {
-        return null;
+    public List<DocumentTabEntity> getTargetLevelTab(int num) {
+        List<DocumentTabEntity> list=documentTabRepository.findByLevel(num);
+        return list;
     }
 }
