@@ -5,6 +5,7 @@ import com.nmefc.neargoos.service.inte.DocumentTabService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -34,6 +35,16 @@ public class DocumentController {
         return list;
     }
 
-
-
+    /**
+    * @Author:evaseemefly
+    * @Description: 获取指定 level 的 tab list
+    * @param: * @param null
+    * @Date:20:34 2019/10/14
+    */
+    @ResponseBody
+    @GetMapping(value = "level/{num}")
+    public List<DocumentTabEntity> getTargetLevelTab(@PathVariable int num){
+        List<DocumentTabEntity> list=documentTabService.getTargetLevelTab(num);
+        return list;
+    }
 }
