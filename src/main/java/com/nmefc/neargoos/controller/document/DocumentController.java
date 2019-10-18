@@ -33,4 +33,7 @@ public class DocumentController {
         List<DocumentTabEntity> list=documentTabService.getPrimaryTab();
         return list;
     }
+
+
+
 }

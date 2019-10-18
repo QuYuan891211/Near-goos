@@ -2,7 +2,6 @@ package com.nmefc.neargoos.entity.document;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -12,13 +11,12 @@ public class DocumentBaseEntity {
     private String name;
     private Byte isDel;
     private Integer pid;
+    private Integer tid;
+    private Integer cid;
+    private Integer iid;
     private String pageArea;
     private Timestamp gmtCreate;
     private Timestamp gmtModified;
-    private DocumentTitleEntity documentTitleByTid;
-    private DocumentContentEntity documentContentByCid;
-    private DocumentImageEntity documentImageByIid;
-    private Collection<DocumentTabEntity> documentTabsById;
 
     @Id
     @Column(name = "id")
@@ -61,6 +59,36 @@ public class DocumentBaseEntity {
     }
 
     @Basic
+    @Column(name = "tid")
+    public Integer getTid() {
+        return tid;
+    }
+
+    public void setTid(Integer tid) {
+        this.tid = tid;
+    }
+
+    @Basic
+    @Column(name = "cid")
+    public Integer getCid() {
+        return cid;
+    }
+
+    public void setCid(Integer cid) {
+        this.cid = cid;
+    }
+
+    @Basic
+    @Column(name = "iid")
+    public Integer getIid() {
+        return iid;
+    }
+
+    public void setIid(Integer iid) {
+        this.iid = iid;
+    }
+
+    @Basic
     @Column(name = "page_area")
     public String getPageArea() {
         return pageArea;
@@ -99,6 +127,9 @@ public class DocumentBaseEntity {
                 Objects.equals(name, that.name) &&
                 Objects.equals(isDel, that.isDel) &&
                 Objects.equals(pid, that.pid) &&
+                Objects.equals(tid, that.tid) &&
+                Objects.equals(cid, that.cid) &&
+                Objects.equals(iid, that.iid) &&
                 Objects.equals(pageArea, that.pageArea) &&
                 Objects.equals(gmtCreate, that.gmtCreate) &&
                 Objects.equals(gmtModified, that.gmtModified);
@@ -106,45 +137,6 @@ public class DocumentBaseEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, isDel, pid, pageArea, gmtCreate, gmtModified);
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "tid", referencedColumnName = "id")
-    public DocumentTitleEntity getDocumentTitleByTid() {
-        return documentTitleByTid;
-    }
-
-    public void setDocumentTitleByTid(DocumentTitleEntity documentTitleByTid) {
-        this.documentTitleByTid = documentTitleByTid;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "cid", referencedColumnName = "id")
-    public DocumentContentEntity getDocumentContentByCid() {
-        return documentContentByCid;
-    }
-
-    public void setDocumentContentByCid(DocumentContentEntity documentContentByCid) {
-        this.documentContentByCid = documentContentByCid;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "iid", referencedColumnName = "id")
-    public DocumentImageEntity getDocumentImageByIid() {
-        return documentImageByIid;
-    }
-
-    public void setDocumentImageByIid(DocumentImageEntity documentImageByIid) {
-        this.documentImageByIid = documentImageByIid;
-    }
-
-    @OneToMany(mappedBy = "documentBaseByDbid")
-    public Collection<DocumentTabEntity> getDocumentTabsById() {
-        return documentTabsById;
-    }
-
-    public void setDocumentTabsById(Collection<DocumentTabEntity> documentTabsById) {
-        this.documentTabsById = documentTabsById;
+        return Objects.hash(id, name, isDel, pid, tid, cid, iid, pageArea, gmtCreate, gmtModified);
     }
 }

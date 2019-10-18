@@ -20,7 +20,7 @@ public class DocumentTabEntity {
     private Integer pid;
     private Timestamp gmtCreate;
     private Timestamp gmtModified;
-    private DocumentBaseEntity documentBaseByDbid;
+    private Integer dbid;
 
     @Id
     @Column(name = "id")
@@ -152,6 +152,16 @@ public class DocumentTabEntity {
         this.gmtModified = gmtModified;
     }
 
+    @Basic
+    @Column(name = "dbid")
+    public Integer getDbid() {
+        return dbid;
+    }
+
+    public void setDbid(Integer dbid) {
+        this.dbid = dbid;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -169,21 +179,12 @@ public class DocumentTabEntity {
                 Objects.equals(level, that.level) &&
                 Objects.equals(pid, that.pid) &&
                 Objects.equals(gmtCreate, that.gmtCreate) &&
-                Objects.equals(gmtModified, that.gmtModified);
+                Objects.equals(gmtModified, that.gmtModified) &&
+                Objects.equals(dbid, that.dbid);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, viewName, url, idDel, icon, imageUrl, imageHeight, imageWidth, level, pid, gmtCreate, gmtModified);
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "dbid", referencedColumnName = "id")
-    public DocumentBaseEntity getDocumentBaseByDbid() {
-        return documentBaseByDbid;
-    }
-
-    public void setDocumentBaseByDbid(DocumentBaseEntity documentBaseByDbid) {
-        this.documentBaseByDbid = documentBaseByDbid;
+        return Objects.hash(id, name, viewName, url, idDel, icon, imageUrl, imageHeight, imageWidth, level, pid, gmtCreate, gmtModified, dbid);
     }
 }

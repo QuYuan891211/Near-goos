@@ -40,6 +40,11 @@ public class DocumentTabServiceImpl implements DocumentTabService {
         return list;
     }
 
+    @Override
+    public List<DocumentTabEntity> getTargetLevelTab(Integer level) {
+        return null;
+    }
+
     /**
      * @return :
      * @Author : evaseemefly
@@ -48,7 +53,9 @@ public class DocumentTabServiceImpl implements DocumentTabService {
      * @Date : 2019/10/13 4:34 下午
      */
     @Override
-    public List<DocumentTabEntity> getTargetLevelTab() {
-        return null;
+    public List<DocumentTabEntity> getTargetLevelTab(Integer pid,Integer level) {
+
+        List<DocumentTabEntity> list=documentTabRepository.findAllByPidAndLevel(pid,level);
+        return list;
     }
 }
