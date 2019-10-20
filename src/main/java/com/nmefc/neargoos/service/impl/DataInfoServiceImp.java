@@ -59,6 +59,7 @@ public class DataInfoServiceImp extends DataBaseServiceImp<DataDataInfoEntity,Lo
             if (dataDataInfoEntity.getSourceId() != null){
                 predicateList.add(criteriaBuilder.equal(root.get("sourceId"),dataDataInfoEntity.getSourceId()));
             }
+            predicateList.add(criteriaBuilder.lessThan(root.get("isDelete"),1));
             return criteriaQuery.where(predicateList.toArray(new Predicate[predicateList.size()])).getRestriction();
         },pageable);
     }
