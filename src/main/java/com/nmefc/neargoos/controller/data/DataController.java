@@ -1,11 +1,10 @@
 package com.nmefc.neargoos.controller.data;
 
+import com.nmefc.neargoos.entity.data.DataAreaEntity;
 import com.nmefc.neargoos.entity.data.DataCategoryEntity;
 import com.nmefc.neargoos.entity.data.DataOverviewEntity;
 import com.nmefc.neargoos.entity.data.DataSourceEntity;
-import com.nmefc.neargoos.service.inte.DataBaseService;
-import com.nmefc.neargoos.service.inte.DataCategoryService;
-import com.nmefc.neargoos.service.inte.DataOverviewService;
+import com.nmefc.neargoos.service.inte.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,7 +27,10 @@ public class DataController {
     private DataOverviewService dataOverviewService;
     @Autowired
     private DataCategoryService dataCategoryService;
-
+    @Autowired
+    private DataSourceService dataSourceService;
+    @Autowired
+    private DataAreaService dataAreaService;
 //    /**
 //     *@Description: 新增
 //     *@Param: [dataOverviewEntity]
@@ -82,25 +84,46 @@ public class DataController {
         Pageable pageable = PageRequest.of(page, size, sort);
         return dataCategoryService.findByBaseCondition(dataCategoryEntity,pageable);
     }
-//
-//    /**
-//     *@Description:查找所有数据源（未软删除的）
-//     *@Param: []
-//     *@Return: java.util.List<com.nmefc.neargoos.entity.data.DataCategoryEntity>
-//     *@Author: quyua
-//     *@Date: 2019/10/20 0:21
-//     */
-//    @ResponseBody
-//    @PostMapping("/getSourceByBaseCondition")
-//    public Page<DataSourceEntity> getSource(Long id, String name, Integer page, Integer size){
-//        DataSourceEntity dataSourceEntity = new DataSourceEntity();
-//        dataSourceEntity.setId(id);
-//        dataSourceEntity.setName(name);
-////        int page=0,size=10;
-//        //        1. 检查是否传入分页数据
-//        if (page == null || size == null){return null;}
-//        Sort sort = new Sort(Sort.Direction.DESC, "id");
-//        Pageable pageable = PageRequest.of(page, size, sort);
-//        return dataBaseService.findByBaseCondition(dataSourceEntity,pageable);
-//    }
+
+        /**
+         *@Description:查找所有数据源（未软删除的）
+         *@Param: []
+         *@Return: java.util.List<com.nmefc.neargoos.entity.data.DataCategoryEntity>
+         *@Author: quyua
+         *@Date: 2019/10/20 0:21
+         */
+        @ResponseBody
+        @GetMapping("/getSourceByBaseCondition")
+        public Page<DataSourceEntity> getSource(Long id, String name, Integer page, Integer size){
+            DataSourceEntity dataSourceEntity = new DataSourceEntity();
+            dataSourceEntity.setId(id);
+            dataSourceEntity.setName(name);
+    //        int page=0,size=10;
+            //        1. 检查是否传入分页数据
+            if (page == null || size == null){return null;}
+            Sort sort = new Sort(Sort.Direction.DESC, "id");
+            Pageable pageable = PageRequest.of(page, size, sort);
+            return dataSourceService.findByBaseCondition(dataSourceEntity,pageable);
+        }
+
+    /**
+     *@Description:查找所有海区信息（未软删除的）
+     *@Param: []
+     *@Return: java.util.List<com.nmefc.neargoos.entity.data.DataCategoryEntity>
+     *@Author: quyua
+     *@Date: 2019/10/20 0:21
+     */
+    @ResponseBody
+    @GetMapping("/getAreaByBaseCondition")
+    public Page<DataAreaEntity> getArea(Long id, String name, Integer page, Integer size){
+        DataAreaEntity dataAreaEntity = new DataAreaEntity();
+        dataAreaEntity.setId(id);
+        dataAreaEntity.setName(name);
+        //        int page=0,size=10;
+        //        1. 检查是否传入分页数据
+        if (page == null || size == null){return null;}
+        Sort sort = new Sort(Sort.Direction.DESC, "id");
+        Pageable pageable = PageRequest.of(page, size, sort);
+        return dataAreaService.findByBaseCondition(dataAreaEntity,pageable);
+    }
 }
