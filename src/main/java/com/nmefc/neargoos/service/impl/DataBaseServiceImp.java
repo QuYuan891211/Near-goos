@@ -36,7 +36,7 @@ public abstract class DataBaseServiceImp<T extends DataBaseEntity,PK> implements
 //        return dataList;
 //    }
     /**
-     *@Description: 数据基础信息查询（id,name及未被软删除）---> 用于查询数据总体介绍表，数据源表，海区表及数据类型表
+     *@Description: 数据信息条件查询（id,name及未被软删除）---> 用于查询数据总体介绍表，数据源表，海区表及数据类型表
      *@Param: [t, pageable]
      *@Return: org.springframework.data.domain.Page<T>
      *@Author: quyua

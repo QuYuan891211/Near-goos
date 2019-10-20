@@ -10,7 +10,7 @@ public class DataDataInfoEntity extends DataBaseEntity{
 //    private Timestamp gmtCreate;
 //    private Timestamp gmtModified;
 //    private byte isDelete;
-    private String filename;
+//    private String name;
     private String extensions;
     private String remark;
     private Timestamp date;
@@ -60,15 +60,15 @@ public class DataDataInfoEntity extends DataBaseEntity{
 //        this.isDelete = isDelete;
 //    }
 
-    @Basic
-    @Column(name = "filename")
-    public String getFilename() {
-        return filename;
-    }
-
-    public void setFilename(String filename) {
-        this.filename = filename;
-    }
+//    @Basic
+//    @Column(name = "name")
+//    public String getFilename() {
+//        return name;
+//    }
+//
+//    public void setFilename(String filename) {
+//        this.name = name;
+//    }
 
     @Basic
     @Column(name = "extensions")
@@ -162,7 +162,7 @@ public class DataDataInfoEntity extends DataBaseEntity{
         if (isDesc != that.isDesc) return false;
         if (gmtCreate != null ? !gmtCreate.equals(that.gmtCreate) : that.gmtCreate != null) return false;
         if (gmtModified != null ? !gmtModified.equals(that.gmtModified) : that.gmtModified != null) return false;
-        if (filename != null ? !filename.equals(that.filename) : that.filename != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (extensions != null ? !extensions.equals(that.extensions) : that.extensions != null) return false;
         if (remark != null ? !remark.equals(that.remark) : that.remark != null) return false;
         if (date != null ? !date.equals(that.date) : that.date != null) return false;
@@ -180,7 +180,7 @@ public class DataDataInfoEntity extends DataBaseEntity{
         result = 31 * result + (gmtCreate != null ? gmtCreate.hashCode() : 0);
         result = 31 * result + (gmtModified != null ? gmtModified.hashCode() : 0);
         result = 31 * result + (int) isDelete;
-        result = 31 * result + (filename != null ? filename.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (extensions != null ? extensions.hashCode() : 0);
         result = 31 * result + (remark != null ? remark.hashCode() : 0);
         result = 31 * result + (date != null ? date.hashCode() : 0);

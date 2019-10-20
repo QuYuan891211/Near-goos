@@ -1,9 +1,7 @@
 package com.nmefc.neargoos.controller.data;
 
-import com.nmefc.neargoos.entity.data.DataAreaEntity;
-import com.nmefc.neargoos.entity.data.DataCategoryEntity;
-import com.nmefc.neargoos.entity.data.DataOverviewEntity;
-import com.nmefc.neargoos.entity.data.DataSourceEntity;
+import com.nmefc.neargoos.common.utils.DateTimeUtils;
+import com.nmefc.neargoos.entity.data.*;
 import com.nmefc.neargoos.service.inte.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 /**
  *@Description: data介绍功能的控制器
@@ -31,6 +31,8 @@ public class DataController {
     private DataSourceService dataSourceService;
     @Autowired
     private DataAreaService dataAreaService;
+    @Autowired
+    private DataInfoService dataInfoService;
 //    /**
 //     *@Description: 新增
 //     *@Param: [dataOverviewEntity]
@@ -65,7 +67,7 @@ public class DataController {
        return dataOverviewService.findByBaseCondition(dataOverviewEntity,pageable);
     }
     /**
-     *@Description:查找所有数据类型（未软删除的）
+     *@Description:查找数据类型（未软删除的）
      *@Param: []
      *@Return: java.util.List<com.nmefc.neargoos.entity.data.DataCategoryEntity>
      *@Author: quyua
@@ -86,7 +88,7 @@ public class DataController {
     }
 
         /**
-         *@Description:查找所有数据源（未软删除的）
+         *@Description:查找数据源（未软删除的）
          *@Param: []
          *@Return: java.util.List<com.nmefc.neargoos.entity.data.DataCategoryEntity>
          *@Author: quyua
@@ -107,7 +109,7 @@ public class DataController {
         }
 
     /**
-     *@Description:查找所有海区信息（未软删除的）
+     *@Description:查找海区信息（未软删除的）
      *@Param: []
      *@Return: java.util.List<com.nmefc.neargoos.entity.data.DataCategoryEntity>
      *@Author: quyua
@@ -125,5 +127,23 @@ public class DataController {
         Sort sort = new Sort(Sort.Direction.DESC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
         return dataAreaService.findByBaseCondition(dataAreaEntity,pageable);
+    }
+
+    /**
+     *@Description:查找数据信息（未软删除的）
+     *@Param: []
+     *@Return: java.util.List<com.nmefc.neargoos.entity.data.DataCategoryEntity>
+     *@Author: quyua
+     *@Date: 2019/10/20 0:21
+     */
+    @ResponseBody
+    @GetMapping("/getDataInfoByBaseCondition")
+    public Page<DataDataInfoEntity> getDataInfo(DataDataInfoEntity dataDataInfoEntity, Date beginTime,Date endTime, Integer page, Integer size){
+        //        int page=0,size=10;
+        //        1. 检查是否传入分页数据
+        if (page == null || size == null){return null;}
+        Sort sort = new Sort(Sort.Direction.DESC, "id");
+        Pageable pageable = PageRequest.of(page, size, sort);
+        return dataInfoService.findByBaseCondition(dataDataInfoEntity, DateTimeUtils.date2timestamp(beginTime),DateTimeUtils.date2timestamp(endTime),pageable);
     }
 }
