@@ -5,13 +5,13 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "document_base", schema = "neargoos", catalog = "")
-public class DocumentBaseEntity {
+@Table(name = "document_image", schema = "neargoos", catalog = "")
+public class DocumentImageEntity {
     private long id;
     private String name;
-    private Byte isDel;
-    private Long pid;
-    private String pageArea;
+    private String imageUrl;
+    private Double imageHeigh;
+    private Double imageWidth;
     private Timestamp gmtCreate;
     private Timestamp gmtModified;
 
@@ -36,33 +36,33 @@ public class DocumentBaseEntity {
     }
 
     @Basic
-    @Column(name = "is_del")
-    public Byte getIsDel() {
-        return isDel;
+    @Column(name = "image_url")
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setIsDel(Byte isDel) {
-        this.isDel = isDel;
-    }
-
-    @Basic
-    @Column(name = "pid")
-    public Long getPid() {
-        return pid;
-    }
-
-    public void setPid(Long pid) {
-        this.pid = pid;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     @Basic
-    @Column(name = "page_area")
-    public String getPageArea() {
-        return pageArea;
+    @Column(name = "image_heigh")
+    public Double getImageHeigh() {
+        return imageHeigh;
     }
 
-    public void setPageArea(String pageArea) {
-        this.pageArea = pageArea;
+    public void setImageHeigh(Double imageHeigh) {
+        this.imageHeigh = imageHeigh;
+    }
+
+    @Basic
+    @Column(name = "image_width")
+    public Double getImageWidth() {
+        return imageWidth;
+    }
+
+    public void setImageWidth(Double imageWidth) {
+        this.imageWidth = imageWidth;
     }
 
     @Basic
@@ -89,18 +89,18 @@ public class DocumentBaseEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DocumentBaseEntity that = (DocumentBaseEntity) o;
+        DocumentImageEntity that = (DocumentImageEntity) o;
         return id == that.id &&
                 Objects.equals(name, that.name) &&
-                Objects.equals(isDel, that.isDel) &&
-                Objects.equals(pid, that.pid) &&
-                Objects.equals(pageArea, that.pageArea) &&
+                Objects.equals(imageUrl, that.imageUrl) &&
+                Objects.equals(imageHeigh, that.imageHeigh) &&
+                Objects.equals(imageWidth, that.imageWidth) &&
                 Objects.equals(gmtCreate, that.gmtCreate) &&
                 Objects.equals(gmtModified, that.gmtModified);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, isDel, pid, pageArea, gmtCreate, gmtModified);
+        return Objects.hash(id, name, imageUrl, imageHeigh, imageWidth, gmtCreate, gmtModified);
     }
 }

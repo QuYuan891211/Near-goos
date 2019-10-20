@@ -5,13 +5,12 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "document_base", schema = "neargoos", catalog = "")
-public class DocumentBaseEntity {
+@Table(name = "document_title", schema = "neargoos", catalog = "")
+public class DocumentTitleEntity {
     private long id;
     private String name;
     private Byte isDel;
-    private Long pid;
-    private String pageArea;
+    private String titleContent;
     private Timestamp gmtCreate;
     private Timestamp gmtModified;
 
@@ -46,23 +45,13 @@ public class DocumentBaseEntity {
     }
 
     @Basic
-    @Column(name = "pid")
-    public Long getPid() {
-        return pid;
+    @Column(name = "title_content")
+    public String getTitleContent() {
+        return titleContent;
     }
 
-    public void setPid(Long pid) {
-        this.pid = pid;
-    }
-
-    @Basic
-    @Column(name = "page_area")
-    public String getPageArea() {
-        return pageArea;
-    }
-
-    public void setPageArea(String pageArea) {
-        this.pageArea = pageArea;
+    public void setTitleContent(String titleContent) {
+        this.titleContent = titleContent;
     }
 
     @Basic
@@ -89,18 +78,17 @@ public class DocumentBaseEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DocumentBaseEntity that = (DocumentBaseEntity) o;
+        DocumentTitleEntity that = (DocumentTitleEntity) o;
         return id == that.id &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(isDel, that.isDel) &&
-                Objects.equals(pid, that.pid) &&
-                Objects.equals(pageArea, that.pageArea) &&
+                Objects.equals(titleContent, that.titleContent) &&
                 Objects.equals(gmtCreate, that.gmtCreate) &&
                 Objects.equals(gmtModified, that.gmtModified);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, isDel, pid, pageArea, gmtCreate, gmtModified);
+        return Objects.hash(id, name, isDel, titleContent, gmtCreate, gmtModified);
     }
 }

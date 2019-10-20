@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.List;
+import java.lang.Long;
 
 /**
  * @Author : evaseemefly
@@ -13,6 +14,8 @@ import java.util.List;
  * Invocation of init method failed;
  * nested exception is java.lang.IllegalArgumentException:
  * Not a managed type: class com.nmefc.neargoos.entity.document.DocumentTabEntity
+ *
+ * todo:[*] 19-10-19 注意修改了JpaRepository的泛型类型为Integer（之前为Long）
  * @params :
  * @Date : 2019/10/13 4:49 下午
  * @return :
@@ -28,5 +31,5 @@ public interface DocumentTabRepository extends JpaSpecificationExecutor<Document
      * @params :
      * @Date : 2019/10/18 16:39
      */
-    List<DocumentTabEntity> findAllByPidAndLevel(Integer pid,Integer level);
+    List<DocumentTabEntity> findAllByPid(Long pid);
 }

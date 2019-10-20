@@ -6,26 +6,26 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class TabBaseAssociationEntityPK implements Serializable {
-    private int bid;
-    private int tabid;
+    private long bid;
+    private long tabid;
 
     @Column(name = "bid")
     @Id
-    public int getBid() {
+    public long getBid() {
         return bid;
     }
 
-    public void setBid(int bid) {
+    public void setBid(long bid) {
         this.bid = bid;
     }
 
     @Column(name = "tabid")
     @Id
-    public int getTabid() {
+    public long getTabid() {
         return tabid;
     }
 
-    public void setTabid(int tabid) {
+    public void setTabid(long tabid) {
         this.tabid = tabid;
     }
 

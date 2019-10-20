@@ -7,7 +7,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "document_tab", schema = "neargoos", catalog = "")
 public class DocumentTabEntity {
-    private int id;
+    private long id;
     private String name;
     private String viewName;
     private String url;
@@ -17,18 +17,18 @@ public class DocumentTabEntity {
     private String imageHeight;
     private String imageWidth;
     private Integer level;
-    private Integer pid;
+    private Long pid;
     private Timestamp gmtCreate;
     private Timestamp gmtModified;
-    private Integer dbid;
+    private Long dbid;
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -124,11 +124,11 @@ public class DocumentTabEntity {
 
     @Basic
     @Column(name = "pid")
-    public Integer getPid() {
+    public Long getPid() {
         return pid;
     }
 
-    public void setPid(Integer pid) {
+    public void setPid(Long pid) {
         this.pid = pid;
     }
 
@@ -154,11 +154,11 @@ public class DocumentTabEntity {
 
     @Basic
     @Column(name = "dbid")
-    public Integer getDbid() {
+    public Long getDbid() {
         return dbid;
     }
 
-    public void setDbid(Integer dbid) {
+    public void setDbid(Long dbid) {
         this.dbid = dbid;
     }
 

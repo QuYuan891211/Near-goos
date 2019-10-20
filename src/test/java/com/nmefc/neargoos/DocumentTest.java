@@ -23,7 +23,7 @@ public class DocumentTest {
         Timestamp tsNow=new Timestamp(System.currentTimeMillis());
         documentTemp.setGmtCreate(tsNow);
         documentTemp.setGmtModified(tsNow);
-        documentTemp.setLevel(1);
+//        documentTemp.setLevel(1);
         documentTemp.setName("测试");
 //        documentTabRepository.save(documentTemp);
 

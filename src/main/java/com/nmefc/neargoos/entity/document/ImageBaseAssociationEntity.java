@@ -4,17 +4,16 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tab_base_association", schema = "neargoos", catalog = "")
-@IdClass(TabBaseAssociationEntityPK.class)
-public class TabBaseAssociationEntity {
-//    @Column(insertable=false,updatable=false)
+@Table(name = "image_base_association", schema = "neargoos", catalog = "")
+@IdClass(ImageBaseAssociationEntityPK.class)
+public class ImageBaseAssociationEntity {
     private long bid;
-//    @Column(insertable=false,updatable=false)
-    private long tabid;
+    private Long imageid;
     private DocumentBaseEntity documentBaseByBid;
-    private DocumentTabEntity documentTabByTabid;
+    private DocumentImageEntity documentImageByImageid;
 
     @Id
+    @Basic
     @Column(name = "bid")
     public long getBid() {
         return bid;
@@ -25,27 +24,28 @@ public class TabBaseAssociationEntity {
     }
 
     @Id
-    @Column(name = "tabid")
-    public long getTabid() {
-        return tabid;
+    @Basic
+    @Column(name = "imageid")
+    public Long getImageid() {
+        return imageid;
     }
 
-    public void setTabid(long tabid) {
-        this.tabid = tabid;
+    public void setImageid(Long imageid) {
+        this.imageid = imageid;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TabBaseAssociationEntity that = (TabBaseAssociationEntity) o;
+        ImageBaseAssociationEntity that = (ImageBaseAssociationEntity) o;
         return bid == that.bid &&
-                tabid == that.tabid;
+                Objects.equals(imageid, that.imageid);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bid, tabid);
+        return Objects.hash(bid, imageid);
     }
 
     @ManyToOne
@@ -59,12 +59,12 @@ public class TabBaseAssociationEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "tabid", referencedColumnName = "id", nullable = false,insertable=false,updatable=false)
-    public DocumentTabEntity getDocumentTabByTabid() {
-        return documentTabByTabid;
+    @JoinColumn(name = "imageid", referencedColumnName = "id",insertable=false,updatable=false)
+    public DocumentImageEntity getDocumentImageByImageid() {
+        return documentImageByImageid;
     }
 
-    public void setDocumentTabByTabid(DocumentTabEntity documentTabByTabid) {
-        this.documentTabByTabid = documentTabByTabid;
+    public void setDocumentImageByImageid(DocumentImageEntity documentImageByImageid) {
+        this.documentImageByImageid = documentImageByImageid;
     }
 }
