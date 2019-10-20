@@ -1,7 +1,7 @@
 package com.nmefc.neargoos.entity.data;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+
 /**
  *@Description: data 介绍的实体，由JPA从数据库逆向生成
  *@Param:
@@ -16,7 +16,7 @@ public class DataOverviewEntity extends DataBaseEntity {
 //    private Timestamp gmtCreate;
 //    private Timestamp gmtModified;
     private String content;
-    private String title;
+//    private String name;
 //    private byte isDelete;
 
 //    @Id
@@ -69,15 +69,15 @@ public class DataOverviewEntity extends DataBaseEntity {
         this.content = content;
     }
 
-    @Basic
-    @Column(name = "title")
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
+//    @Basic
+//    @Column(name = "name")
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -91,7 +91,7 @@ public class DataOverviewEntity extends DataBaseEntity {
         if (gmtCreate != null ? !gmtCreate.equals(that.gmtCreate) : that.gmtCreate != null) return false;
         if (gmtModified != null ? !gmtModified.equals(that.gmtModified) : that.gmtModified != null) return false;
         if (content != null ? !content.equals(that.content) : that.content != null) return false;
-        if (title != null ? !title.equals(that.title) : that.title != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
 
         return true;
     }
@@ -102,7 +102,7 @@ public class DataOverviewEntity extends DataBaseEntity {
         result = 31 * result + (gmtCreate != null ? gmtCreate.hashCode() : 0);
         result = 31 * result + (gmtModified != null ? gmtModified.hashCode() : 0);
         result = 31 * result + (content != null ? content.hashCode() : 0);
-        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (int) isDelete;
         return result;
     }

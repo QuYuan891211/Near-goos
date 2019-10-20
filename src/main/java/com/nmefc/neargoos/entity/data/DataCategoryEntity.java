@@ -13,20 +13,20 @@ public class DataCategoryEntity extends DataBaseEntity{
 //    private Timestamp gmtCreate;
 //    private Timestamp gmtModified;
 //    private byte isDelete;
-    private String name;
+//    private String name;
     private String remark;
     private Long parentId;
 
 
-    @Basic
-    @Column(name = "name")
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+//    @Basic
+//    @Column(name = "name")
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
     @Basic
     @Column(name = "remark")

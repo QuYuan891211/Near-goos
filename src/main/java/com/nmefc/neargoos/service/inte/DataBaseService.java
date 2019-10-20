@@ -1,6 +1,8 @@
 package com.nmefc.neargoos.service.inte;
 
 import com.nmefc.neargoos.entity.data.DataBaseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -13,12 +15,14 @@ import java.util.List;
  */
 public interface DataBaseService<T extends DataBaseEntity, PK> {
 
-    /**
-     *@Description: 找到所有没有被软删除的数据
-     *@Param: []
-     *@Return: java.util.List<com.nmefc.neargoos.entity.data.DataOverviewEntity>
-     *@Author: quyua
-     *@Date: 2019/10/12 17:18
-     */
-    List<T> findDataNotDelete(T example);
+//    /**
+//     *@Description: 找到所有没有被软删除的数据
+//     *@Param: []
+//     *@Return: java.util.List<com.nmefc.neargoos.entity.data.DataOverviewEntity>
+//     *@Author: quyua
+//     *@Date: 2019/10/12 17:18
+//     */
+//    List<T> findDataNotDelete(T example);
+
+    Page<T> findByBaseCondition(T t, Pageable pageable);
 }

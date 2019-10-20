@@ -14,7 +14,7 @@ public class DataSourceEntity extends DataBaseEntity{
 //    private Timestamp gmtModified;
 //    private byte isDelete;
     private String imgUrl;
-    private String name;
+//    private String name;
     private Long parentId;
     private String homepageUrl;
 //
@@ -68,15 +68,15 @@ public class DataSourceEntity extends DataBaseEntity{
         this.imgUrl = imgUrl;
     }
 
-    @Basic
-    @Column(name = "name")
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+//    @Basic
+//    @Column(name = "name")
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
     @Basic
     @Column(name = "parent_id")

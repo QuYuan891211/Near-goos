@@ -20,7 +20,7 @@ import java.util.Date;
 @MappedSuperclass
 public class DataBaseEntity extends BaseEntity{
     protected byte isDelete;
-    @Basic
+    protected String name;
     @Column(name = "is_delete")
     public byte getIsDelete() {
         return isDelete;
@@ -28,5 +28,16 @@ public class DataBaseEntity extends BaseEntity{
 
     public void setIsDelete(byte isDelete) {
         this.isDelete = isDelete;
+    }
+
+
+    @Basic
+    @Column(name = "name")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
