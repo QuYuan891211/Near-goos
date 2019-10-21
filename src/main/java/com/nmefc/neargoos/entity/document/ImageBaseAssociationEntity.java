@@ -30,6 +30,10 @@ public class ImageBaseAssociationEntity {
         return imageid;
     }
 
+    public void setImageid(long imageid) {
+        this.imageid = imageid;
+    }
+
     public void setImageid(Long imageid) {
         this.imageid = imageid;
     }
@@ -59,7 +63,7 @@ public class ImageBaseAssociationEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "imageid", referencedColumnName = "id",insertable=false,updatable=false)
+     @JoinColumn(name = "imageid", referencedColumnName = "id", nullable = false,insertable=false,updatable=false)
     public DocumentImageEntity getDocumentImageByImageid() {
         return documentImageByImageid;
     }

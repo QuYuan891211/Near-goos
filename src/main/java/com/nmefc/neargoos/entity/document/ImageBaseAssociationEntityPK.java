@@ -11,6 +11,7 @@ public class ImageBaseAssociationEntityPK implements Serializable {
     private DocumentBaseEntity documentBaseByBid;
     private DocumentImageEntity documentImageByImageid;
 
+    @Basic
     @Id
     @Column(name = "bid")
     public long getBid() {

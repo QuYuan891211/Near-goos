@@ -42,8 +42,13 @@ public class DocumentBaseServiceImpl implements DocumentBaseService {
             // 找到指定tabid对应的关联表中的baseid，并加入list中
             // todo:[*] 19-10-20 此处还有其他更好的办法吗？直接找到对应的关联表中的记录？
             List<TabBaseAssociationEntity> tabBaseTemp = tabBaseAssociationRepository.findByTabid(byId.get().getId());
+
+
+//            tabBaseTemp[0]
             tabBaseTemp.forEach(temp -> {
                 listBase.add(temp.getDocumentBaseByBid());
+                // todo:[*] 19-10-21 尝试在关联表中直接找到外键对应的映射entity
+//                temp.
             });
 //            tabBaseTemp.forEach(temp -> listBid.add(temp.getBid()));
             return listBase;
