@@ -1,5 +1,4 @@
 package com.nmefc.neargoos.service.inte;
-
 import com.nmefc.neargoos.entity.document.DocumentImageEntity;
 
 import java.util.List;
