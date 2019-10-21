@@ -1,11 +1,8 @@
 package com.nmefc.neargoos.repository.inte;
 
 import com.nmefc.neargoos.entity.data.DataBaseEntity;
-import com.nmefc.neargoos.entity.data.DataOverviewEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-
-import java.util.List;
 
 /**
  *@Description: data介绍的数据库交互操作接口

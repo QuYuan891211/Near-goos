@@ -1,10 +1,8 @@
 package com.nmefc.neargoos.entity.data;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
 
 @Entity
 @Table(name = "data_source", schema = "neargoos", catalog = "")
@@ -15,10 +13,11 @@ public class DataSourceEntity extends DataBaseEntity{
 //    private byte isDelete;
     private String imgUrl;
 //    private String name;
-    private Long parentId;
     private String homepageUrl;
+//    @OneToMany(mappedBy = "dataSourceBySourceId",fetch = FetchType.LAZY)
+//    private Collection<DataDataInfoEntity> dataDataInfosById;
 //
-//    @Basic
+//    @Id
 //    @Column(name = "id")
 //    public long getId() {
 //        return id;
@@ -67,7 +66,7 @@ public class DataSourceEntity extends DataBaseEntity{
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
-
+//
 //    @Basic
 //    @Column(name = "name")
 //    public String getName() {
@@ -77,16 +76,6 @@ public class DataSourceEntity extends DataBaseEntity{
 //    public void setName(String name) {
 //        this.name = name;
 //    }
-
-    @Basic
-    @Column(name = "parent_id")
-    public Long getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
 
     @Basic
     @Column(name = "homepage_url")
@@ -111,7 +100,6 @@ public class DataSourceEntity extends DataBaseEntity{
         if (gmtModified != null ? !gmtModified.equals(that.gmtModified) : that.gmtModified != null) return false;
         if (imgUrl != null ? !imgUrl.equals(that.imgUrl) : that.imgUrl != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (parentId != null ? !parentId.equals(that.parentId) : that.parentId != null) return false;
         if (homepageUrl != null ? !homepageUrl.equals(that.homepageUrl) : that.homepageUrl != null) return false;
 
         return true;
@@ -125,8 +113,16 @@ public class DataSourceEntity extends DataBaseEntity{
         result = 31 * result + (int) isDelete;
         result = 31 * result + (imgUrl != null ? imgUrl.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (parentId != null ? parentId.hashCode() : 0);
         result = 31 * result + (homepageUrl != null ? homepageUrl.hashCode() : 0);
         return result;
     }
+
+
+//    public Collection<DataDataInfoEntity> getDataDataInfosById() {
+//        return dataDataInfosById;
+//    }
+//
+//    public void setDataDataInfosById(Collection<DataDataInfoEntity> dataDataInfosById) {
+//        this.dataDataInfosById = dataDataInfosById;
+//    }
 }

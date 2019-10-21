@@ -1,10 +1,8 @@
 package com.nmefc.neargoos.entity.data;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
 
 @Entity
 @Table(name = "data_category", schema = "neargoos", catalog = "")
@@ -15,9 +13,49 @@ public class DataCategoryEntity extends DataBaseEntity{
 //    private byte isDelete;
 //    private String name;
     private String remark;
-    private Long parentId;
+//    @OneToMany(mappedBy = "dataCategoryByCategoryId",fetch = FetchType.LAZY )
+//    private Collection<DataDataInfoEntity> dataDataInfosById;
 
-
+//    @Id
+//    @Column(name = "id")
+//    public long getId() {
+//        return id;
+//    }
+//
+//    public void setId(long id) {
+//        this.id = id;
+//    }
+//
+//    @Basic
+//    @Column(name = "gmt_create")
+//    public Timestamp getGmtCreate() {
+//        return gmtCreate;
+//    }
+//
+//    public void setGmtCreate(Timestamp gmtCreate) {
+//        this.gmtCreate = gmtCreate;
+//    }
+//
+//    @Basic
+//    @Column(name = "gmt_modified")
+//    public Timestamp getGmtModified() {
+//        return gmtModified;
+//    }
+//
+//    public void setGmtModified(Timestamp gmtModified) {
+//        this.gmtModified = gmtModified;
+//    }
+//
+//    @Basic
+//    @Column(name = "is_delete")
+//    public byte getIsDelete() {
+//        return isDelete;
+//    }
+//
+//    public void setIsDelete(byte isDelete) {
+//        this.isDelete = isDelete;
+//    }
+//
 //    @Basic
 //    @Column(name = "name")
 //    public String getName() {
@@ -38,16 +76,6 @@ public class DataCategoryEntity extends DataBaseEntity{
         this.remark = remark;
     }
 
-    @Basic
-    @Column(name = "parent_id")
-    public Long getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -61,7 +89,6 @@ public class DataCategoryEntity extends DataBaseEntity{
         if (gmtModified != null ? !gmtModified.equals(that.gmtModified) : that.gmtModified != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (remark != null ? !remark.equals(that.remark) : that.remark != null) return false;
-        if (parentId != null ? !parentId.equals(that.parentId) : that.parentId != null) return false;
 
         return true;
     }
@@ -74,7 +101,15 @@ public class DataCategoryEntity extends DataBaseEntity{
         result = 31 * result + (int) isDelete;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (remark != null ? remark.hashCode() : 0);
-        result = 31 * result + (parentId != null ? parentId.hashCode() : 0);
         return result;
     }
+
+
+//    public Collection<DataDataInfoEntity> getDataDataInfosById() {
+//        return dataDataInfosById;
+//    }
+//
+//    public void setDataDataInfosById(Collection<DataDataInfoEntity> dataDataInfosById) {
+//        this.dataDataInfosById = dataDataInfosById;
+//    }
 }

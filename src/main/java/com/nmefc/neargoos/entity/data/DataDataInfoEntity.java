@@ -2,10 +2,11 @@ package com.nmefc.neargoos.entity.data;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
 
 @Entity
 @Table(name = "data_data_info", schema = "neargoos", catalog = "")
-public class DataDataInfoEntity extends DataBaseEntity{
+public class DataDataInfoEntity extends DataBaseEntity {
 //    private long id;
 //    private Timestamp gmtCreate;
 //    private Timestamp gmtModified;
@@ -15,10 +16,29 @@ public class DataDataInfoEntity extends DataBaseEntity{
     private String remark;
     private Timestamp date;
     private byte isDesc;
+    @Basic
+    @Column(name = "category_id")
     private Long categoryId;
+    @Basic
+    @Column(name = "source_id")
     private Long sourceId;
+    @Basic
+    @Column(name = "area_id")
     private Long areaId;
     private String url;
+    private Timestamp dateFtp;
+    private Long size;
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private DataCategoryEntity dataCategoryByCategoryId;
+    @ManyToOne
+    @JoinColumn(name = "source_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private DataSourceEntity dataSourceBySourceId;
+    @ManyToOne
+    @JoinColumn(name = "area_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private DataAreaEntity dataAreaByAreaId;
+//    @OneToMany(mappedBy = "dataDataInfoByDid",fetch = FetchType.LAZY)
+//    private Collection<DatainfoRecordAssociationEntity> datainfoRecordAssociationsById;
 
 //    @Id
 //    @Column(name = "id")
@@ -59,14 +79,14 @@ public class DataDataInfoEntity extends DataBaseEntity{
 //    public void setIsDelete(byte isDelete) {
 //        this.isDelete = isDelete;
 //    }
-
+//
 //    @Basic
 //    @Column(name = "name")
-//    public String getFilename() {
+//    public String getName() {
 //        return name;
 //    }
 //
-//    public void setFilename(String filename) {
+//    public void setName(String name) {
 //        this.name = name;
 //    }
 
@@ -110,8 +130,7 @@ public class DataDataInfoEntity extends DataBaseEntity{
         this.isDesc = isDesc;
     }
 
-    @Basic
-    @Column(name = "category_id")
+
     public Long getCategoryId() {
         return categoryId;
     }
@@ -120,8 +139,7 @@ public class DataDataInfoEntity extends DataBaseEntity{
         this.categoryId = categoryId;
     }
 
-    @Basic
-    @Column(name = "source_id")
+
     public Long getSourceId() {
         return sourceId;
     }
@@ -130,8 +148,7 @@ public class DataDataInfoEntity extends DataBaseEntity{
         this.sourceId = sourceId;
     }
 
-    @Basic
-    @Column(name = "area_id")
+
     public Long getAreaId() {
         return areaId;
     }
@@ -148,6 +165,26 @@ public class DataDataInfoEntity extends DataBaseEntity{
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Basic
+    @Column(name = "date_ftp")
+    public Timestamp getDateFtp() {
+        return dateFtp;
+    }
+
+    public void setDateFtp(Timestamp dateFtp) {
+        this.dateFtp = dateFtp;
+    }
+
+    @Basic
+    @Column(name = "size")
+    public Long getSize() {
+        return size;
+    }
+
+    public void setSize(Long size) {
+        this.size = size;
     }
 
     @Override
@@ -170,6 +207,8 @@ public class DataDataInfoEntity extends DataBaseEntity{
         if (sourceId != null ? !sourceId.equals(that.sourceId) : that.sourceId != null) return false;
         if (areaId != null ? !areaId.equals(that.areaId) : that.areaId != null) return false;
         if (url != null ? !url.equals(that.url) : that.url != null) return false;
+        if (dateFtp != null ? !dateFtp.equals(that.dateFtp) : that.dateFtp != null) return false;
+        if (size != null ? !size.equals(that.size) : that.size != null) return false;
 
         return true;
     }
@@ -189,6 +228,44 @@ public class DataDataInfoEntity extends DataBaseEntity{
         result = 31 * result + (sourceId != null ? sourceId.hashCode() : 0);
         result = 31 * result + (areaId != null ? areaId.hashCode() : 0);
         result = 31 * result + (url != null ? url.hashCode() : 0);
+        result = 31 * result + (dateFtp != null ? dateFtp.hashCode() : 0);
+        result = 31 * result + (size != null ? size.hashCode() : 0);
         return result;
     }
+
+
+    public DataCategoryEntity getDataCategoryByCategoryId() {
+        return dataCategoryByCategoryId;
+    }
+
+    public void setDataCategoryByCategoryId(DataCategoryEntity dataCategoryByCategoryId) {
+        this.dataCategoryByCategoryId = dataCategoryByCategoryId;
+    }
+
+
+    public DataSourceEntity getDataSourceBySourceId() {
+        return dataSourceBySourceId;
+    }
+
+    public void setDataSourceBySourceId(DataSourceEntity dataSourceBySourceId) {
+        this.dataSourceBySourceId = dataSourceBySourceId;
+    }
+
+
+    public DataAreaEntity getDataAreaByAreaId() {
+        return dataAreaByAreaId;
+    }
+
+    public void setDataAreaByAreaId(DataAreaEntity dataAreaByAreaId) {
+        this.dataAreaByAreaId = dataAreaByAreaId;
+    }
+
+
+//    public Collection<DatainfoRecordAssociationEntity> getDatainfoRecordAssociationsById() {
+//        return datainfoRecordAssociationsById;
+//    }
+//
+//    public void setDatainfoRecordAssociationsById(Collection<DatainfoRecordAssociationEntity> datainfoRecordAssociationsById) {
+//        this.datainfoRecordAssociationsById = datainfoRecordAssociationsById;
+//    }
 }

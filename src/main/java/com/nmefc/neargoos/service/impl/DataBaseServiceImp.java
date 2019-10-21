@@ -1,19 +1,16 @@
 package com.nmefc.neargoos.service.impl;
 
 import com.nmefc.neargoos.entity.data.DataBaseEntity;
-import com.nmefc.neargoos.entity.data.DataCategoryEntity;
 import com.nmefc.neargoos.exception.ServiceException;
 import com.nmefc.neargoos.repository.inte.DataBaseRepository;
 import com.nmefc.neargoos.service.inte.DataBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public abstract class DataBaseServiceImp<T extends DataBaseEntity,PK> implements DataBaseService<T,PK> {
 

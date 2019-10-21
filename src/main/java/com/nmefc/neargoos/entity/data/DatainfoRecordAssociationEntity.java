@@ -8,6 +8,8 @@ import javax.persistence.*;
 public class DatainfoRecordAssociationEntity {
     private long rid;
     private long did;
+    private DataRecordEntity dataRecordByRid;
+    private DataDataInfoEntity dataDataInfoByDid;
 
     @Id
     @Column(name = "rid")
@@ -47,5 +49,25 @@ public class DatainfoRecordAssociationEntity {
         int result = (int) (rid ^ (rid >>> 32));
         result = 31 * result + (int) (did ^ (did >>> 32));
         return result;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "rid", referencedColumnName = "id", nullable = false,insertable = false, updatable = false)
+    public DataRecordEntity getDataRecordByRid() {
+        return dataRecordByRid;
+    }
+
+    public void setDataRecordByRid(DataRecordEntity dataRecordByRid) {
+        this.dataRecordByRid = dataRecordByRid;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "did", referencedColumnName = "id", nullable = false,insertable = false, updatable = false)
+    public DataDataInfoEntity getDataDataInfoByDid() {
+        return dataDataInfoByDid;
+    }
+
+    public void setDataDataInfoByDid(DataDataInfoEntity dataDataInfoByDid) {
+        this.dataDataInfoByDid = dataDataInfoByDid;
     }
 }

@@ -2,6 +2,7 @@ package com.nmefc.neargoos.controller.data;
 
 import com.nmefc.neargoos.common.utils.DateTimeUtils;
 import com.nmefc.neargoos.entity.data.*;
+import com.nmefc.neargoos.middleModel.DataInfoQueryModel;
 import com.nmefc.neargoos.service.inte.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -61,7 +62,7 @@ public class DataController {
     @GetMapping("/getAllOverview")
     public Page<DataOverviewEntity> getOverview(){
         DataOverviewEntity dataOverviewEntity = new DataOverviewEntity();
-        int page=0,size=1;
+        int page=0,size=5;
         Sort sort = new Sort(Sort.Direction.DESC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
        return dataOverviewService.findByBaseCondition(dataOverviewEntity,pageable);
@@ -137,13 +138,14 @@ public class DataController {
      *@Date: 2019/10/20 0:21
      */
     @ResponseBody
-    @GetMapping("/getDataInfoByBaseCondition")
-    public Page<DataDataInfoEntity> getDataInfo(DataDataInfoEntity dataDataInfoEntity, Date beginTime,Date endTime, Integer page, Integer size){
+    @PostMapping("/getDataInfoByBaseCondition")
+    public Page<DataDataInfoEntity> getDataInfo(DataInfoQueryModel dataInfoQueryModel){
         //        int page=0,size=10;
         //        1. 检查是否传入分页数据
-        if (page == null || size == null){return null;}
+        if (dataInfoQueryModel == null){return null;}
+        if (dataInfoQueryModel.getPage() == null || dataInfoQueryModel.getSize() == null){return null;}
         Sort sort = new Sort(Sort.Direction.DESC, "id");
-        Pageable pageable = PageRequest.of(page, size, sort);
-        return dataInfoService.findByBaseCondition(dataDataInfoEntity, DateTimeUtils.date2timestamp(beginTime),DateTimeUtils.date2timestamp(endTime),pageable);
+        Pageable pageable = PageRequest.of(dataInfoQueryModel.getPage(), dataInfoQueryModel.getSize(), sort);
+        return dataInfoService.findByBaseCondition(dataInfoQueryModel,pageable);
     }
 }

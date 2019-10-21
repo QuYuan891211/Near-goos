@@ -1,24 +1,18 @@
 package com.nmefc.neargoos.entity.data;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
-/**
- *@Description: data 介绍的实体，由JPA从数据库逆向生成
- *@Param:
- *@Return:
- *@Author: quyua
- *@Date: 2019/10/10 9:48
- */
 @Entity
 @Table(name = "data_overview", schema = "neargoos", catalog = "")
-public class DataOverviewEntity extends DataBaseEntity {
+public class DataOverviewEntity extends DataBaseEntity{
 //    private long id;
 //    private Timestamp gmtCreate;
 //    private Timestamp gmtModified;
     private String content;
 //    private String name;
 //    private byte isDelete;
-
+//
 //    @Id
 //    @Column(name = "id")
 //    public long getId() {
@@ -44,19 +38,9 @@ public class DataOverviewEntity extends DataBaseEntity {
 //    public Timestamp getGmtModified() {
 //        return gmtModified;
 //    }
-
+//
 //    public void setGmtModified(Timestamp gmtModified) {
 //        this.gmtModified = gmtModified;
-//    }
-
-//    @Basic
-//    @Column(name = "is_delete")
-//    public byte getIsDelete() {
-//        return isDelete;
-//    }
-//
-//    public void setIsDelete(byte isDelete) {
-//        this.isDelete = isDelete;
 //    }
 
     @Basic
@@ -68,7 +52,7 @@ public class DataOverviewEntity extends DataBaseEntity {
     public void setContent(String content) {
         this.content = content;
     }
-
+//
 //    @Basic
 //    @Column(name = "name")
 //    public String getName() {
@@ -77,6 +61,16 @@ public class DataOverviewEntity extends DataBaseEntity {
 //
 //    public void setName(String name) {
 //        this.name = name;
+//    }
+//
+//    @Basic
+//    @Column(name = "is_delete")
+//    public byte getIsDelete() {
+//        return isDelete;
+//    }
+//
+//    public void setIsDelete(byte isDelete) {
+//        this.isDelete = isDelete;
 //    }
 
     @Override
@@ -106,5 +100,4 @@ public class DataOverviewEntity extends DataBaseEntity {
         result = 31 * result + (int) isDelete;
         return result;
     }
-
 }

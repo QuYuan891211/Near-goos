@@ -1,23 +1,23 @@
 package com.nmefc.neargoos.entity.data;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
 
 @Entity
 @Table(name = "data_record", schema = "neargoos", catalog = "")
-public class DataRecordEntity extends DataBaseEntity{
+public class DataRecordEntity extends DataBaseEntity {
 //    private long id;
 //    private Timestamp gmtCreate;
 //    private Timestamp gmtModified;
 //    private byte isDelete;
-    private int userId;
     private byte state;
     private String ip;
+//    private String name;
+//    @OneToMany(mappedBy = "dataRecordByRid",fetch = FetchType.LAZY)
+//    private Collection<DatainfoRecordAssociationEntity> datainfoRecordAssociationsById;
 //
-//    @Basic
+//    @Id
 //    @Column(name = "id")
 //    public long getId() {
 //        return id;
@@ -58,16 +58,6 @@ public class DataRecordEntity extends DataBaseEntity{
 //    }
 
     @Basic
-    @Column(name = "user_id")
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    @Basic
     @Column(name = "state")
     public byte getState() {
         return state;
@@ -86,6 +76,16 @@ public class DataRecordEntity extends DataBaseEntity{
     public void setIp(String ip) {
         this.ip = ip;
     }
+//
+//    @Basic
+//    @Column(name = "name")
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -96,11 +96,11 @@ public class DataRecordEntity extends DataBaseEntity{
 
         if (id != that.id) return false;
         if (isDelete != that.isDelete) return false;
-        if (userId != that.userId) return false;
         if (state != that.state) return false;
         if (gmtCreate != null ? !gmtCreate.equals(that.gmtCreate) : that.gmtCreate != null) return false;
         if (gmtModified != null ? !gmtModified.equals(that.gmtModified) : that.gmtModified != null) return false;
         if (ip != null ? !ip.equals(that.ip) : that.ip != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
 
         return true;
     }
@@ -111,9 +111,18 @@ public class DataRecordEntity extends DataBaseEntity{
         result = 31 * result + (gmtCreate != null ? gmtCreate.hashCode() : 0);
         result = 31 * result + (gmtModified != null ? gmtModified.hashCode() : 0);
         result = 31 * result + (int) isDelete;
-        result = 31 * result + userId;
         result = 31 * result + (int) state;
         result = 31 * result + (ip != null ? ip.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
+
+
+//    public Collection<DatainfoRecordAssociationEntity> getDatainfoRecordAssociationsById() {
+//        return datainfoRecordAssociationsById;
+//    }
+//
+//    public void setDatainfoRecordAssociationsById(Collection<DatainfoRecordAssociationEntity> datainfoRecordAssociationsById) {
+//        this.datainfoRecordAssociationsById = datainfoRecordAssociationsById;
+//    }
 }
