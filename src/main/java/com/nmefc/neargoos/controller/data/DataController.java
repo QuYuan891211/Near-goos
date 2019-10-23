@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *@Description: data介绍功能的控制器
@@ -34,6 +35,8 @@ public class DataController {
     private DataAreaService dataAreaService;
     @Autowired
     private DataInfoService dataInfoService;
+    @Autowired
+    private DataRecordService dataRecordService;
 //    /**
 //     *@Description: 新增
 //     *@Param: [dataOverviewEntity]
@@ -60,7 +63,7 @@ public class DataController {
      */
     @ResponseBody
     @GetMapping("/getAllOverview")
-    public Page<DataOverviewEntity> getOverview(){
+    public Page<DataOverviewEntity> getAllOverview(){
         DataOverviewEntity dataOverviewEntity = new DataOverviewEntity();
         int page=0,size=5;
         Sort sort = new Sort(Sort.Direction.DESC, "id");
@@ -75,8 +78,8 @@ public class DataController {
      *@Date: 2019/10/20 0:21
      */
     @ResponseBody
-    @GetMapping("/getCategoryByCondition")
-    public Page<DataCategoryEntity> getCategoryByCondition(Long id,String name,Integer page,Integer size){
+    @GetMapping("/getCategoryByBaseCondition")
+    public Page<DataCategoryEntity> getCategoryByBaseCondition(Long id,String name,Integer page,Integer size){
         DataCategoryEntity dataCategoryEntity = new DataCategoryEntity();
         dataCategoryEntity.setId(id);
         dataCategoryEntity.setName(name);
@@ -97,7 +100,7 @@ public class DataController {
          */
         @ResponseBody
         @GetMapping("/getSourceByBaseCondition")
-        public Page<DataSourceEntity> getSource(Long id, String name, Integer page, Integer size){
+        public Page<DataSourceEntity> getSourceByBaseCondition(Long id, String name, Integer page, Integer size){
             DataSourceEntity dataSourceEntity = new DataSourceEntity();
             dataSourceEntity.setId(id);
             dataSourceEntity.setName(name);
@@ -118,7 +121,7 @@ public class DataController {
      */
     @ResponseBody
     @GetMapping("/getAreaByBaseCondition")
-    public Page<DataAreaEntity> getArea(Long id, String name, Integer page, Integer size){
+    public Page<DataAreaEntity> getAreaByBaseCondition(Long id, String name, Integer page, Integer size){
         DataAreaEntity dataAreaEntity = new DataAreaEntity();
         dataAreaEntity.setId(id);
         dataAreaEntity.setName(name);
@@ -138,8 +141,8 @@ public class DataController {
      *@Date: 2019/10/20 0:21
      */
     @ResponseBody
-    @PostMapping("/getDataInfoByBaseCondition")
-    public Page<DataDataInfoEntity> getDataInfo(DataInfoQueryModel dataInfoQueryModel){
+    @PostMapping("/getDataInfoByQuery")
+    public Page<DataDataInfoEntity> getDataInfoByQuery(DataInfoQueryModel dataInfoQueryModel){
         //        int page=0,size=10;
         //        1. 检查是否传入分页数据
         if (dataInfoQueryModel == null){return null;}
@@ -147,5 +150,34 @@ public class DataController {
         Sort sort = new Sort(Sort.Direction.DESC, "id");
         Pageable pageable = PageRequest.of(dataInfoQueryModel.getPage(), dataInfoQueryModel.getSize(), sort);
         return dataInfoService.findByBaseCondition(dataInfoQueryModel,pageable);
+    }
+    /**
+     *@Description: 根据数据ID获取数据下载记录
+     * [to-do] 分页
+     *@Param: [id]
+     *@Return: java.util.List<com.nmefc.neargoos.entity.data.DataRecordEntity>
+     *@Author: quyua
+     *@Date: 2019/10/24 0:52
+     */
+    @ResponseBody
+    @GetMapping("/getDataRecordByDatainfoId")
+    public List<DataRecordEntity> getDataRecordByDatainfoId(Long id){
+        if (id == null){return null;}
+        return dataInfoService.findDataRecordByDataInfoId(id);
+    }
+
+    /**
+     *@Description: 根据数据下载记录ID获取数据信息
+     * [to-do]分页
+     *@Param: [id]
+     *@Return: java.util.List<com.nmefc.neargoos.entity.data.DataDataInfoEntity>
+     *@Author: quyua
+     *@Date: 2019/10/24 1:36
+     */
+    @ResponseBody
+    @GetMapping("/getDataInfoByDataRecordId")
+    public List<DataDataInfoEntity> getDataInfoByDataRecordId(Long id){
+        if (id == null){return null;}
+        return dataRecordService.findDataInfoByDataRecordId(id);
     }
 }
