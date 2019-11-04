@@ -21,9 +21,9 @@ spring:
           url: jdbc:mysql://localhost:3306/neargoos?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
           username: root
           # aw
-          password: admin123
+#          password: admin123
 #          p52s
-#          password: 123456
+          password: 123456
           #配置初始化大小/最小/最大
           initial-size: 1
           min-idle: 1
