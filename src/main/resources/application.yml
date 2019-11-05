@@ -20,6 +20,7 @@ spring:
           #基本属性
           url: jdbc:mysql://localhost:3306/neargoos?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
           username: root
+          # aw
 #          password: admin123
 #          p52s
           password: 123456
