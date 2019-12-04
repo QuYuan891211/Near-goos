@@ -20,8 +20,10 @@ import java.util.List;
  * @Author:evaseemeflye
  * @Date:Created in 21:31 2019/10/10
  */
+@CrossOrigin(origins = "*",allowedHeaders ="*" )
 @Controller
 @RequestMapping("/product")
+//@CrossOrigin(origins = "http://localhost:8080")
 public class ProductController {
 
     /**
@@ -34,12 +36,12 @@ public class ProductController {
     private ProductService productService;
 
     /**
-    * @Author : evaseemefly
-    * @Description : 根据 area,interval,targetdate,type（可多选可单选） 获取对应的 product
-    * @params : 
-    * @Date : 2019/10/12 11:12 
-    * @return : 
-    */
+     * @return :
+     * @Author : evaseemefly
+     * @Description : 根据 area,interval,targetdate,type（可多选可单选） 获取对应的 product
+     * @params :
+     * @Date : 2019/10/12 11:12
+     */
     @ResponseBody
     @GetMapping(value = "/list")
     public List<ProductInfoEntity> getListByCondition(ProductInfoEntity product) {
@@ -49,15 +51,14 @@ public class ProductController {
 
         // TODO[*] 2019/10/13:此处修改为可以传入单一条件或多种条件
         List<ProductInfoEntity> list = productService.getMatchListByProduct(product);
-       return list;
+        return list;
     }
-
 
 
     @ResponseBody
     @GetMapping(value = "/all")
-    public List<ProductInfoEntity> getAllList(){
-        List<ProductInfoEntity> list=productService.getAllList();
+    public List<ProductInfoEntity> getAllList() {
+        List<ProductInfoEntity> list = productService.getAllList();
         return list;
     }
 
