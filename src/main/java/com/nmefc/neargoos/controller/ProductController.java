@@ -4,6 +4,7 @@ import com.nmefc.neargoos.common.enumPackage.Area;
 import com.nmefc.neargoos.common.enumPackage.ProductType;
 import com.nmefc.neargoos.entity.product.ProductInfoEntity;
 import com.nmefc.neargoos.middleModel.AreaMidModel;
+import com.nmefc.neargoos.middleModel.ProductMenuMideModel;
 import com.nmefc.neargoos.middleModel.ProductTypeMidModel;
 import com.nmefc.neargoos.service.inte.ProductService;
 import org.joda.time.DateTime;
@@ -20,7 +21,7 @@ import java.util.List;
  * @Author:evaseemeflye
  * @Date:Created in 21:31 2019/10/10
  */
-@CrossOrigin(origins = "*",allowedHeaders ="*" )
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
 @RequestMapping("/product")
 //@CrossOrigin(origins = "http://localhost:8080")
@@ -54,6 +55,19 @@ public class ProductController {
         return list;
     }
 
+    /**
+     * @return :
+     * @Author : evaseemefly
+     * @Description : 获取全部的 menu list
+     * @params :
+     * @Date : 2019/12/4 19:14
+     */
+    @ResponseBody
+    @GetMapping(value = "/menu/list")
+    public List<ProductMenuMideModel> getAllMenuList() {
+        List<ProductMenuMideModel> list = null;
+        return list;
+    }
 
     @ResponseBody
     @GetMapping(value = "/all")

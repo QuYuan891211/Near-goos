@@ -3,7 +3,7 @@
 
  Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 80017
+ Source Server Version : 80017product_typeproduct_typeproduct_infoarea_category_association
  Source Host           : localhost:3306
  Source Schema         : neargoos
 

@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
 --
--- Host: localhost    Database: neargoos
+-- Host: localhost    Database: newneargoos
 -- ------------------------------------------------------
 -- Server version	8.0.15
 
@@ -27,9 +27,9 @@ CREATE TABLE `common_area` (
   `pid` int(11) DEFAULT NULL,
   `name` varchar(45) DEFAULT NULL,
   `typeid` int(11) DEFAULT NULL,
-  `remark` varchar(300) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `remark` varchar(300) CHARACTER SET utf8 COLLATE utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -418,7 +418,7 @@ CREATE TABLE `product_type` (
   `name` varchar(45) DEFAULT NULL,
   `remark` varchar(300) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

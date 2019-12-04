@@ -4,6 +4,7 @@ import com.nmefc.neargoos.common.enumPackage.Area;
 import com.nmefc.neargoos.common.enumPackage.ProductType;
 import com.nmefc.neargoos.entity.product.ProductInfoEntity;
 import com.nmefc.neargoos.middleModel.AreaMidModel;
+import com.nmefc.neargoos.middleModel.ProductMenuMideModel;
 import com.nmefc.neargoos.middleModel.ProductTypeMidModel;
 //import com.sun.jmx.snmp.Timestamp;
 import java.sql.Timestamp;
@@ -44,6 +45,15 @@ public interface ProductService {
      */
     List<ProductTypeMidModel> getProductTypes();
 
+
+    /**
+    * @Author : evaseemefly
+    * @Description : 获取全部的产品的种类的 menu list
+    * @params :
+    * @Date : 2019/12/4 20:55
+    * @return :
+    */
+    List<ProductMenuMideModel> getProductTypeMenuList();
 
     List<ProductInfoEntity> getAllList();
 

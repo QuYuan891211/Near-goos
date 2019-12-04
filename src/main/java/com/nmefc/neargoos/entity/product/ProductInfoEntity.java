@@ -20,6 +20,8 @@ public class ProductInfoEntity {
     private Timestamp gmtCreate;
     private Timestamp gmtModified;
     private Integer type;
+    private AreaCategoryAssociationEntity areaCategoryAssociationByAreaType;
+    private Integer areaType;
 
     @Id
     @Column(name = "id")
@@ -130,5 +132,25 @@ public class ProductInfoEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, area, interval, imageUrl, targetDate, gmtCreate, gmtModified, type);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "area_type", referencedColumnName = "id")
+    public AreaCategoryAssociationEntity getAreaCategoryAssociationByAreaType() {
+        return areaCategoryAssociationByAreaType;
+    }
+
+    public void setAreaCategoryAssociationByAreaType(AreaCategoryAssociationEntity areaCategoryAssociationByAreaType) {
+        this.areaCategoryAssociationByAreaType = areaCategoryAssociationByAreaType;
+    }
+
+    @Basic
+    @Column(name = "area_type")
+    public Integer getAreaType() {
+        return areaType;
+    }
+
+    public void setAreaType(Integer areaType) {
+        this.areaType = areaType;
     }
 }

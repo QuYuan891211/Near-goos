@@ -3,16 +3,21 @@ package com.nmefc.neargoos.service.impl;
 import com.nmefc.neargoos.common.enumPackage.Area;
 import com.nmefc.neargoos.common.enumPackage.ProductInterval;
 import com.nmefc.neargoos.common.enumPackage.ProductType;
-import com.nmefc.neargoos.entity.product.ProductInfoEntity;
+import com.nmefc.neargoos.entity.product.*;
 import com.nmefc.neargoos.middleModel.AreaMidModel;
+import com.nmefc.neargoos.middleModel.ProductMenuMideModel;
 import com.nmefc.neargoos.middleModel.ProductTypeMidModel;
+import com.nmefc.neargoos.repository.ProductPeriodRepository;
 import com.nmefc.neargoos.repository.ProductRepository;
+import com.nmefc.neargoos.repository.ProductTypeRepository;
 import com.nmefc.neargoos.service.inte.ProductService;
+import org.hibernate.engine.spi.CollectionEntry;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 //TODO[*] 注意这两个包的区别
@@ -32,31 +37,37 @@ public class ProductServiceImp implements ProductService {
     @Resource
     private ProductRepository productRepository;
 
+    @Resource
+    private ProductTypeRepository productTypeRepository;
+
+    @Resource
+    private ProductPeriodRepository productPeriodRepository;
+
     public List<ProductInfoEntity> getMatchConditionImageList(ProductType type, Integer interval, Timestamp targetDate, Area area) {
 //        return productRepository.findAll();
 //        return productRepository.findByAreaAndTypeAndIntervalAndTargetDate(area.ordinal(),type.ordinal(),interval,targetDate);
-        return productRepository.findByAreaAndTypeAndIntervalAndTargetDate(area.ordinal(),type.ordinal(),interval,targetDate);
+        return productRepository.findByAreaAndTypeAndIntervalAndTargetDate(area.ordinal(), type.ordinal(), interval, targetDate);
 //        List<ProductInfoEntity> list=productRepository.
 
     }
 
-    public List<ProductInfoEntity> getMatchListByProduct(ProductInfoEntity product){
+    public List<ProductInfoEntity> getMatchListByProduct(ProductInfoEntity product) {
         return productRepository.findAll(
-                (root,query,cb)->{
-                    List<Predicate> predicates=new ArrayList<Predicate>();
+                (root, query, cb) -> {
+                    List<Predicate> predicates = new ArrayList<Predicate>();
 
 //                    StringUtils.isNullOrEmpty("")
-                    if(product.getArea()!=null){
-                        predicates.add(cb.equal(root.get("area"),product.getArea()));
+                    if (product.getArea() != null) {
+                        predicates.add(cb.equal(root.get("area"), product.getArea()));
                     }
-                    if(product.getInterval()!=null){
-                        predicates.add(cb.equal(root.get("interval"),product.getInterval()));
+                    if (product.getInterval() != null) {
+                        predicates.add(cb.equal(root.get("interval"), product.getInterval()));
                     }
-                    if(product.getType()!=null){
-                        predicates.add(cb.equal(root.get("type"),product.getType()));
+                    if (product.getType() != null) {
+                        predicates.add(cb.equal(root.get("type"), product.getType()));
                     }
-                    if(product.getTargetDate()!=null){
-                        predicates.add(cb.equal(root.get("targetDate"),product.getTargetDate()));
+                    if (product.getTargetDate() != null) {
+                        predicates.add(cb.equal(root.get("targetDate"), product.getTargetDate()));
                     }
                     return query.where(predicates.toArray(new Predicate[predicates.size()])).getRestriction();
 //                    predicates.add(cb.equal(root.get("area"),area.ordinal()));
@@ -79,13 +90,29 @@ public class ProductServiceImp implements ProductService {
         return list;
     }
 
+    @Override
+    public List<ProductMenuMideModel> getProductTypeMenuList() {
+        List<ProductTypeEntity> fatherlist = productTypeRepository.findAll();
+        fatherlist.forEach(temp -> {
+            Collection<AreaCategoryAssociationEntity> children = temp.getAreaCategoryAssociationsById();
+            children.forEach(child -> {
+                CommonAreaEntity area = child.getCommonAreaByAid();
+                // 根据当前的area与type找到符合条件的periods
+                productPeriodRepository.findAll()
+                Collection<ProductPeriodEntity> periods = area.getProductPeriodsById();
+
+            });
+        });
+        return null;
+    }
+
     /**
-    * @Author : evaseemefly
-    * @Description : 
-    * @params : 
-    * @Date : 2019/10/12 11:12 
-    * @return : 
-    */
+     * @return :
+     * @Author : evaseemefly
+     * @Description :
+     * @params :
+     * @Date : 2019/10/12 11:12
+     */
     public List<ProductInfoEntity> getAllList() {
         return productRepository.findAll();
     }
