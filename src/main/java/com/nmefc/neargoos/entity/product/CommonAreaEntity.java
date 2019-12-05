@@ -4,15 +4,6 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
-/**
- * \* Created with IntelliJ IDEA.
- * \* User: evase
- * \* Date: 2019/12/4
- * \* Time: 19:10
- * \* To change this template use File | Settings | File Templates.
- * \* Description:
- * \
- */
 @Entity
 @Table(name = "common_area", schema = "neargoos", catalog = "")
 public class CommonAreaEntity {

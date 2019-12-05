@@ -5,6 +5,7 @@ import com.nmefc.neargoos.common.enumPackage.ProductInterval;
 import com.nmefc.neargoos.common.enumPackage.ProductType;
 import com.nmefc.neargoos.entity.product.*;
 import com.nmefc.neargoos.middleModel.AreaMidModel;
+import com.nmefc.neargoos.middleModel.ProductAreaMenuMidModel;
 import com.nmefc.neargoos.middleModel.ProductMenuMideModel;
 import com.nmefc.neargoos.middleModel.ProductTypeMidModel;
 import com.nmefc.neargoos.repository.ProductPeriodRepository;
@@ -16,10 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 //TODO[*] 注意这两个包的区别
 //import java.util.function.Predicate;
 import javax.persistence.criteria.Predicate;
@@ -92,18 +90,58 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public List<ProductMenuMideModel> getProductTypeMenuList() {
-        List<ProductTypeEntity> fatherlist = productTypeRepository.findAll();
-        fatherlist.forEach(temp -> {
-            Collection<AreaCategoryAssociationEntity> children = temp.getAreaCategoryAssociationsById();
-            children.forEach(child -> {
-                CommonAreaEntity area = child.getCommonAreaByAid();
-                // 根据当前的area与type找到符合条件的periods
-                productPeriodRepository.findAll()
-                Collection<ProductPeriodEntity> periods = area.getProductPeriodsById();
-
+//        List<ProductTypeEntity> fatherlist = productTypeRepository.findAll();
+        /*
+            大致的思路是：
+                找到全部的type->关联表->area->period
+        */
+        // 获取全部的type
+        List<ProductMenuMideModel> listMenu = new ArrayList<>();
+        List<ProductTypeEntity> all = productTypeRepository.findAll();
+        all.forEach(typeTemp -> {
+            // 关联表
+            Collection<AreaCategoryAssociationEntity> children = typeTemp.getAreaCategoryAssociationsById();
+            List<ProductAreaMenuMidModel> listAreaMenu = new ArrayList<>();
+            // 根据关联表->area
+            children.forEach(assTemp -> {
+                // 注意： 关联表->area是1:1的关系，所以不会出现1:n的情况
+                CommonAreaEntity area = assTemp.getCommonAreaByAid();
+                // 根据当前的area找到对应的periods
+                // 不使用此种方式？
+//                Collection<ProductPeriodEntity> productPeriodsById = area.getProductPeriodsById();
+                // 此处我只是找到area的id
+                Integer aid = area.getId();
+                List<ProductPeriodEntity> byAidAndTid = productPeriodRepository.findByAidAndTid(aid, assTemp.getTid());
+                ProductPeriodEntity productPeriodTemp = byAidAndTid.get(0);
+                String[] periods = productPeriodTemp.getPeriods().split(",");
+                ArrayList<String> periodsList = new ArrayList<>(periods.length);
+                Collections.addAll(periodsList, periods);
+                String[] periodsIndex = productPeriodTemp.getPeriodsindex().split(",");
+                ArrayList<String> periodsIndexList = new ArrayList<>(periodsIndex.length);
+                Collections.addAll(periodsIndexList, periodsIndex);
+                // TODO:[-] 19-12-05 注意此处使用String.valueOf(obj) 将int转换为string，不用考虑obj为null的问题
+                listAreaMenu.add(new ProductAreaMenuMidModel(String.valueOf(area.getId()), area.getName(), periodsList, periodsIndexList));
             });
+            listMenu.add(new ProductMenuMideModel(String.valueOf(typeTemp.getId()), typeTemp.getName(), listAreaMenu));
+            // 以下不再使用注释掉
+            // 根据当前的area与type找到符合条件的periods
+            // 找到其中的periods
+//            children.forEach(area -> {
+//                List<ProductPeriodEntity> byAidAndTid = productPeriodRepository.findByAidAndTid(typeTemp.getId(), area.getTid());
+//                ProductPeriodEntity productPeriodTemp = byAidAndTid.get(0);
+//                String[] periods = productPeriodTemp.getPeriods().split(",");
+//                ArrayList<String> periodsList = new ArrayList<>(periods.length);
+//                Collections.addAll(periodsList, periods);
+//                String[] periodsIndex = productPeriodTemp.getPeriodsindex().split(",");
+//                ArrayList<String> periodsIndexList = new ArrayList<>(periodsIndex.length);
+//                Collections.addAll(periodsIndexList, periodsIndex);
+//                // TODO:[-] 19-12-05 注意此处使用String.valueOf(obj) 将int转换为string，不用考虑obj为null的问题
+//                listAreaMenu.add(new ProductAreaMenuMidModel(String.valueOf(area.getId()), area.getName(), periodsList, periodsIndexList));
+//            });
+//            listMenu.add(new ProductMenuMideModel(String.valueOf(typeTemp.getId()), typeTemp.getName(), listAreaMenu));
         });
-        return null;
+//
+        return listMenu;
     }
 
     /**

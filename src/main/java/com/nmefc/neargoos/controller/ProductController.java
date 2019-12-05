@@ -66,6 +66,7 @@ public class ProductController {
     @GetMapping(value = "/menu/list")
     public List<ProductMenuMideModel> getAllMenuList() {
         List<ProductMenuMideModel> list = null;
+        list = productService.getProductTypeMenuList();
         return list;
     }
 

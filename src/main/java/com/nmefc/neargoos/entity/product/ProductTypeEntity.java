@@ -4,22 +4,12 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
-/**
- * \* Created with IntelliJ IDEA.
- * \* User: evase
- * \* Date: 2019/12/4
- * \* Time: 19:10
- * \* To change this template use File | Settings | File Templates.
- * \* Description:
- * \
- */
 @Entity
 @Table(name = "product_type", schema = "neargoos", catalog = "")
 public class ProductTypeEntity {
     private int id;
     private String name;
     private String remark;
-    private Integer aid;
     private Collection<AreaCategoryAssociationEntity> areaCategoryAssociationsById;
     private Collection<ProductPeriodEntity> productPeriodsById;
 
@@ -53,16 +43,6 @@ public class ProductTypeEntity {
         this.remark = remark;
     }
 
-    @Basic
-    @Column(name = "aid")
-    public Integer getAid() {
-        return aid;
-    }
-
-    public void setAid(Integer aid) {
-        this.aid = aid;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -70,13 +50,12 @@ public class ProductTypeEntity {
         ProductTypeEntity that = (ProductTypeEntity) o;
         return id == that.id &&
                 Objects.equals(name, that.name) &&
-                Objects.equals(remark, that.remark) &&
-                Objects.equals(aid, that.aid);
+                Objects.equals(remark, that.remark);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, remark, aid);
+        return Objects.hash(id, name, remark);
     }
 
     @OneToMany(mappedBy = "productTypeByTid")

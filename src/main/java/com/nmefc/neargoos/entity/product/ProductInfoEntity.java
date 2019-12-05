@@ -4,14 +4,10 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
-/**
- * @Author:evaseemeflye
- * @Date:Created in 21:10 2019/10/11
- */
 @Entity
 @Table(name = "product_info", schema = "neargoos", catalog = "")
 public class ProductInfoEntity {
-    private int id;
+    private long id;
     private String name;
     private Integer area;
     private Integer interval;
@@ -20,16 +16,15 @@ public class ProductInfoEntity {
     private Timestamp gmtCreate;
     private Timestamp gmtModified;
     private Integer type;
-    private AreaCategoryAssociationEntity areaCategoryAssociationByAreaType;
     private Integer areaType;
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -113,6 +108,16 @@ public class ProductInfoEntity {
         this.type = type;
     }
 
+    @Basic
+    @Column(name = "area_type")
+    public Integer getAreaType() {
+        return areaType;
+    }
+
+    public void setAreaType(Integer areaType) {
+        this.areaType = areaType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -126,31 +131,12 @@ public class ProductInfoEntity {
                 Objects.equals(targetDate, that.targetDate) &&
                 Objects.equals(gmtCreate, that.gmtCreate) &&
                 Objects.equals(gmtModified, that.gmtModified) &&
-                Objects.equals(type, that.type);
+                Objects.equals(type, that.type) &&
+                Objects.equals(areaType, that.areaType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, area, interval, imageUrl, targetDate, gmtCreate, gmtModified, type);
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "area_type", referencedColumnName = "id")
-    public AreaCategoryAssociationEntity getAreaCategoryAssociationByAreaType() {
-        return areaCategoryAssociationByAreaType;
-    }
-
-    public void setAreaCategoryAssociationByAreaType(AreaCategoryAssociationEntity areaCategoryAssociationByAreaType) {
-        this.areaCategoryAssociationByAreaType = areaCategoryAssociationByAreaType;
-    }
-
-    @Basic
-    @Column(name = "area_type")
-    public Integer getAreaType() {
-        return areaType;
-    }
-
-    public void setAreaType(Integer areaType) {
-        this.areaType = areaType;
+        return Objects.hash(id, name, area, interval, imageUrl, targetDate, gmtCreate, gmtModified, type, areaType);
     }
 }
