@@ -4,10 +4,7 @@ import com.nmefc.neargoos.common.enumPackage.Area;
 import com.nmefc.neargoos.common.enumPackage.ProductInterval;
 import com.nmefc.neargoos.common.enumPackage.ProductType;
 import com.nmefc.neargoos.entity.product.*;
-import com.nmefc.neargoos.middleModel.AreaMidModel;
-import com.nmefc.neargoos.middleModel.ProductAreaMenuMidModel;
-import com.nmefc.neargoos.middleModel.ProductMenuMideModel;
-import com.nmefc.neargoos.middleModel.ProductTypeMidModel;
+import com.nmefc.neargoos.middleModel.*;
 import com.nmefc.neargoos.repository.ProductPeriodRepository;
 import com.nmefc.neargoos.repository.ProductRepository;
 import com.nmefc.neargoos.repository.ProductTypeRepository;
@@ -49,7 +46,7 @@ public class ProductServiceImp implements ProductService {
 
     }
 
-    public List<ProductInfoEntity> getMatchListByProduct(ProductInfoEntity product) {
+    public List<ProductInfoEntity> getMatchListByProduct(ProductSearchMidModel product) {
         return productRepository.findAll(
                 (root, query, cb) -> {
                     List<Predicate> predicates = new ArrayList<Predicate>();
@@ -58,15 +55,15 @@ public class ProductServiceImp implements ProductService {
                     if (product.getArea() != null) {
                         predicates.add(cb.equal(root.get("area"), product.getArea()));
                     }
-                    if (product.getInterval() != null) {
-                        predicates.add(cb.equal(root.get("interval"), product.getInterval()));
+                    if (product.getPeriod() != null) {
+                        predicates.add(cb.equal(root.get("interval"), product.getPeriod()));
                     }
-                    if (product.getType() != null) {
-                        predicates.add(cb.equal(root.get("type"), product.getType()));
+                    if (product.getCateogry() != null) {
+                        predicates.add(cb.equal(root.get("type"), product.getCateogry()));
                     }
-                    if (product.getTargetDate() != null) {
-                        predicates.add(cb.equal(root.get("targetDate"), product.getTargetDate()));
-                    }
+//                    if (product.getStart() != null) {
+//                        predicates.add(cb.equal(root.get("targetDate"), product.getStart()));
+//                    }
                     return query.where(predicates.toArray(new Predicate[predicates.size()])).getRestriction();
 //                    predicates.add(cb.equal(root.get("area"),area.ordinal()));
 //                    predicates.add(cb.equal(root.get("type"),type.ordinal()));

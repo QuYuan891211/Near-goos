@@ -5,6 +5,7 @@ import com.nmefc.neargoos.common.enumPackage.ProductType;
 import com.nmefc.neargoos.entity.product.ProductInfoEntity;
 import com.nmefc.neargoos.middleModel.AreaMidModel;
 import com.nmefc.neargoos.middleModel.ProductMenuMideModel;
+import com.nmefc.neargoos.middleModel.ProductSearchMidModel;
 import com.nmefc.neargoos.middleModel.ProductTypeMidModel;
 //import com.sun.jmx.snmp.Timestamp;
 import java.sql.Timestamp;
@@ -36,7 +37,7 @@ public interface ProductService {
     * @Date : 2019/10/13 4:35 下午
     * @return :
     */
-    List<ProductInfoEntity> getMatchListByProduct(ProductInfoEntity product);
+    List<ProductInfoEntity> getMatchListByProduct(ProductSearchMidModel product);
     /**
      * @Author:evaseemefly
      * @Description:根据 产品类型，间隔，起始时间，以及区域获取对应的图片名称
