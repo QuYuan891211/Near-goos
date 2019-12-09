@@ -61,9 +61,15 @@ public class ProductServiceImp implements ProductService {
                     if (product.getCateogry() != null) {
                         predicates.add(cb.equal(root.get("type"), product.getCateogry()));
                     }
-//                    if (product.getStart() != null) {
-//                        predicates.add(cb.equal(root.get("targetDate"), product.getStart()));
-//                    }
+                    // TODO:[*] 19-12-09 加入了时间区间的查询条件
+                    if (product.getStart() != null) {
+                        //Unable to locate Attribute  with the the given name [start] on this ManagedType
+                        // 此处注意，由于product info表中对应的时间只有一个字段，是targetDate
+                        predicates.add(cb.greaterThanOrEqualTo(root.get("targetDate"), product.getStart()));
+                    }
+                    if (product.getEnd() != null) {
+                        predicates.add(cb.lessThanOrEqualTo(root.get("targetDate"), product.getEnd()));
+                    }
                     return query.where(predicates.toArray(new Predicate[predicates.size()])).getRestriction();
 //                    predicates.add(cb.equal(root.get("area"),area.ordinal()));
 //                    predicates.add(cb.equal(root.get("type"),type.ordinal()));

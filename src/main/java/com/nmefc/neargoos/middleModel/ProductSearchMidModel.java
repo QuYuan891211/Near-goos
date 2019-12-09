@@ -3,6 +3,7 @@ package com.nmefc.neargoos.middleModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -19,8 +20,9 @@ public class ProductSearchMidModel {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
     @JsonFormat(timezone = "GTM+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date start;
-//    @JsonFormat(timezone = "GTM+8",pattern="yyyy-MM-dd HH:mm:ss")
-//    private Date end;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+    @JsonFormat(timezone = "GTM+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date end;
 
 //    public ProductSearchMidModel(String cateogry, String area, String period, Date start, Date end) {
 //        this.cateogry = cateogry;
@@ -45,10 +47,11 @@ public class ProductSearchMidModel {
     public Date getStart() {
         return start;
     }
-//
-//    public Date getEnd() {
-//        return end;
-//    }
+
+    //
+    public Date getEnd() {
+        return end;
+    }
 
     public void setCateogry(String cateogry) {
         this.cateogry = cateogry;
@@ -66,10 +69,11 @@ public class ProductSearchMidModel {
     public void setStart(Date start) {
         this.start = start;
     }
-//
-//    public void setEnd(Date end) {
-//        this.end = end;
-//    }
+
+    //
+    public void setEnd(Date end) {
+        this.end = end;
+    }
 
 
 }

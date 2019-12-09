@@ -48,7 +48,7 @@ public class ProductController {
      */
     @ResponseBody
     @GetMapping(value = "/list")
-    public List<ProductInfoEntity> getListByCondition(ProductSearchMidModel product,  @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") Date end) {
+    public List<ProductInfoEntity> getListByCondition(ProductSearchMidModel product) {
 //    public List<ProductInfoEntity> getListByCondition(ProductSearchMidModel product, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") Date start, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") Date end) {
         //TODO:[-] 最终发现采用此种方式可行，且会将UTC时间自动转换为本地时区
         // 此处有一个问题是，若使用上面的方式，若不传入start的话，会提示有错误
@@ -58,7 +58,7 @@ public class ProductController {
 //        List<ProductInfoEntity> list = productService.getMatchConditionImageList(ProductType.values()[product.getType()], product.getInterval(), ts, Area.values()[product.getArea()]);
 
         // TODO[*] 2019/10/13:此处修改为可以传入单一条件或多种条件
-        List<ProductInfoEntity> list = productService.getMatchListByProduct(new ProductSearchMidModel());
+        List<ProductInfoEntity> list = productService.getMatchListByProduct(product);
         return list;
     }
 
