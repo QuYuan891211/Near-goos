@@ -65,6 +65,19 @@ public class ProductController {
     /**
      * @return :
      * @Author : evaseemefly
+     * @Description : 根据 area,interval,targetdate,type（可多选可单选） 获取对应的 product（单个）
+     * @params :
+     * @Date : 2019/12/11 16:07
+     */
+    @ResponseBody
+    @GetMapping(value = "/imageinfo")
+    public ProductInfoEntity getImageByCondition(ProductSearchMidModel product) {
+        return null;
+    }
+
+    /**
+     * @return :
+     * @Author : evaseemefly
      * @Description : 获取全部的 menu list
      * @params :
      * @Date : 2019/12/4 19:14
