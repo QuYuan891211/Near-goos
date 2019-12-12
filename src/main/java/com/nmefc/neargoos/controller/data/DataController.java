@@ -3,6 +3,7 @@ package com.nmefc.neargoos.controller.data;
 import com.nmefc.neargoos.common.utils.DateTimeUtils;
 import com.nmefc.neargoos.entity.data.*;
 import com.nmefc.neargoos.middleModel.DataInfoQueryModel;
+import com.nmefc.neargoos.middleModel.DataInfoStatisticsModel;
 import com.nmefc.neargoos.service.inte.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -78,7 +79,7 @@ public class DataController {
      *@Date: 2019/10/20 0:21
      */
     @ResponseBody
-    @GetMapping("/getCategoryByBaseCondition")
+    @PostMapping("/getCategoryByBaseCondition")
     public Page<DataCategoryEntity> getCategoryByBaseCondition(Long id,String name,Integer page,Integer size){
         DataCategoryEntity dataCategoryEntity = new DataCategoryEntity();
         dataCategoryEntity.setId(id);
@@ -142,14 +143,13 @@ public class DataController {
      */
     @ResponseBody
     @PostMapping("/getDataInfoByQuery")
-    public Page<DataDataInfoEntity> getDataInfoByQuery(DataInfoQueryModel dataInfoQueryModel){
+    public List<DataDataInfoEntity> getDataInfoByQuery(DataInfoQueryModel dataInfoQueryModel){
         //        int page=0,size=10;
         //        1. 检查是否传入分页数据
         if (dataInfoQueryModel == null){return null;}
         if (dataInfoQueryModel.getPage() == null || dataInfoQueryModel.getSize() == null){return null;}
-        Sort sort = new Sort(Sort.Direction.DESC, "id");
-        Pageable pageable = PageRequest.of(dataInfoQueryModel.getPage(), dataInfoQueryModel.getSize(), sort);
-        return dataInfoService.findByBaseCondition(dataInfoQueryModel,pageable);
+
+        return dataInfoService.findByBaseCondition(dataInfoQueryModel);
     }
     /**
      *@Description: 根据数据ID获取数据下载记录
@@ -179,5 +179,26 @@ public class DataController {
     public List<DataDataInfoEntity> getDataInfoByDataRecordId(Long id){
         if (id == null){return null;}
         return dataRecordService.findDataInfoByDataRecordId(id);
+    }
+    /**
+     *@Description: 各类别数据统计信息
+     *@Param: [name]
+     *@Return: java.util.List<com.nmefc.neargoos.middleModel.DataInfoStatisticsModel>
+     *@Author: quyua
+     *@Date: 2019/12/11 15:36
+     */
+    @ResponseBody
+    @PostMapping("/statistics")
+    public DataInfoStatisticsModel getDataInfoStatistics(String name){
+//        //1.得到类别id
+        List<DataCategoryEntity> dataCategoryEntityList =  this.getCategoryByBaseCondition(null,name,0,1).getContent();
+        if(dataCategoryEntityList == null || dataCategoryEntityList.size()<1) {return null;}
+        Long id = dataCategoryEntityList.get(0).getId();
+        DataInfoQueryModel dataInfoQueryModel = new DataInfoQueryModel();
+        dataInfoQueryModel.setCategoryId(id);
+        dataInfoQueryModel.setPage(0);
+        dataInfoQueryModel.setSize(0);
+        return dataInfoService.statisticsByCategory(dataInfoQueryModel);
+
     }
 }
