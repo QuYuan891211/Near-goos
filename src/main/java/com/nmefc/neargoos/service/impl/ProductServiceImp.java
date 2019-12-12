@@ -80,9 +80,14 @@ public class ProductServiceImp implements ProductService {
         );
     }
 
-
-    // TODO:[*] 19-12-12 注释的快捷方式暂时有点问题，先手动加上，之后再替换
-    // 获取符合条件的最近的product info
+    /**
+    * @Author : evaseemefly
+    * @Description : 获取符合条件的最近的product info
+    * @params : params: product 产品搜索mid model
+    * @return: Optional<ProductInfoEntity>
+    * @Date : 2019/12/12 10:59
+    * @return :
+    */
     public Optional<ProductInfoEntity> getLastProduct(ProductSearchMidModel product) {
         Optional<ProductInfoEntity> lastInfo = productRepository.findOne((root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<Predicate>();
@@ -113,7 +118,13 @@ public class ProductServiceImp implements ProductService {
         return list;
     }
 
-    @Override
+    /**
+    * @Author : evaseemefly
+    * @Description :
+    * @params :
+    * @Date : 2019/12/12 10:58
+    * @return :
+    */
     public List<ProductMenuMideModel> getProductTypeMenuList() {
 //        List<ProductTypeEntity> fatherlist = productTypeRepository.findAll();
         /*
