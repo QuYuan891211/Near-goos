@@ -23,7 +23,14 @@ import java.util.List;
  *@Author: quyua
  *@Date: 2019/10/10 9:48
  */
+//@RestController
+@CrossOrigin(origins = "*",allowedHeaders ="*" )
 @Controller
+////实现跨域注解
+////origin="*"代表所有域名都可访问
+////maxAge飞行前响应的缓存持续时间的最大年龄，简单来说就是Cookie的有效期 单位为秒
+////若maxAge是负数,则代表为临时Cookie,不会被持久化,Cookie信息保存在浏览器内存中,浏览器关闭Cookie就消失
+//@CrossOrigin(origins = "http://localhost:8081",maxAge = 3600)
 @RequestMapping("/data")
 public class DataController {
     @Autowired
@@ -188,7 +195,7 @@ public class DataController {
      *@Date: 2019/12/11 15:36
      */
     @ResponseBody
-    @PostMapping("/statistics")
+    @GetMapping("/statistics")
     public DataInfoStatisticsModel getDataInfoStatistics(String name){
 //        //1.得到类别id
         List<DataCategoryEntity> dataCategoryEntityList =  this.getCategoryByBaseCondition(null,name,0,1).getContent();
