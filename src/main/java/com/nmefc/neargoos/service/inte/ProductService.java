@@ -9,10 +9,13 @@ import com.nmefc.neargoos.middleModel.ProductSearchMidModel;
 import com.nmefc.neargoos.middleModel.ProductTypeMidModel;
 //import com.sun.jmx.snmp.Timestamp;
 import java.sql.Timestamp;
+
+import com.sun.deploy.security.BadCertificateDialog;
 import org.joda.time.DateTime;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @Author:evaseemeflye
@@ -38,6 +41,7 @@ public interface ProductService {
     * @return :
     */
     List<ProductInfoEntity> getMatchListByProduct(ProductSearchMidModel product);
+
     /**
      * @Author:evaseemefly
      * @Description:根据 产品类型，间隔，起始时间，以及区域获取对应的图片名称
@@ -46,7 +50,9 @@ public interface ProductService {
      */
     List<ProductTypeMidModel> getProductTypes();
 
-
+    // TODO:[*] 19-12-12 注释的快捷方式暂时有点问题，先手动加上，之后再替换
+    // 获取符合条件的最近的product info
+    Optional<ProductInfoEntity> getLastProduct(ProductSearchMidModel product);
     /**
     * @Author : evaseemefly
     * @Description : 获取全部的产品的种类的 menu list

@@ -70,9 +70,10 @@ public class ProductController {
      * @Date : 2019/12/11 16:07
      */
     @ResponseBody
-    @GetMapping(value = "/imageinfo")
+    @GetMapping(value = "/last")
     public ProductInfoEntity getImageByCondition(ProductSearchMidModel product) {
-        return null;
+        return productService.getLastProduct(product).isPresent() ? productService.getLastProduct(product).get() : null;
+//        return productService.getLastProduct(product);
     }
 
     /**

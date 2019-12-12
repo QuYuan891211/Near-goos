@@ -46,6 +46,8 @@ public class ProductServiceImp implements ProductService {
 
     }
 
+    // 注释的快捷方式暂时有点问题，先手动加上，之后再替换
+    // 获取符合条件的product list
     public List<ProductInfoEntity> getMatchListByProduct(ProductSearchMidModel product) {
         return productRepository.findAll(
                 (root, query, cb) -> {
@@ -76,6 +78,26 @@ public class ProductServiceImp implements ProductService {
 //                    predicates.add(cb.equal(root.get("target_data",targetDate)));
                 }
         );
+    }
+
+
+    // TODO:[*] 19-12-12 注释的快捷方式暂时有点问题，先手动加上，之后再替换
+    // 获取符合条件的最近的product info
+    public Optional<ProductInfoEntity> getLastProduct(ProductSearchMidModel product) {
+        Optional<ProductInfoEntity> lastInfo = productRepository.findOne((root, query, cb) -> {
+            List<Predicate> predicates = new ArrayList<Predicate>();
+            if (product.getArea() != null) {
+                predicates.add(cb.equal(root.get("area"), product.getArea()));
+            }
+            if (product.getPeriod() != null) {
+                predicates.add(cb.equal(root.get("interval"), product.getPeriod()));
+            }
+            if (product.getCateogry() != null) {
+                predicates.add(cb.equal(root.get("type"), product.getCateogry()));
+            }
+            return query.where(predicates.toArray(new Predicate[predicates.size()])).orderBy(cb.desc(root.get("targetDate"))).getRestriction();
+        });
+        return lastInfo;
     }
 
     public List<ProductTypeMidModel> getProductTypes() {
@@ -146,6 +168,7 @@ public class ProductServiceImp implements ProductService {
 //
         return listMenu;
     }
+
 
     /**
      * @return :
