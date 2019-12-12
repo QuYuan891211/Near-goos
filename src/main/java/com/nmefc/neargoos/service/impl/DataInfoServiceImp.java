@@ -23,6 +23,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -131,14 +132,22 @@ public class DataInfoServiceImp extends DataBaseServiceImp<DataDataInfoEntity,Lo
      */
     public DataInfoStatisticsModel statisticsByCategory(DataInfoQueryModel dataInfoQueryModel){
         List<DataDataInfoEntity> list = this.findByBaseCondition(dataInfoQueryModel);
-        if (list == null || list.size() <1 ){return null;}
         DataInfoStatisticsModel dataInfoStatisticsModel = new DataInfoStatisticsModel();
-        Long fileSize =  list.stream().collect(Collectors.summingLong(item->item.getSize()));
-        dataInfoStatisticsModel.setSize(fileSize);
-        dataInfoStatisticsModel.setFileNumber(list.size());
-        dataInfoStatisticsModel.setBeginTime(list.get(list.size()-1).getDate());
-        dataInfoStatisticsModel.setEndTime(list.get(0).getDate());
         dataInfoStatisticsModel.setCategoryId(dataInfoQueryModel.getCategoryId());
+        dataInfoStatisticsModel.setName(dataInfoQueryModel.getCategoryName());
+        dataInfoStatisticsModel.setFileNumber(0);
+        dataInfoStatisticsModel.setSize(new Long(0));
+        dataInfoStatisticsModel.setBeginTime(new Date());
+        dataInfoStatisticsModel.setEndTime(new Date());
+        //当此类别没有数据的时候
+        if (list != null && list.size()>0){
+            Long fileSize =  list.stream().collect(Collectors.summingLong(item->item.getSize()));
+            dataInfoStatisticsModel.setSize(fileSize);
+            dataInfoStatisticsModel.setFileNumber(list.size());
+            dataInfoStatisticsModel.setBeginTime(list.get(list.size()-1).getDate());
+            dataInfoStatisticsModel.setEndTime(list.get(0).getDate());
+        }
+
         return dataInfoStatisticsModel;
     }
 

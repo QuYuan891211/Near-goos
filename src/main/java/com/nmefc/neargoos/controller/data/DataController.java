@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -196,16 +197,24 @@ public class DataController {
      */
     @ResponseBody
     @GetMapping("/statistics")
-    public DataInfoStatisticsModel getDataInfoStatistics(String name){
+    public List<DataInfoStatisticsModel> getDataInfoStatistics(){
+
 //        //1.得到类别id
-        List<DataCategoryEntity> dataCategoryEntityList =  this.getCategoryByBaseCondition(null,name,0,1).getContent();
+        //暂时写死
+        List<DataCategoryEntity> dataCategoryEntityList =  this.getCategoryByBaseCondition(null,null,0,10).getContent();
+        List<DataInfoStatisticsModel> resultList = new ArrayList<>();
         if(dataCategoryEntityList == null || dataCategoryEntityList.size()<1) {return null;}
-        Long id = dataCategoryEntityList.get(0).getId();
-        DataInfoQueryModel dataInfoQueryModel = new DataInfoQueryModel();
-        dataInfoQueryModel.setCategoryId(id);
-        dataInfoQueryModel.setPage(0);
-        dataInfoQueryModel.setSize(0);
-        return dataInfoService.statisticsByCategory(dataInfoQueryModel);
+        dataCategoryEntityList.forEach(item->{
+            Long id = item.getId();
+            DataInfoQueryModel dataInfoQueryModel = new DataInfoQueryModel();
+            dataInfoQueryModel.setCategoryId(id);
+            dataInfoQueryModel.setPage(0);
+            dataInfoQueryModel.setSize(0);
+            dataInfoQueryModel.setCategoryName(item.getName());
+            resultList.add(dataInfoService.statisticsByCategory(dataInfoQueryModel));
+        });
+
+        return resultList;
 
     }
 }

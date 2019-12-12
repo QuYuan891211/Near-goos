@@ -6,6 +6,15 @@ public class DataInfoStatisticsModel {
     private Long categoryId;
     private Date beginTime;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private String name;
     private Date endTime;
     private Integer fileNumber;
     private Long size;
