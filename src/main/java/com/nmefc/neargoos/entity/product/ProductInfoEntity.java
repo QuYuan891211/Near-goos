@@ -4,6 +4,15 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
+/**
+ * \* Created with IntelliJ IDEA.
+ * \* User: DELL
+ * \* Date: 2019/12/13
+ * \* Time: 14:33
+ * \* To change this template use File | Settings | File Templates.
+ * \* Description:
+ * \
+ */
 @Entity
 @Table(name = "product_info", schema = "neargoos", catalog = "")
 public class ProductInfoEntity {
@@ -16,7 +25,10 @@ public class ProductInfoEntity {
     private Timestamp gmtCreate;
     private Timestamp gmtModified;
     private Integer type;
-    private Integer areaType;
+    private String relativePath;
+    private String rootPath;
+    private String fileName;
+    private String ext;
 
     @Id
     @Column(name = "id")
@@ -109,13 +121,43 @@ public class ProductInfoEntity {
     }
 
     @Basic
-    @Column(name = "area_type")
-    public Integer getAreaType() {
-        return areaType;
+    @Column(name = "relative_path")
+    public String getRelativePath() {
+        return relativePath;
     }
 
-    public void setAreaType(Integer areaType) {
-        this.areaType = areaType;
+    public void setRelativePath(String relativePath) {
+        this.relativePath = relativePath;
+    }
+
+    @Basic
+    @Column(name = "root_path")
+    public String getRootPath() {
+        return rootPath;
+    }
+
+    public void setRootPath(String rootPath) {
+        this.rootPath = rootPath;
+    }
+
+    @Basic
+    @Column(name = "file_name")
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    @Basic
+    @Column(name = "ext")
+    public String getExt() {
+        return ext;
+    }
+
+    public void setExt(String ext) {
+        this.ext = ext;
     }
 
     @Override
@@ -132,11 +174,14 @@ public class ProductInfoEntity {
                 Objects.equals(gmtCreate, that.gmtCreate) &&
                 Objects.equals(gmtModified, that.gmtModified) &&
                 Objects.equals(type, that.type) &&
-                Objects.equals(areaType, that.areaType);
+                Objects.equals(relativePath, that.relativePath) &&
+                Objects.equals(rootPath, that.rootPath) &&
+                Objects.equals(fileName, that.fileName) &&
+                Objects.equals(ext, that.ext);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, area, interval, imageUrl, targetDate, gmtCreate, gmtModified, type, areaType);
+        return Objects.hash(id, name, area, interval, imageUrl, targetDate, gmtCreate, gmtModified, type, relativePath, rootPath, fileName, ext);
     }
 }
