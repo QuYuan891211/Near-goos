@@ -70,10 +70,36 @@ public class ProductServiceImp implements ProductService {
                     if (product.getEnd() != null) {
                         predicates.add(cb.lessThanOrEqualTo(root.get("targetDate"), product.getEnd()));
                     }
+                    // TODO:[*] 19-12-11 此处不再局限于根据时间进行查询（去掉start与end），只获取最近时刻的product(放在另一个方法中)
                     return query.where(predicates.toArray(new Predicate[predicates.size()])).getRestriction();
 //                    predicates.add(cb.equal(root.get("area"),area.ordinal()));
 //                    predicates.add(cb.equal(root.get("type"),type.ordinal()));
 //                    predicates.add(cb.equal(root.get("target_data",targetDate)));
+                }
+        );
+    }
+
+    @Override
+    public Optional<ProductInfoEntity> getLastProduct(ProductSearchMidModel product) {
+        //TODO:[-] 19-12-11 此处使用Optional ，该类是一个可以为null的容器对象
+        return productRepository.findOne(
+                (root, query, cb) -> {
+                    List<Predicate> predicates = new ArrayList<Predicate>();
+
+//                    StringUtils.isNullOrEmpty("")
+                    if (product.getArea() != null) {
+                        predicates.add(cb.equal(root.get("area"), product.getArea()));
+                    }
+                    if (product.getPeriod() != null) {
+                        predicates.add(cb.equal(root.get("interval"), product.getPeriod()));
+                    }
+                    if (product.getCateogry() != null) {
+                        predicates.add(cb.equal(root.get("type"), product.getCateogry()));
+                    }
+                    query.where(predicates.toArray(new Predicate[predicates.size()]));
+                    // TODO:[*] 19-12-11 此处不再局限于根据时间进行查询（去掉start与end），只获取最近时刻的product(放在另一个方法中)
+                    query.orderBy(cb.desc(root.get("targetDate")));
+                    return query.getRestriction();
                 }
         );
     }

@@ -19,6 +19,7 @@ import java.sql.Timestamp;
 //import com.sun.jmx.snmp.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @Author:evaseemeflye
@@ -70,8 +71,12 @@ public class ProductController {
      * @Date : 2019/12/11 16:07
      */
     @ResponseBody
-    @GetMapping(value = "/imageinfo")
+    @GetMapping(value = "/lastproduct")
     public ProductInfoEntity getImageByCondition(ProductSearchMidModel product) {
+        Optional<ProductInfoEntity> lastProduct = productService.getLastProduct(product);
+        if (lastProduct.isPresent()) {
+            return lastProduct.get();
+        }
         return null;
     }
 

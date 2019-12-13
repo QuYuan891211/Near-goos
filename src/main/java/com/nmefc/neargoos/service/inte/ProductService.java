@@ -13,6 +13,7 @@ import org.joda.time.DateTime;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @Author:evaseemeflye
@@ -38,6 +39,15 @@ public interface ProductService {
     * @return :
     */
     List<ProductInfoEntity> getMatchListByProduct(ProductSearchMidModel product);
+
+    /**
+    * @Author : evaseemefly
+    * @Description : 获取指定条件的距离现在最近的预报产品 info
+    * @params :
+    * @Date : 2019/12/11 21:41
+    * @return :
+    */
+    Optional<ProductInfoEntity> getLastProduct(ProductSearchMidModel product);
     /**
      * @Author:evaseemefly
      * @Description:根据 产品类型，间隔，起始时间，以及区域获取对应的图片名称
