@@ -9,6 +9,8 @@ import com.nmefc.neargoos.middleModel.ProductSearchMidModel;
 import com.nmefc.neargoos.middleModel.ProductTypeMidModel;
 //import com.sun.jmx.snmp.Timestamp;
 import java.sql.Timestamp;
+
+import com.sun.deploy.security.BadCertificateDialog;
 import org.joda.time.DateTime;
 
 import java.util.Date;
@@ -56,7 +58,9 @@ public interface ProductService {
      */
     List<ProductTypeMidModel> getProductTypes();
 
-
+    // TODO:[*] 19-12-12 注释的快捷方式暂时有点问题，先手动加上，之后再替换
+    // 获取符合条件的最近的product info
+//    Optional<ProductInfoEntity> getLastProduct(ProductSearchMidModel product);
     /**
     * @Author : evaseemefly
     * @Description : 获取全部的产品的种类的 menu list

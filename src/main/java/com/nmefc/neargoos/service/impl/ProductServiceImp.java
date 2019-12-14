@@ -46,6 +46,8 @@ public class ProductServiceImp implements ProductService {
 
     }
 
+    // 注释的快捷方式暂时有点问题，先手动加上，之后再替换
+    // 获取符合条件的product list
     public List<ProductInfoEntity> getMatchListByProduct(ProductSearchMidModel product) {
         return productRepository.findAll(
                 (root, query, cb) -> {
@@ -79,29 +81,29 @@ public class ProductServiceImp implements ProductService {
         );
     }
 
-    @Override
+    /**
+    * @Author : evaseemefly
+    * @Description : 获取符合条件的最近的product info
+    * @params : params: product 产品搜索mid model
+    * @return: Optional<ProductInfoEntity>
+    * @Date : 2019/12/12 10:59
+    * @return :
+    */
     public Optional<ProductInfoEntity> getLastProduct(ProductSearchMidModel product) {
-        //TODO:[-] 19-12-11 此处使用Optional ，该类是一个可以为null的容器对象
-        return productRepository.findOne(
-                (root, query, cb) -> {
-                    List<Predicate> predicates = new ArrayList<Predicate>();
-
-//                    StringUtils.isNullOrEmpty("")
-                    if (product.getArea() != null) {
-                        predicates.add(cb.equal(root.get("area"), product.getArea()));
-                    }
-                    if (product.getPeriod() != null) {
-                        predicates.add(cb.equal(root.get("interval"), product.getPeriod()));
-                    }
-                    if (product.getCateogry() != null) {
-                        predicates.add(cb.equal(root.get("type"), product.getCateogry()));
-                    }
-                    query.where(predicates.toArray(new Predicate[predicates.size()]));
-                    // TODO:[*] 19-12-11 此处不再局限于根据时间进行查询（去掉start与end），只获取最近时刻的product(放在另一个方法中)
-                    query.orderBy(cb.desc(root.get("targetDate")));
-                    return query.getRestriction();
-                }
-        );
+        Optional<ProductInfoEntity> lastInfo = productRepository.findOne((root, query, cb) -> {
+            List<Predicate> predicates = new ArrayList<Predicate>();
+            if (product.getArea() != null) {
+                predicates.add(cb.equal(root.get("area"), product.getArea()));
+            }
+            if (product.getPeriod() != null) {
+                predicates.add(cb.equal(root.get("interval"), product.getPeriod()));
+            }
+            if (product.getCateogry() != null) {
+                predicates.add(cb.equal(root.get("type"), product.getCateogry()));
+            }
+            return query.where(predicates.toArray(new Predicate[predicates.size()])).orderBy(cb.desc(root.get("targetDate"))).getRestriction();
+        });
+        return lastInfo;
     }
 
     public List<ProductTypeMidModel> getProductTypes() {
@@ -117,7 +119,13 @@ public class ProductServiceImp implements ProductService {
         return list;
     }
 
-    @Override
+    /**
+    * @Author : evaseemefly
+    * @Description :
+    * @params :
+    * @Date : 2019/12/12 10:58
+    * @return :
+    */
     public List<ProductMenuMideModel> getProductTypeMenuList() {
 //        List<ProductTypeEntity> fatherlist = productTypeRepository.findAll();
         /*
@@ -172,6 +180,7 @@ public class ProductServiceImp implements ProductService {
 //
         return listMenu;
     }
+
 
     /**
      * @return :

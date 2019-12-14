@@ -71,13 +71,10 @@ public class ProductController {
      * @Date : 2019/12/11 16:07
      */
     @ResponseBody
-    @GetMapping(value = "/lastproduct")
+    @GetMapping(value = "/last")
     public ProductInfoEntity getImageByCondition(ProductSearchMidModel product) {
-        Optional<ProductInfoEntity> lastProduct = productService.getLastProduct(product);
-        if (lastProduct.isPresent()) {
-            return lastProduct.get();
-        }
-        return null;
+        return productService.getLastProduct(product).isPresent() ? productService.getLastProduct(product).get() : null;
+//        return productService.getLastProduct(product);
     }
 
     /**
