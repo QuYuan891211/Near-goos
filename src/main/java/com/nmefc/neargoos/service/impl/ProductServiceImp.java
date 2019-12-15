@@ -121,6 +121,18 @@ public class ProductServiceImp implements ProductService {
 
     /**
     * @Author : evaseemefly
+    * @Description : 从数据库中返回全部的types
+    * @params :
+    * @Date : 2019/12/15 17:47
+    * @return :
+    */
+    public List<ProductTypeEntity> getTypesByDB(){
+        List<ProductTypeEntity> productTypeRepositoryAll = productTypeRepository.findAll();
+        return productTypeRepositoryAll;
+    }
+
+    /**
+    * @Author : evaseemefly
     * @Description :
     * @params :
     * @Date : 2019/12/12 10:58
@@ -149,6 +161,10 @@ public class ProductServiceImp implements ProductService {
                 // 此处我只是找到area的id
                 Integer aid = area.getId();
                 List<ProductPeriodEntity> byAidAndTid = productPeriodRepository.findByAidAndTid(aid, assTemp.getTid());
+                // TODO:[*] BUG: 在获取多菜单时，此处会出现bug
+                if(byAidAndTid.size()==0){
+                    return;
+                }
                 ProductPeriodEntity productPeriodTemp = byAidAndTid.get(0);
                 String[] periods = productPeriodTemp.getPeriods().split(",");
                 ArrayList<String> periodsList = new ArrayList<>(periods.length);

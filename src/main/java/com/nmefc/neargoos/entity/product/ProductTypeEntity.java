@@ -1,16 +1,23 @@
 package com.nmefc.neargoos.entity.product;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
+@Data
 @Entity
 @Table(name = "product_type", schema = "neargoos", catalog = "")
 public class ProductTypeEntity {
     private int id;
     private String name;
     private String remark;
+
+    @JsonIgnore
     private Collection<AreaCategoryAssociationEntity> areaCategoryAssociationsById;
+    @JsonIgnore
     private Collection<ProductPeriodEntity> productPeriodsById;
 
     @Id

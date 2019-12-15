@@ -3,6 +3,7 @@ package com.nmefc.neargoos.controller;
 import com.nmefc.neargoos.common.enumPackage.Area;
 import com.nmefc.neargoos.common.enumPackage.ProductType;
 import com.nmefc.neargoos.entity.product.ProductInfoEntity;
+import com.nmefc.neargoos.entity.product.ProductTypeEntity;
 import com.nmefc.neargoos.middleModel.AreaMidModel;
 import com.nmefc.neargoos.middleModel.ProductMenuMideModel;
 import com.nmefc.neargoos.middleModel.ProductSearchMidModel;
@@ -104,6 +105,23 @@ public class ProductController {
     public List<ProductTypeMidModel> getProductTypes() {
         // 以下封装至dal层中了（service）
         List<ProductTypeMidModel> list = productService.getProductTypes();
+        return list;
+    }
+
+    /**
+    * @Author : evaseemefly
+    * @Description :
+     * TODO:[-] 19-12-15
+     * 从db中查询types表 动态获取types的种类     *
+    * @params :
+    * @Date : 2019/12/15 17:53
+    * @return :
+    */
+    @ResponseBody
+    @GetMapping(value = "/typesbydb")
+    public List<ProductTypeEntity> getProductTypesByDB() {
+        // 以下封装至dal层中了（service）
+        List<ProductTypeEntity> list = productService.getTypesByDB();
         return list;
     }
 

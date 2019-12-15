@@ -3,6 +3,7 @@ package com.nmefc.neargoos.service.inte;
 import com.nmefc.neargoos.common.enumPackage.Area;
 import com.nmefc.neargoos.common.enumPackage.ProductType;
 import com.nmefc.neargoos.entity.product.ProductInfoEntity;
+import com.nmefc.neargoos.entity.product.ProductTypeEntity;
 import com.nmefc.neargoos.middleModel.AreaMidModel;
 import com.nmefc.neargoos.middleModel.ProductMenuMideModel;
 import com.nmefc.neargoos.middleModel.ProductSearchMidModel;
@@ -41,6 +42,15 @@ public interface ProductService {
     * @return :
     */
     List<ProductInfoEntity> getMatchListByProduct(ProductSearchMidModel product);
+
+    /**
+    * @Author : evaseemefly
+    * @Description : 从数据库中返回全部的types
+    * @params :
+    * @Date : 2019/12/15 17:48
+    * @return :
+    */
+    List<ProductTypeEntity> getTypesByDB();
 
     /**
     * @Author : evaseemefly
