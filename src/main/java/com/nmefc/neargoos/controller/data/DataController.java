@@ -200,7 +200,7 @@ public class DataController {
     public List<DataInfoStatisticsModel> getDataInfoStatistics(){
 
 //        //1.得到类别id
-        //暂时写死
+        //[to-do]暂时写死
         List<DataCategoryEntity> dataCategoryEntityList =  this.getCategoryByBaseCondition(null,null,0,10).getContent();
         List<DataInfoStatisticsModel> resultList = new ArrayList<>();
         if(dataCategoryEntityList == null || dataCategoryEntityList.size()<1) {return null;}
@@ -215,6 +215,46 @@ public class DataController {
         });
 
         return resultList;
-
     }
+
+    /**
+     *@Description: 获取全部海区
+     *@Param: []
+     *@Return: java.util.List<com.nmefc.neargoos.entity.data.DataAreaEntity>
+     *@Author: quyua
+     *@Date: 2019/12/20 16:44
+     */
+    @ResponseBody
+    @GetMapping("/getAllArea")
+    public List<DataAreaEntity> getAllArea(){
+        //[to-do]分页需要修改，暂时写死
+        return this.getAreaByBaseCondition(null,null,0,10).getContent();
+    }
+    /**
+     *@Description: 获取全部数据来源
+     *@Param: []
+     *@Return: java.util.List<com.nmefc.neargoos.entity.data.DataSourceEntity>
+     *@Author: quyua
+     *@Date: 2019/12/20 20:49
+     */
+    @ResponseBody
+    @GetMapping("/getAllSource")
+    public List<DataSourceEntity> getAllSource(){
+        //[to-do]分页需要修改，暂时写死
+        return this.getSourceByBaseCondition(null,null,0,10).getContent();
+    }
+    /**
+     *@Description: 获取全部类别
+     *@Param: []
+     *@Return: java.util.List<com.nmefc.neargoos.entity.data.DataCategoryEntity>
+     *@Author: quyua
+     *@Date: 2019/12/20 22:59
+     */
+    @ResponseBody
+    @GetMapping("/getAllCategory")
+    public List<DataCategoryEntity> getAllCategory(){
+        //[to-do]分页需要修改，暂时写死
+        return this.getCategoryByBaseCondition(null,null,0,10).getContent();
+    }
+
 }
