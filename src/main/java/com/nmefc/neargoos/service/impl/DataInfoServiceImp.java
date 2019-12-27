@@ -1,11 +1,10 @@
 package com.nmefc.neargoos.service.impl;
 
 import com.nmefc.neargoos.common.utils.DateTimeUtils;
-import com.nmefc.neargoos.entity.data.DataDataInfoEntity;
-import com.nmefc.neargoos.entity.data.DataRecordEntity;
-import com.nmefc.neargoos.entity.data.DatainfoRecordAssociationEntity;
+import com.nmefc.neargoos.entity.data.*;
 import com.nmefc.neargoos.exception.ServiceException;
 import com.nmefc.neargoos.middleModel.DataInfoQueryModel;
+import com.nmefc.neargoos.middleModel.DataInfoResultModel;
 import com.nmefc.neargoos.middleModel.DataInfoStatisticsModel;
 import com.nmefc.neargoos.repository.inte.DataInfoRepository;
 import com.nmefc.neargoos.repository.inte.DataRecordAssociationRepository;
@@ -93,36 +92,9 @@ public class DataInfoServiceImp extends DataBaseServiceImp<DataDataInfoEntity,Lo
                 result = dataInfoRepository.findAll(queryCondition, pageable).getContent();
             }
 
+
         return result;
     }
-//
-//        if (pageable == null) {
-//            return null;
-//        }
-//        return dataInfoRepository.findAll((root, criteriaQuery, criteriaBuilder) -> {
-//            List<Predicate> predicateList = new ArrayList<Predicate>();
-////            1.根据海区的条件
-//            if (dataInfoQueryModel.getAreaId() != null) {
-//                predicateList.add(criteriaBuilder.equal(root.get("areaId"), dataInfoQueryModel.getAreaId()));
-//            }
-////            2.根据数据类型的条件
-//            if (dataInfoQueryModel.getCategoryId() != null) {
-//                predicateList.add(criteriaBuilder.equal(root.get("categoryId"), dataInfoQueryModel.getCategoryId()));
-//            }
-////            3.根据起始时间和结束时间
-//
-//            if (dataInfoQueryModel.getBeginTime() != null && dataInfoQueryModel.getEndTime() != null) {
-//
-//                predicateList.add(criteriaBuilder.between(root.get("date"), DateTimeUtils.date2timestamp(dataInfoQueryModel.getBeginTime()), DateTimeUtils.date2timestamp(dataInfoQueryModel.getEndTime())));
-//            }
-////            4.根据数据源
-//            if (dataInfoQueryModel.getSourceId() != null) {
-//                predicateList.add(criteriaBuilder.equal(root.get("sourceId"), dataInfoQueryModel.getSourceId()));
-//            }
-//            predicateList.add(criteriaBuilder.lessThan(root.get("isDelete"), 1));
-//            return criteriaQuery.where(predicateList.toArray(new Predicate[predicateList.size()])).getRestriction();
-//        }, pageable);
-//    }
     /**
      *@Description: 获取对于类型统计信息
      *@Param: [name]
@@ -151,6 +123,7 @@ public class DataInfoServiceImp extends DataBaseServiceImp<DataDataInfoEntity,Lo
         return dataInfoStatisticsModel;
     }
 
+
     /**
      *@Description: 根据ID查找数据信息
      *@Param: [id]
@@ -167,4 +140,43 @@ public class DataInfoServiceImp extends DataBaseServiceImp<DataDataInfoEntity,Lo
         //去掉所有软删除的
         return list.stream().filter(item->item.getIsDelete()<1).collect(Collectors.toList());
     }
+/**
+ *@Description: 将数据信息实体转换为前台显示信息
+ *@Param: [dataAreaEntityList, dataCategoryEntityList, dataSourceEntityList, dataDataInfoEntity]
+ *@Return: com.nmefc.neargoos.middleModel.DataInfoResultModel
+ *@Author: quyua
+ *@Date: 2019/12/27 19:20
+ */
+    @Override
+    public DataInfoResultModel dataDataInfoEntity2dataInfoResultModel(List<DataAreaEntity> dataAreaEntityList, List<DataCategoryEntity> dataCategoryEntityList, List<DataSourceEntity> dataSourceEntityList, DataDataInfoEntity dataDataInfoEntity) {
+        DataInfoResultModel dataInfoResultModel = new DataInfoResultModel();
+        if (dataAreaEntityList != null && dataCategoryEntityList != null && dataSourceEntityList != null && dataDataInfoEntity != null) {
+            dataInfoResultModel.setId(dataDataInfoEntity.getId());
+            dataInfoResultModel.setName(dataDataInfoEntity.getName());
+            dataInfoResultModel.setDate(dataDataInfoEntity.getDate());
+            dataInfoResultModel.setSize(dataDataInfoEntity.getSize());
+
+            //找到匹配的海区
+            dataAreaEntityList.stream().forEach(s -> {
+                if (s.getId().equals(dataDataInfoEntity.getAreaId())) {
+                    dataInfoResultModel.setArea(s.getName());
+                }
+            });
+            //找到匹配的数据类型
+            dataCategoryEntityList.stream().forEach(s -> {
+                if (s.getId().equals(dataDataInfoEntity.getCategoryId())) {
+                    dataInfoResultModel.setCategory(s.getName());
+                }
+            });
+            //找到匹配的数据源
+            dataSourceEntityList.stream().forEach(s -> {
+                if (s.getId().equals(dataDataInfoEntity.getSourceId())) {
+                    dataInfoResultModel.setSource(s.getName());
+                }
+            });
+        }
+        return dataInfoResultModel;
+    }
+
+
 }
