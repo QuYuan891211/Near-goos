@@ -17,6 +17,7 @@ public class DataInfoQueryModel {
     private Date endTime;
     private Integer page;
     private Integer size;
+    private String categoryName;
 
     public Long getCategoryId() {
         return categoryId;
@@ -72,5 +73,13 @@ public class DataInfoQueryModel {
 
     public void setSize(Integer size) {
         this.size = size;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 }
