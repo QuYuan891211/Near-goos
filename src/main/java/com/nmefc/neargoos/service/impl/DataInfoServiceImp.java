@@ -72,7 +72,7 @@ public class DataInfoServiceImp extends DataBaseServiceImp<DataDataInfoEntity,Lo
 
         if (dataInfoQueryModel.getBeginTime() != null && dataInfoQueryModel.getEndTime() != null) {
 
-            predicateList.add(criteriaBuilder.between(root.get("date"), DateTimeUtils.date2timestamp(dataInfoQueryModel.getBeginTime()), DateTimeUtils.date2timestamp(dataInfoQueryModel.getEndTime())));
+            predicateList.add(criteriaBuilder.between(root.get("date"),dataInfoQueryModel.getBeginTime(), dataInfoQueryModel.getEndTime()));
         }
 //            4.根据数据源
         if (dataInfoQueryModel.getSourceId() != null) {

@@ -1,5 +1,6 @@
 package com.nmefc.neargoos.middleModel;
 
+import java.sql.Timestamp;
 import java.util.Date;
 /**
  *@Description: 数据信息查询中间实体
@@ -12,9 +13,9 @@ public class DataInfoQueryModel {
     private Long categoryId;
     private Long areaId;
     private Long sourceId;
-    private Date beginTime;
+    private Timestamp beginTime;
 
-    private Date endTime;
+    private Timestamp endTime;
     private Integer page;
     private Integer size;
     private String categoryName;
@@ -43,19 +44,19 @@ public class DataInfoQueryModel {
         this.sourceId = sourceId;
     }
 
-    public Date getBeginTime() {
+    public Timestamp getBeginTime() {
         return beginTime;
     }
 
-    public void setBeginTime(Date beginTime) {
+    public void setBeginTime(Timestamp beginTime) {
         this.beginTime = beginTime;
     }
 
-    public Date getEndTime() {
+    public Timestamp getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(Timestamp endTime) {
         this.endTime = endTime;
     }
 
