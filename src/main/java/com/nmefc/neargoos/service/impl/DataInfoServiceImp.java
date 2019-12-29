@@ -9,6 +9,7 @@ import com.nmefc.neargoos.middleModel.DataInfoStatisticsModel;
 import com.nmefc.neargoos.repository.inte.DataInfoRepository;
 import com.nmefc.neargoos.repository.inte.DataRecordAssociationRepository;
 import com.nmefc.neargoos.service.inte.DataInfoService;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -72,7 +73,7 @@ public class DataInfoServiceImp extends DataBaseServiceImp<DataDataInfoEntity,Lo
 
         if (dataInfoQueryModel.getBeginTime() != null && dataInfoQueryModel.getEndTime() != null) {
 
-            predicateList.add(criteriaBuilder.between(root.get("date"),dataInfoQueryModel.getBeginTime(), dataInfoQueryModel.getEndTime()));
+            predicateList.add(criteriaBuilder.between(root.get("date"), DateTimeUtils.date2timestamp(dataInfoQueryModel.getBeginTime()), DateTimeUtils.date2timestamp(dataInfoQueryModel.getEndTime())));
         }
 //            4.根据数据源
         if (dataInfoQueryModel.getSourceId() != null) {

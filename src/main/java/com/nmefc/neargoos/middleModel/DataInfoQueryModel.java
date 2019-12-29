@@ -1,5 +1,8 @@
 package com.nmefc.neargoos.middleModel;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.sql.Timestamp;
 import java.util.Date;
 /**
@@ -13,12 +16,18 @@ public class DataInfoQueryModel {
     private Long categoryId;
     private Long areaId;
     private Long sourceId;
-    private Timestamp beginTime;
 
-    private Timestamp endTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH")
+    @JsonFormat(timezone = "GTM",pattern = "yyyy-MM-dd HH")
+    private Date beginTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH")
+    @JsonFormat(timezone = "GTM",pattern = "yyyy-MM-dd HH")
+    private Date endTime;
     private Integer page;
     private Integer size;
     private String categoryName;
+    private String sourceName;
+    private String areaName;
 
     public Long getCategoryId() {
         return categoryId;
@@ -44,19 +53,19 @@ public class DataInfoQueryModel {
         this.sourceId = sourceId;
     }
 
-    public Timestamp getBeginTime() {
+    public Date getBeginTime() {
         return beginTime;
     }
 
-    public void setBeginTime(Timestamp beginTime) {
+    public void setBeginTime(Date beginTime) {
         this.beginTime = beginTime;
     }
 
-    public Timestamp getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Timestamp endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
@@ -82,5 +91,21 @@ public class DataInfoQueryModel {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public String getSourceName() {
+        return sourceName;
+    }
+
+    public void setSourceName(String sourceName) {
+        this.sourceName = sourceName;
+    }
+
+    public String getAreaName() {
+        return areaName;
+    }
+
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
     }
 }

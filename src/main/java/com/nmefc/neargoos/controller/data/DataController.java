@@ -171,10 +171,13 @@ public class DataController {
      */
     @ResponseBody
     @PostMapping("/getDataInfoResultsByQuery")
-    public List<DataInfoResultModel> getDataInfoListByQuery(DataInfoQueryModel dataInfoQueryModel){
+    public List<DataInfoResultModel> getDataInfoListByQuery(@RequestBody DataInfoQueryModel dataInfoQueryModel){
 
         if (dataInfoQueryModel == null){return null;}
-        if (dataInfoQueryModel.getPage() == null || dataInfoQueryModel.getSize() == null){return null;}
+        if (dataInfoQueryModel.getPage() == null || dataInfoQueryModel.getSize() == null){
+            dataInfoQueryModel.setPage(0);
+            dataInfoQueryModel.setSize(0);
+        }
         List<DataInfoResultModel> dataInfoResultModelList = new ArrayList<>();
         List<DataDataInfoEntity> dataDataInfoEntityList = dataInfoService.findByBaseCondition(dataInfoQueryModel);
         List<DataAreaEntity> dataAreaEntityList = getAllArea();
