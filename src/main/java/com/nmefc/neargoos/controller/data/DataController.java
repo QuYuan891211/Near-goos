@@ -3,6 +3,7 @@ package com.nmefc.neargoos.controller.data;
 import com.nmefc.neargoos.common.utils.DateTimeUtils;
 import com.nmefc.neargoos.entity.data.*;
 import com.nmefc.neargoos.middleModel.DataInfoQueryModel;
+import com.nmefc.neargoos.middleModel.DataInfoResultModel;
 import com.nmefc.neargoos.middleModel.DataInfoStatisticsModel;
 import com.nmefc.neargoos.service.inte.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *@Description: data介绍功能的控制器
@@ -143,22 +145,55 @@ public class DataController {
     }
 
     /**
-     *@Description:查找数据信息（未软删除的）
+     *@Description:查找数据信息（分页）（未软删除的）
      *@Param: []
      *@Return: java.util.List<com.nmefc.neargoos.entity.data.DataCategoryEntity>
      *@Author: quyua
      *@Date: 2019/10/20 0:21
      */
-    @ResponseBody
-    @PostMapping("/getDataInfoByQuery")
-    public List<DataDataInfoEntity> getDataInfoByQuery(DataInfoQueryModel dataInfoQueryModel){
-        //        int page=0,size=10;
-        //        1. 检查是否传入分页数据
-        if (dataInfoQueryModel == null){return null;}
-        if (dataInfoQueryModel.getPage() == null || dataInfoQueryModel.getSize() == null){return null;}
+//    @ResponseBody
+//    @PostMapping("/getDataInfoByQuery")
+//    public List<DataDataInfoEntity> getDataInfoListByQuery(DataInfoQueryModel dataInfoQueryModel){
+//        //        int page=0,size=10;
+//        //        1. 检查是否传入分页数据
+//        if (dataInfoQueryModel == null){return null;}
+//        if (dataInfoQueryModel.getPage() == null || dataInfoQueryModel.getSize() == null){return null;}
+//
+//        return dataInfoService.findByBaseCondition(dataInfoQueryModel);
+//    }
 
-        return dataInfoService.findByBaseCondition(dataInfoQueryModel);
+    /**
+     *@Description:查找数据信息（不分页）（未软删除的）
+     *@Param: [dataInfoQueryModel]
+     *@Return: java.util.List<com.nmefc.neargoos.entity.data.DataDataInfoEntity>
+     *@Author: quyua
+     *@Date: 2019/12/27 18:26
+     */
+    @ResponseBody
+    @PostMapping("/getDataInfoResultsByQuery")
+    public List<DataInfoResultModel> getDataInfoListByQuery(@RequestBody DataInfoQueryModel dataInfoQueryModel){
+
+        if (dataInfoQueryModel == null){return null;}
+        if (dataInfoQueryModel.getPage() == null || dataInfoQueryModel.getSize() == null){
+            dataInfoQueryModel.setPage(0);
+            dataInfoQueryModel.setSize(0);
+        }
+        List<DataInfoResultModel> dataInfoResultModelList = new ArrayList<>();
+        List<DataDataInfoEntity> dataDataInfoEntityList = dataInfoService.findByBaseCondition(dataInfoQueryModel);
+        List<DataAreaEntity> dataAreaEntityList = getAllArea();
+        List<DataCategoryEntity> dataCategoryEntityList = getAllCategory();
+        List<DataSourceEntity> dataSourceEntities = getAllSource();
+        if(dataDataInfoEntityList != null && dataDataInfoEntityList.size()>0){
+            dataDataInfoEntityList.stream().forEach(item->{
+                DataInfoResultModel dataInfoResultModel = dataInfoService.dataDataInfoEntity2dataInfoResultModel(dataAreaEntityList,dataCategoryEntityList,dataSourceEntities,item);
+                dataInfoResultModelList.add(dataInfoResultModel);
+            });
+        }
+
+        System.out.print(dataInfoResultModelList.size());
+        return dataInfoResultModelList;
     }
+
     /**
      *@Description: 根据数据ID获取数据下载记录
      * [to-do] 分页
