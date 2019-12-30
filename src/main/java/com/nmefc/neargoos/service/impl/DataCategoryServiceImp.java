@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 @Service("dataCategoryService")
 public class DataCategoryServiceImp extends DataBaseServiceImp<DataCategoryEntity,Long> implements DataCategoryService {
+    //暂时不用统一的数据校验
     @Override
     public String check(DataCategoryEntity record, String response) throws ServiceException {
-        return null;
+        if(record == null){return "entity is null";}
+        return response;
     }
 }
