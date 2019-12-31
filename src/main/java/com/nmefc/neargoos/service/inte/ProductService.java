@@ -3,14 +3,20 @@ package com.nmefc.neargoos.service.inte;
 import com.nmefc.neargoos.common.enumPackage.Area;
 import com.nmefc.neargoos.common.enumPackage.ProductType;
 import com.nmefc.neargoos.entity.product.ProductInfoEntity;
+import com.nmefc.neargoos.entity.product.ProductTypeEntity;
 import com.nmefc.neargoos.middleModel.AreaMidModel;
+import com.nmefc.neargoos.middleModel.ProductMenuMideModel;
+import com.nmefc.neargoos.middleModel.ProductSearchMidModel;
 import com.nmefc.neargoos.middleModel.ProductTypeMidModel;
 //import com.sun.jmx.snmp.Timestamp;
 import java.sql.Timestamp;
+
+import com.sun.deploy.security.BadCertificateDialog;
 import org.joda.time.DateTime;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @Author:evaseemeflye
@@ -35,7 +41,25 @@ public interface ProductService {
     * @Date : 2019/10/13 4:35 下午
     * @return :
     */
-    List<ProductInfoEntity> getMatchListByProduct(ProductInfoEntity product);
+    List<ProductInfoEntity> getMatchListByProduct(ProductSearchMidModel product);
+
+    /**
+    * @Author : evaseemefly
+    * @Description : 从数据库中返回全部的types
+    * @params :
+    * @Date : 2019/12/15 17:48
+    * @return :
+    */
+    List<ProductTypeEntity> getTypesByDB();
+
+    /**
+    * @Author : evaseemefly
+    * @Description : 获取指定条件的距离现在最近的预报产品 info
+    * @params :
+    * @Date : 2019/12/11 21:41
+    * @return :
+    */
+    Optional<ProductInfoEntity> getLastProduct(ProductSearchMidModel product);
     /**
      * @Author:evaseemefly
      * @Description:根据 产品类型，间隔，起始时间，以及区域获取对应的图片名称
@@ -44,6 +68,17 @@ public interface ProductService {
      */
     List<ProductTypeMidModel> getProductTypes();
 
+    // TODO:[*] 19-12-12 注释的快捷方式暂时有点问题，先手动加上，之后再替换
+    // 获取符合条件的最近的product info
+//    Optional<ProductInfoEntity> getLastProduct(ProductSearchMidModel product);
+    /**
+    * @Author : evaseemefly
+    * @Description : 获取全部的产品的种类的 menu list
+    * @params :
+    * @Date : 2019/12/4 20:55
+    * @return :
+    */
+    List<ProductMenuMideModel> getProductTypeMenuList();
 
     List<ProductInfoEntity> getAllList();
 

@@ -5,13 +5,18 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 /**
- * @Author:evaseemeflye
- * @Date:Created in 21:10 2019/10/11
+ * \* Created with IntelliJ IDEA.
+ * \* User: DELL
+ * \* Date: 2019/12/13
+ * \* Time: 14:33
+ * \* To change this template use File | Settings | File Templates.
+ * \* Description:
+ * \
  */
 @Entity
 @Table(name = "product_info", schema = "neargoos", catalog = "")
 public class ProductInfoEntity {
-    private int id;
+    private long id;
     private String name;
     private Integer area;
     private Integer interval;
@@ -20,14 +25,18 @@ public class ProductInfoEntity {
     private Timestamp gmtCreate;
     private Timestamp gmtModified;
     private Integer type;
+    private String relativePath;
+    private String rootPath;
+    private String fileName;
+    private String ext;
 
     @Id
     @Column(name = "id")
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -111,6 +120,46 @@ public class ProductInfoEntity {
         this.type = type;
     }
 
+    @Basic
+    @Column(name = "relative_path")
+    public String getRelativePath() {
+        return relativePath;
+    }
+
+    public void setRelativePath(String relativePath) {
+        this.relativePath = relativePath;
+    }
+
+    @Basic
+    @Column(name = "root_path")
+    public String getRootPath() {
+        return rootPath;
+    }
+
+    public void setRootPath(String rootPath) {
+        this.rootPath = rootPath;
+    }
+
+    @Basic
+    @Column(name = "file_name")
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    @Basic
+    @Column(name = "ext")
+    public String getExt() {
+        return ext;
+    }
+
+    public void setExt(String ext) {
+        this.ext = ext;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -124,11 +173,15 @@ public class ProductInfoEntity {
                 Objects.equals(targetDate, that.targetDate) &&
                 Objects.equals(gmtCreate, that.gmtCreate) &&
                 Objects.equals(gmtModified, that.gmtModified) &&
-                Objects.equals(type, that.type);
+                Objects.equals(type, that.type) &&
+                Objects.equals(relativePath, that.relativePath) &&
+                Objects.equals(rootPath, that.rootPath) &&
+                Objects.equals(fileName, that.fileName) &&
+                Objects.equals(ext, that.ext);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, area, interval, imageUrl, targetDate, gmtCreate, gmtModified, type);
+        return Objects.hash(id, name, area, interval, imageUrl, targetDate, gmtCreate, gmtModified, type, relativePath, rootPath, fileName, ext);
     }
 }
