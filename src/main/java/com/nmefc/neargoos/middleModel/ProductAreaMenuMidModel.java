@@ -19,13 +19,15 @@ import java.util.List;
 public class ProductAreaMenuMidModel {
     private String key;
     private String val;
+    private String remark;
 
     private List<String> periods;
     private List<String> periodsIndex;
 
-    public ProductAreaMenuMidModel(String key, String val, List<String> periods, List<String> periodsIndex) {
+    public ProductAreaMenuMidModel(String key, String val, String remark, List<String> periods, List<String> periodsIndex) {
         this.key = key;
         this.val = val;
+        this.remark = remark;
         this.periods = periods;
         this.periodsIndex = periodsIndex;
     }
@@ -36,6 +38,10 @@ public class ProductAreaMenuMidModel {
 
     public void setVal(String val) {
         this.val = val;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public void setPeriods(List<String> periods) {
