@@ -172,13 +172,28 @@ public class DataController {
     @ResponseBody
     @PostMapping("/getDataInfoResultsByQuery")
     public List<DataInfoResultModel> getDataInfoListByQuery(@RequestBody DataInfoQueryModel dataInfoQueryModel){
-
+        List<DataInfoResultModel> dataInfoResultModelList = new ArrayList<>();
         if (dataInfoQueryModel == null){return null;}
         if (dataInfoQueryModel.getPage() == null || dataInfoQueryModel.getSize() == null){
             dataInfoQueryModel.setPage(0);
             dataInfoQueryModel.setSize(0);
         }
-        List<DataInfoResultModel> dataInfoResultModelList = new ArrayList<>();
+        //如果没选时间
+        if(dataInfoQueryModel.getBeginTime() == null || dataInfoQueryModel.getEndTime() == null ||dataInfoQueryModel.getBeginTime().after(dataInfoQueryModel.getEndTime())){
+            DataInfoResultModel dataInfoResultModel = new DataInfoResultModel();
+            dataInfoResultModel.setMsg("Please select begin time and end time exactly");
+            dataInfoResultModel.setState(false);
+            dataInfoResultModelList.add(dataInfoResultModel);
+            return dataInfoResultModelList;
+        }
+        //如果时间超过10天
+        if(dataInfoQueryModel.getEndTime().getTime() - dataInfoQueryModel.getBeginTime().getTime() > 864000000){
+            DataInfoResultModel dataInfoResultModel = new DataInfoResultModel();
+            dataInfoResultModel.setMsg("Please select less than 10 days");
+            dataInfoResultModel.setState(false);
+            dataInfoResultModelList.add(dataInfoResultModel);
+            return dataInfoResultModelList;
+        }
         List<DataDataInfoEntity> dataDataInfoEntityList = dataInfoService.findByBaseCondition(dataInfoQueryModel);
         List<DataAreaEntity> dataAreaEntityList = getAllArea();
         List<DataCategoryEntity> dataCategoryEntityList = getAllCategory();
@@ -186,6 +201,7 @@ public class DataController {
         if(dataDataInfoEntityList != null && dataDataInfoEntityList.size()>0){
             dataDataInfoEntityList.stream().forEach(item->{
                 DataInfoResultModel dataInfoResultModel = dataInfoService.dataDataInfoEntity2dataInfoResultModel(dataAreaEntityList,dataCategoryEntityList,dataSourceEntities,item);
+                dataInfoResultModel.setState(true);
                 dataInfoResultModelList.add(dataInfoResultModel);
             });
         }
