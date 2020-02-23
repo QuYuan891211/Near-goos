@@ -12,6 +12,16 @@ public class DataInfoResultModel {
     private Long size;
     private String msg;
     private boolean state;
+    private String url;
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+
 
     public String getMsg() {
         return msg;
