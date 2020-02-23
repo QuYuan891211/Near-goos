@@ -156,6 +156,7 @@ public class DataInfoServiceImp extends DataBaseServiceImp<DataDataInfoEntity,Lo
             dataInfoResultModel.setName(dataDataInfoEntity.getName());
             dataInfoResultModel.setDate(dataDataInfoEntity.getDate());
             dataInfoResultModel.setSize(dataDataInfoEntity.getSize());
+            dataInfoResultModel.setUrl(dataDataInfoEntity.getUrl());
 
             //找到匹配的海区
             dataAreaEntityList.stream().forEach(s -> {
