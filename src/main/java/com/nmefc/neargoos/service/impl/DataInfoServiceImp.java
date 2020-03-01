@@ -98,16 +98,16 @@ public class DataInfoServiceImp extends DataBaseServiceImp<DataDataInfoEntity,Lo
         //[to-do]按照日期排序
 //        Collections.reverse(result);
         //UTC时间转换
-        result.forEach(item->{
-            Date newDate = null;
-            try {
-                newDate = DateTimeUtils.DateConvert(item.getDate());
-
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            item.setDate(newDate);
-        });
+//        result.forEach(item->{
+//            Date newDate = null;
+//            try {
+//                newDate = DateTimeUtils.DateConvert(item.getDate());
+//
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//            item.setDate(newDate);
+//        });
         return result;
     }
     /**
