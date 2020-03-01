@@ -22,6 +22,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -96,6 +97,17 @@ public class DataInfoServiceImp extends DataBaseServiceImp<DataDataInfoEntity,Lo
             }
         //[to-do]按照日期排序
 //        Collections.reverse(result);
+        //UTC时间转换
+        result.forEach(item->{
+            Date newDate = null;
+            try {
+                newDate = DateTimeUtils.DateConvert(item.getDate());
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            item.setDate(newDate);
+        });
         return result;
     }
     /**
