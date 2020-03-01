@@ -23,6 +23,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -84,16 +85,17 @@ public class DataInfoServiceImp extends DataBaseServiceImp<DataDataInfoEntity,Lo
         };
 
         // 分页和不分页，这里按起始页和每页展示条数为0时默认为不分页，分页的话按创建时间降序
-
+            Sort sort = new Sort(Sort.Direction.DESC, "date");
             if (dataInfoQueryModel.getPage() == 0 && dataInfoQueryModel.getSize() == 0) {
-                result = dataInfoRepository.findAll(queryCondition);
+
+                result = dataInfoRepository.findAll(queryCondition, sort);
             } else {
-                Sort sort = new Sort(Sort.Direction.DESC, "date");
+
                 Pageable pageable = PageRequest.of(dataInfoQueryModel.getPage(), dataInfoQueryModel.getSize(), sort);
                 result = dataInfoRepository.findAll(queryCondition, pageable).getContent();
             }
-
-
+        //[to-do]按照日期排序
+//        Collections.reverse(result);
         return result;
     }
     /**
