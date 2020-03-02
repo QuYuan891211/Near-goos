@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -186,10 +187,11 @@ public class DataController {
             dataInfoResultModelList.add(dataInfoResultModel);
             return dataInfoResultModelList;
         }
+        BigInteger interval = new BigInteger("2678400000");
         //如果时间超过10天
-        if(dataInfoQueryModel.getEndTime().getTime() - dataInfoQueryModel.getBeginTime().getTime() > 864000000){
+        if(dataInfoQueryModel.getEndTime().getTime() - dataInfoQueryModel.getBeginTime().getTime() > interval.longValue()){
             DataInfoResultModel dataInfoResultModel = new DataInfoResultModel();
-            dataInfoResultModel.setMsg("Please select less than 10 days");
+            dataInfoResultModel.setMsg("Please select less than 31 days");
             dataInfoResultModel.setState(false);
             dataInfoResultModelList.add(dataInfoResultModel);
             return dataInfoResultModelList;
