@@ -85,7 +85,7 @@ public class DataInfoServiceImp extends DataBaseServiceImp<DataDataInfoEntity,Lo
             return criteriaBuilder.and(predicateList.toArray(new Predicate[predicateList.size()]));
         };
 
-        // 分页和不分页，这里按起始页和每页展示条数为0时默认为不分页，分页的话按创建时间降序
+        // 分页和不分页，这里按起始页和每页展示条数为0时默认为不分页，分页的话时间降序
             Sort sort = new Sort(Sort.Direction.DESC, "date");
             if (dataInfoQueryModel.getPage() == 0 && dataInfoQueryModel.getSize() == 0) {
 
@@ -126,7 +126,7 @@ public class DataInfoServiceImp extends DataBaseServiceImp<DataDataInfoEntity,Lo
         dataInfoStatisticsModel.setSize(new Long(0));
         dataInfoStatisticsModel.setBeginTime(new Date());
         dataInfoStatisticsModel.setEndTime(new Date());
-        //当此类别没有数据的时候
+
         if (list != null && list.size()>0){
             Long fileSize =  list.stream().collect(Collectors.summingLong(item->item.getSize()));
             dataInfoStatisticsModel.setSize(fileSize);
