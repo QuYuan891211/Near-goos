@@ -1,7 +1,11 @@
 package com.nmefc.neargoos.common.utils;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * @Author: QuYuan
@@ -29,4 +33,25 @@ public class DateTimeUtils {
     public static Timestamp date2timestamp(Date date){
         return new Timestamp(date.getTime());
     }
+
+    /**
+     *@Description:时间转换（UTC和GMT）
+     *@Param: []
+     *@Return: void
+     *@Author: QuYuan
+     *@Date: 2020/3/2 0:30
+     */
+    public static Date DateConvert(Date date) throws ParseException {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);//设置起时间
+        cal.add(Calendar.HOUR,8);
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH");
+//        String dateStr = format.format(date);
+//        format.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+//        dateStr = format.format(date);
+//        System.out.println(dateStr);
+        Date newDate = cal.getTime();
+        return newDate;
+    }
+
 }
