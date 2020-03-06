@@ -11,7 +11,7 @@ import com.nmefc.neargoos.middleModel.ProductTypeMidModel;
 //import com.sun.jmx.snmp.Timestamp;
 import java.sql.Timestamp;
 
-import com.sun.deploy.security.BadCertificateDialog;
+//import com.sun.deploy.security.BadCertificateDialog;
 import org.joda.time.DateTime;
 
 import java.util.Date;
