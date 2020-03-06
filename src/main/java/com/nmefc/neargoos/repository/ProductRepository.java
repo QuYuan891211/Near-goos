@@ -1,7 +1,7 @@
 package com.nmefc.neargoos.repository;
 
 import com.nmefc.neargoos.entity.product.ProductInfoEntity;
-import com.sun.deploy.security.BadCertificateDialog;
+//import com.sun.deploy.security.BadCertificateDialog;
 import net.sf.ehcache.util.ProductInfo;
 import org.joda.time.DateTime;
 import org.springframework.data.jpa.repository.JpaRepository;
