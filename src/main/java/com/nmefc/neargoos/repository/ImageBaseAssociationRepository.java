@@ -4,7 +4,7 @@ import com.nmefc.neargoos.entity.document.ImageBaseAssociationEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Service;
-import sun.util.resources.ga.LocaleNames_ga;
+//import sun.util.resources.ga.LocaleNames_ga;
 
 import java.util.List;
 

@@ -82,13 +82,13 @@ public class ProductServiceImp implements ProductService {
     }
 
     /**
-    * @Author : evaseemefly
-    * @Description : 获取符合条件的最近的product info
-    * @params : params: product 产品搜索mid model
-    * @return: Optional<ProductInfoEntity>
-    * @Date : 2019/12/12 10:59
-    * @return :
-    */
+     * @return :
+     * @Author : evaseemefly
+     * @Description : 获取符合条件的最近的product info
+     * @params : params: product 产品搜索mid model
+     * @return: Optional<ProductInfoEntity>
+     * @Date : 2019/12/12 10:59
+     */
     public Optional<ProductInfoEntity> getLastProduct(ProductSearchMidModel product) {
         Optional<ProductInfoEntity> lastInfo = productRepository.findOne((root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<Predicate>();
@@ -120,24 +120,24 @@ public class ProductServiceImp implements ProductService {
     }
 
     /**
-    * @Author : evaseemefly
-    * @Description : 从数据库中返回全部的types
-    * @params :
-    * @Date : 2019/12/15 17:47
-    * @return :
-    */
-    public List<ProductTypeEntity> getTypesByDB(){
+     * @return :
+     * @Author : evaseemefly
+     * @Description : 从数据库中返回全部的types
+     * @params :
+     * @Date : 2019/12/15 17:47
+     */
+    public List<ProductTypeEntity> getTypesByDB() {
         List<ProductTypeEntity> productTypeRepositoryAll = productTypeRepository.findAll();
         return productTypeRepositoryAll;
     }
 
     /**
-    * @Author : evaseemefly
-    * @Description :
-    * @params :
-    * @Date : 2019/12/12 10:58
-    * @return :
-    */
+     * @return :
+     * @Author : evaseemefly
+     * @Description :
+     * @params :
+     * @Date : 2019/12/12 10:58
+     */
     public List<ProductMenuMideModel> getProductTypeMenuList() {
 //        List<ProductTypeEntity> fatherlist = productTypeRepository.findAll();
         /*
@@ -162,7 +162,7 @@ public class ProductServiceImp implements ProductService {
                 Integer aid = area.getId();
                 List<ProductPeriodEntity> byAidAndTid = productPeriodRepository.findByAidAndTid(aid, assTemp.getTid());
                 // TODO:[*] BUG: 在获取多菜单时，此处会出现bug
-                if(byAidAndTid.size()==0){
+                if (byAidAndTid.size() == 0) {
                     return;
                 }
                 ProductPeriodEntity productPeriodTemp = byAidAndTid.get(0);
@@ -173,9 +173,9 @@ public class ProductServiceImp implements ProductService {
                 ArrayList<String> periodsIndexList = new ArrayList<>(periodsIndex.length);
                 Collections.addAll(periodsIndexList, periodsIndex);
                 // TODO:[-] 19-12-05 注意此处使用String.valueOf(obj) 将int转换为string，不用考虑obj为null的问题
-                listAreaMenu.add(new ProductAreaMenuMidModel(String.valueOf(area.getId()), area.getName(), periodsList, periodsIndexList));
+                listAreaMenu.add(new ProductAreaMenuMidModel(String.valueOf(area.getId()), area.getName(), area.getRemark(), periodsList, periodsIndexList));
             });
-            listMenu.add(new ProductMenuMideModel(String.valueOf(typeTemp.getId()), typeTemp.getName(), listAreaMenu));
+            listMenu.add(new ProductMenuMideModel(String.valueOf(typeTemp.getId()), typeTemp.getName(), typeTemp.getRemark(), listAreaMenu));
             // 以下不再使用注释掉
             // 根据当前的area与type找到符合条件的periods
             // 找到其中的periods
