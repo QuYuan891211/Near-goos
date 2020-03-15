@@ -1,6 +1,7 @@
 package com.nmefc.neargoos.middleModel;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class DataInfoResultModel {
     private Long id;
@@ -8,8 +9,36 @@ public class DataInfoResultModel {
     private String category;
     private String area;
     private String source;
-    private Timestamp date;
+    private Date date;
     private Long size;
+    private String msg;
+    private boolean state;
+    private String url;
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public boolean isState() {
+        return state;
+    }
+
+    public void setState(boolean state) {
+        this.state = state;
+    }
 
     public Long getId() {
         return id;
@@ -51,11 +80,11 @@ public class DataInfoResultModel {
         this.source = source;
     }
 
-    public Timestamp getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -172,13 +173,37 @@ public class DataController {
     @ResponseBody
     @PostMapping("/getDataInfoResultsByQuery")
     public List<DataInfoResultModel> getDataInfoListByQuery(@RequestBody DataInfoQueryModel dataInfoQueryModel){
-
+        List<DataInfoResultModel> dataInfoResultModelList = new ArrayList<>();
         if (dataInfoQueryModel == null){return null;}
         if (dataInfoQueryModel.getPage() == null || dataInfoQueryModel.getSize() == null){
             dataInfoQueryModel.setPage(0);
             dataInfoQueryModel.setSize(0);
         }
-        List<DataInfoResultModel> dataInfoResultModelList = new ArrayList<>();
+        //如果没选时间
+        if(dataInfoQueryModel.getBeginTime() == null || dataInfoQueryModel.getEndTime() == null ||dataInfoQueryModel.getBeginTime().after(dataInfoQueryModel.getEndTime())){
+            DataInfoResultModel dataInfoResultModel = new DataInfoResultModel();
+            dataInfoResultModel.setMsg("Please select begin time and end time exactly");
+            dataInfoResultModel.setState(false);
+            dataInfoResultModelList.add(dataInfoResultModel);
+            return dataInfoResultModelList;
+        }
+        BigInteger interval = new BigInteger("2678400000");
+        //如果时间超过10天
+        if(dataInfoQueryModel.getEndTime().getTime() - dataInfoQueryModel.getBeginTime().getTime() > interval.longValue()){
+            DataInfoResultModel dataInfoResultModel = new DataInfoResultModel();
+            dataInfoResultModel.setMsg("Please select less than 31 days");
+            dataInfoResultModel.setState(false);
+            dataInfoResultModelList.add(dataInfoResultModel);
+            return dataInfoResultModelList;
+        }
+        //如果传来了all(不设条件即为全选)
+        if(null != dataInfoQueryModel.getCategoryId()){
+            if(9999 == (dataInfoQueryModel.getCategoryId())){
+                dataInfoQueryModel.setCategoryId(null);
+                dataInfoQueryModel.setCategoryName(null);
+            }
+        }
+
         List<DataDataInfoEntity> dataDataInfoEntityList = dataInfoService.findByBaseCondition(dataInfoQueryModel);
         List<DataAreaEntity> dataAreaEntityList = getAllArea();
         List<DataCategoryEntity> dataCategoryEntityList = getAllCategory();
@@ -186,11 +211,12 @@ public class DataController {
         if(dataDataInfoEntityList != null && dataDataInfoEntityList.size()>0){
             dataDataInfoEntityList.stream().forEach(item->{
                 DataInfoResultModel dataInfoResultModel = dataInfoService.dataDataInfoEntity2dataInfoResultModel(dataAreaEntityList,dataCategoryEntityList,dataSourceEntities,item);
+                dataInfoResultModel.setState(true);
                 dataInfoResultModelList.add(dataInfoResultModel);
             });
         }
 
-        System.out.print(dataInfoResultModelList.size());
+        System.out.println(dataInfoResultModelList.size());
         return dataInfoResultModelList;
     }
 
@@ -288,8 +314,13 @@ public class DataController {
     @ResponseBody
     @GetMapping("/getAllCategory")
     public List<DataCategoryEntity> getAllCategory(){
+        List<DataCategoryEntity> list = this.getCategoryByBaseCondition(null,null,0,10).getContent();
+//        DataCategoryEntity dataCategoryEntity = new DataCategoryEntity();
+//        dataCategoryEntity.setId(new Long(999));
+//        dataCategoryEntity.setName("ALL");
+//        list.add(dataCategoryEntity);
         //[to-do]分页需要修改，暂时写死
-        return this.getCategoryByBaseCondition(null,null,0,10).getContent();
+        return list;
     }
 
 }

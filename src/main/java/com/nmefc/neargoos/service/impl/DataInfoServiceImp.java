@@ -22,7 +22,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -83,17 +85,29 @@ public class DataInfoServiceImp extends DataBaseServiceImp<DataDataInfoEntity,Lo
             return criteriaBuilder.and(predicateList.toArray(new Predicate[predicateList.size()]));
         };
 
-        // 分页和不分页，这里按起始页和每页展示条数为0时默认为不分页，分页的话按创建时间降序
-
+        // 分页和不分页，这里按起始页和每页展示条数为0时默认为不分页，分页的话时间降序
+            Sort sort = new Sort(Sort.Direction.DESC, "date");
             if (dataInfoQueryModel.getPage() == 0 && dataInfoQueryModel.getSize() == 0) {
-                result = dataInfoRepository.findAll(queryCondition);
+
+                result = dataInfoRepository.findAll(queryCondition, sort);
             } else {
-                Sort sort = new Sort(Sort.Direction.DESC, "date");
+
                 Pageable pageable = PageRequest.of(dataInfoQueryModel.getPage(), dataInfoQueryModel.getSize(), sort);
                 result = dataInfoRepository.findAll(queryCondition, pageable).getContent();
             }
-
-
+        //[to-do]按照日期排序
+//        Collections.reverse(result);
+        //UTC时间转换
+//        result.forEach(item->{
+//            Date newDate = null;
+//            try {
+//                newDate = DateTimeUtils.DateConvert(item.getDate());
+//
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//            item.setDate(newDate);
+//        });
         return result;
     }
     /**
@@ -112,7 +126,7 @@ public class DataInfoServiceImp extends DataBaseServiceImp<DataDataInfoEntity,Lo
         dataInfoStatisticsModel.setSize(new Long(0));
         dataInfoStatisticsModel.setBeginTime(new Date());
         dataInfoStatisticsModel.setEndTime(new Date());
-        //当此类别没有数据的时候
+
         if (list != null && list.size()>0){
             Long fileSize =  list.stream().collect(Collectors.summingLong(item->item.getSize()));
             dataInfoStatisticsModel.setSize(fileSize);
@@ -156,6 +170,7 @@ public class DataInfoServiceImp extends DataBaseServiceImp<DataDataInfoEntity,Lo
             dataInfoResultModel.setName(dataDataInfoEntity.getName());
             dataInfoResultModel.setDate(dataDataInfoEntity.getDate());
             dataInfoResultModel.setSize(dataDataInfoEntity.getSize());
+            dataInfoResultModel.setUrl(dataDataInfoEntity.getUrl());
 
             //找到匹配的海区
             dataAreaEntityList.stream().forEach(s -> {
