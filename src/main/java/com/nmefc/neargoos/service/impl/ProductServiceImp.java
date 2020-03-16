@@ -90,7 +90,8 @@ public class ProductServiceImp implements ProductService {
      * @Date : 2019/12/12 10:59
      */
     public Optional<ProductInfoEntity> getLastProduct(ProductSearchMidModel product) {
-        Optional<ProductInfoEntity> lastInfo = productRepository.findOne((root, query, cb) -> {
+
+        List<ProductInfoEntity> list = productRepository.findAll((root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<Predicate>();
             if (product.getArea() != null) {
                 predicates.add(cb.equal(root.get("area"), product.getArea()));
@@ -103,7 +104,21 @@ public class ProductServiceImp implements ProductService {
             }
             return query.where(predicates.toArray(new Predicate[predicates.size()])).orderBy(cb.desc(root.get("targetDate"))).getRestriction();
         });
-        return lastInfo;
+        return Optional.of(list.get(0));
+//        Optional<ProductInfoEntity> lastInfo = productRepository.findOne((root, query, cb) -> {
+//            List<Predicate> predicates = new ArrayList<Predicate>();
+//            if (product.getArea() != null) {
+//                predicates.add(cb.equal(root.get("area"), product.getArea()));
+//            }
+//            if (product.getPeriod() != null) {
+//                predicates.add(cb.equal(root.get("interval"), product.getPeriod()));
+//            }
+//            if (product.getCateogry() != null) {
+//                predicates.add(cb.equal(root.get("type"), product.getCateogry()));
+//            }
+//            return query.where(predicates.toArray(new Predicate[predicates.size()])).orderBy(cb.desc(root.get("targetDate"))).getRestriction();
+//        });
+//        return lastInfo;
     }
 
     public List<ProductTypeMidModel> getProductTypes() {
