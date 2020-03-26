@@ -1,6 +1,7 @@
 package com.nmefc.neargoos.service.impl;
 
 import com.nmefc.neargoos.common.enumPackage.Area;
+import com.nmefc.neargoos.common.enumPackage.BrevityEnum;
 import com.nmefc.neargoos.common.enumPackage.ProductInterval;
 import com.nmefc.neargoos.common.enumPackage.ProductType;
 import com.nmefc.neargoos.entity.product.*;
@@ -10,6 +11,10 @@ import com.nmefc.neargoos.repository.ProductRepository;
 import com.nmefc.neargoos.repository.ProductTypeRepository;
 import com.nmefc.neargoos.service.inte.ProductService;
 import org.hibernate.engine.spi.CollectionEntry;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,6 +22,7 @@ import java.sql.Timestamp;
 import java.util.*;
 //TODO[*] 注意这两个包的区别
 //import java.util.function.Predicate;
+import javax.naming.ldap.PagedResultsControl;
 import javax.persistence.criteria.Predicate;
 
 // TODO[*] 19-10-12 以下两种类型的区别
@@ -49,36 +55,76 @@ public class ProductServiceImp implements ProductService {
     // 注释的快捷方式暂时有点问题，先手动加上，之后再替换
     // 获取符合条件的product list
     public List<ProductInfoEntity> getMatchListByProduct(ProductSearchMidModel product) {
-        return productRepository.findAll(
-                (root, query, cb) -> {
-                    List<Predicate> predicates = new ArrayList<Predicate>();
+        List<ProductInfoEntity> listRes = new ArrayList<>();
+        // TODO:[*] + 20-03-25 加入了使用 JpaSpecificationExecutor 并加入分页操作
+//        if (product.getBrevity() == BrevityEnum.SHORT) {
+//            // 加入截取最后的20个
+//            Sort sort = new Sort(Sort.DEFAULT_DIRECTION.DESC, "targetDate");
+//            int page = 0;
+//            int pageSize = 20;
+//            Pageable pageable = PageRequest.of(page, pageSize, sort);
+//
+//            Page<ProductInfoEntity> pageRes = productRepository.findAll(
+//                    (root, query, cb) -> {
+//                        List<Predicate> predicates = new ArrayList<Predicate>();
+//                        if (product.getArea() != null) {
+//                            predicates.add(cb.equal(root.get("area"), product.getArea()));
+//                        }
+//                        if (product.getPeriod() != null) {
+//                            predicates.add(cb.equal(root.get("interval"), product.getPeriod()));
+//                        }
+//                        if (product.getCateogry() != null) {
+//                            predicates.add(cb.equal(root.get("type"), product.getCateogry()));
+//                        }
+//                        // TODO:[*] 19-12-09 加入了时间区间的查询条件
+//                        if (product.getStart() != null) {
+//                            //Unable to locate Attribute  with the the given name [start] on this ManagedType
+//                            // 此处注意，由于product info表中对应的时间只有一个字段，是targetDate
+//                            predicates.add(cb.greaterThanOrEqualTo(root.get("targetDate"), product.getStart()));
+//                        }
+//                        if (product.getEnd() != null) {
+//                            predicates.add(cb.lessThanOrEqualTo(root.get("targetDate"), product.getEnd()));
+//                        }
+//                        // TODO:[*] 19-12-11 此处不再局限于根据时间进行查询（去掉start与end），只获取最近时刻的product(放在另一个方法中)
+//                        return query.where(predicates.toArray(new Predicate[predicates.size()])).getRestriction();
+//                    }, pageable
+//            );
+//            if(pageRes != null && pageRes.hasContent()){
+//                listRes=pageRes.getContent();
+//            }
+//        }
 
-//                    StringUtils.isNullOrEmpty("")
-                    if (product.getArea() != null) {
-                        predicates.add(cb.equal(root.get("area"), product.getArea()));
+
+        if (product.getBrevity() == BrevityEnum.NORMAL) {
+            listRes = productRepository.findAll(
+                    (root, query, cb) -> {
+                        List<Predicate> predicates = new ArrayList<Predicate>();
+                        if (product.getArea() != null) {
+                            predicates.add(cb.equal(root.get("area"), product.getArea()));
+                        }
+                        if (product.getPeriod() != null) {
+                            predicates.add(cb.equal(root.get("interval"), product.getPeriod()));
+                        }
+                        if (product.getCateogry() != null) {
+                            predicates.add(cb.equal(root.get("type"), product.getCateogry()));
+                        }
+                        // TODO:[*] 19-12-09 加入了时间区间的查询条件
+                        if (product.getStart() != null) {
+                            //Unable to locate Attribute  with the the given name [start] on this ManagedType
+                            // 此处注意，由于product info表中对应的时间只有一个字段，是targetDate
+                            predicates.add(cb.greaterThanOrEqualTo(root.get("targetDate"), product.getStart()));
+                        }
+                        if (product.getEnd() != null) {
+                            predicates.add(cb.lessThanOrEqualTo(root.get("targetDate"), product.getEnd()));
+                        }
+                        // TODO:[*] 19-12-11 此处不再局限于根据时间进行查询（去掉start与end），只获取最近时刻的product(放在另一个方法中)
+                        return query.where(predicates.toArray(new Predicate[predicates.size()])).getRestriction();
                     }
-                    if (product.getPeriod() != null) {
-                        predicates.add(cb.equal(root.get("interval"), product.getPeriod()));
-                    }
-                    if (product.getCateogry() != null) {
-                        predicates.add(cb.equal(root.get("type"), product.getCateogry()));
-                    }
-                    // TODO:[*] 19-12-09 加入了时间区间的查询条件
-                    if (product.getStart() != null) {
-                        //Unable to locate Attribute  with the the given name [start] on this ManagedType
-                        // 此处注意，由于product info表中对应的时间只有一个字段，是targetDate
-                        predicates.add(cb.greaterThanOrEqualTo(root.get("targetDate"), product.getStart()));
-                    }
-                    if (product.getEnd() != null) {
-                        predicates.add(cb.lessThanOrEqualTo(root.get("targetDate"), product.getEnd()));
-                    }
-                    // TODO:[*] 19-12-11 此处不再局限于根据时间进行查询（去掉start与end），只获取最近时刻的product(放在另一个方法中)
-                    return query.where(predicates.toArray(new Predicate[predicates.size()])).getRestriction();
-//                    predicates.add(cb.equal(root.get("area"),area.ordinal()));
-//                    predicates.add(cb.equal(root.get("type"),type.ordinal()));
-//                    predicates.add(cb.equal(root.get("target_data",targetDate)));
-                }
-        );
+            );
+        } else if (product.getBrevity() == BrevityEnum.SHORT) {
+            listRes = productRepository.findTop20ByAreaOrderByTargetDateDesc(Integer.parseInt(product.getArea()));
+        }
+        return listRes;
     }
 
     /**
