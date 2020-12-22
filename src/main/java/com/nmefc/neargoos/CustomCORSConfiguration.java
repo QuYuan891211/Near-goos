@@ -16,10 +16,13 @@ import org.springframework.web.filter.CorsFilter;
  * \
  */
 @Configuration
-public class CustomCORSConfiguration {
+public class
+CustomCORSConfiguration {
     private CorsConfiguration buildConfig() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.addAllowedOrigin("*");
+        // 设置指定 url 的过滤
+        corsConfiguration.addAllowedOrigin("*：8082");
+        corsConfiguration.addAllowedOrigin("*：8083");
         corsConfiguration.addAllowedHeader("*");
         corsConfiguration.addAllowedMethod("*");
         corsConfiguration.setAllowCredentials(true);
