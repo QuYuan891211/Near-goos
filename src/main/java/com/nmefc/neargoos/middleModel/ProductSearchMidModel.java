@@ -1,6 +1,7 @@
 package com.nmefc.neargoos.middleModel;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.nmefc.neargoos.common.enumPackage.BrevityEnum;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Timestamp;
@@ -17,6 +18,7 @@ public class ProductSearchMidModel {
     private String cateogry;
     private String area;
     private String period;
+    private BrevityEnum brevity = BrevityEnum.NORMAL;
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
     @JsonFormat(timezone = "GTM+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date start;
@@ -76,4 +78,11 @@ public class ProductSearchMidModel {
     }
 
 
+    public BrevityEnum getBrevity() {
+        return brevity;
+    }
+
+    public void setBrevity(BrevityEnum brevity) {
+        this.brevity = brevity;
+    }
 }

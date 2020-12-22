@@ -3,6 +3,7 @@ package com.nmefc.neargoos.entity.data;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 
 @Entity
 @Table(name = "data_data_info", schema = "neargoos", catalog = "")
@@ -14,7 +15,7 @@ public class DataDataInfoEntity extends DataBaseEntity {
 //    private String name;
     private String extensions;
     private String remark;
-    private Timestamp date;
+    private Date date;
     private byte isDesc;
     @Basic
     @Column(name = "category_id")
@@ -112,11 +113,11 @@ public class DataDataInfoEntity extends DataBaseEntity {
 
     @Basic
     @Column(name = "date")
-    public Timestamp getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
