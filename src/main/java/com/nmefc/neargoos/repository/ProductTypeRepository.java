@@ -14,4 +14,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * \
  */
 public interface ProductTypeRepository extends  JpaSpecificationExecutor<ProductTypeEntity>, JpaRepository<ProductTypeEntity,Integer>{
+
+
 }
