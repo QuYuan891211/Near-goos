@@ -18,12 +18,13 @@ spring:
           driver-class-name: com.mysql.jdbc.Driver
 #          driver-class-name:com.mysql.jdbc.Driver
           #基本属性
-          url: jdbc:mysql://localhost:3306/neargoos?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+          url: jdbc:mysql://localhost:3306/neargoos?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
           username: root
           # aw
 #          password: admin123
+
 #          p52s
-          password: 123456
+          password: 62105799
           #配置初始化大小/最小/最大
           initial-size: 1
           min-idle: 1
