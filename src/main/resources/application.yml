@@ -23,7 +23,7 @@ spring:
 #          password: admin123
 
 #          p52s
-          password: 62105799
+          password: 64155459
           #配置初始化大小/最小/最大
           initial-size: 1
           min-idle: 1
