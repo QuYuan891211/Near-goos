@@ -21,8 +21,9 @@ CustomCORSConfiguration {
     private CorsConfiguration buildConfig() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         // 设置指定 url 的过滤
-        corsConfiguration.addAllowedOrigin("*：8082");
-        corsConfiguration.addAllowedOrigin("*：8083");
+        // 20-12-23 修改为 -> http://neargoos.nmefc.cn
+        corsConfiguration.addAllowedOrigin("http://neargoos.nmefc.cn");
+//        corsConfiguration.addAllowedOrigin("*：8083");
         corsConfiguration.addAllowedHeader("*");
         corsConfiguration.addAllowedMethod("*");
         corsConfiguration.setAllowCredentials(true);
