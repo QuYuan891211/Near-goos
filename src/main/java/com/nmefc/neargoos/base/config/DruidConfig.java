@@ -23,7 +23,7 @@ public class DruidConfig {
         servletRegistrationBean.addInitParameter("allow", "127.0.0.1,10.1.1.1"); // 白名单
         // servletRegistrationBean.addInitParameter("deny", "192.168.1.200"); // 黑名单
         servletRegistrationBean.addInitParameter("loginUsername", "admin123"); // 用户名
-        servletRegistrationBean.addInitParameter("loginPassword", "62155769"); // 密码
+        servletRegistrationBean.addInitParameter("loginPassword", "62455959"); // 密码
         servletRegistrationBean.addInitParameter("resetEnable", "false"); // 是否可以重置数据源
         return servletRegistrationBean ;
     }
