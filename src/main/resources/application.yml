@@ -10,20 +10,20 @@ spring:
 #        process-definition-location-prefix: classpath:/processes/
     datasource:
         name: mysql_test
-        type: com.alibaba.druid.pool.DruidDataSource
+#        type: com.alibaba.druid.pool.DruidDataSource
         #druid相关配置
         druid:
-          #监控统计拦截的filters
-          filters: stat
+          type: com.alibaba.druid.pool.DruidDataSource
           driver-class-name: com.mysql.jdbc.Driver
 #          driver-class-name:com.mysql.jdbc.Driver
           #基本属性
-          url: jdbc:mysql://localhost:3306/neargoos?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+          url: jdbc:mysql://localhost:3306/neargoos?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
           username: root
           # aw
 #          password: admin123
+
 #          p52s
-          password: 123456
+          password: 64135759
           #配置初始化大小/最小/最大
           initial-size: 1
           min-idle: 1
@@ -41,6 +41,36 @@ spring:
           #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
           pool-prepared-statements: false
           max-pool-prepared-statement-per-connection-size: 20
+           # druid 监控配置  访问路径：http://XXXX/druid/*
+
+          filter: stat
+#            stat:                 # 用于统计监控信息。
+#              enabled: true       # 启用
+#              slow-sql-millis: 1000  # 记录超过此指定时间的 慢sql 单位：ms
+#              merge-sql: true     # 合并相同sql的统计
+#              wall:
+#                enabled: true       # 启用sql检测功能 ，防止sql注入攻击，sql防火墙启用
+#              slf4j:
+#                enabled: true       # 开启日志管理，监控页面可重置记录
+#            web-stat-filter:        # web应用 监控配置
+#              enabled: true
+#              profile-enable: true  # 能够监控单个url调用的sql列表
+#              url-pattern: /*       # 监控路径控制  eg: /admin/*
+#              exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*' # 不拦截的路径
+#            stat-view-servlet:      # druid 监控页面入口控制
+#              enabled: true
+##              allow: 127.0.0.1,192.168.1.1/27  # ip白名单 只有当前名单中的ip才能访问 1/27表示ip前27位相同即可
+##              deny: 192.168.1.255				 # ip黑名单，禁止访问的地址 优先级高于白名单
+#              login-username: admin123			 # druid 监控页面登录账号
+#              login-password: 62105799			 # druid 监控页面登录密码
+#              url-pattern: /druid/*		 # 监控页面访问路径配置
+#              reset-enable: true  		     # 是否能够重置数据
+#            useGlobalDataSourceStat: true   	 # 合并多个DruidDataSource的监控数据
+#                    # 过滤器配置 可配置多个 ，使用逗号分隔 stat,wall；  不指定过滤器的参数使用默认，也可单独制定过滤器
+#                    # 此方法与上面的 filter 单独配置开启是一样的，只不过上面可以使用个性化配置，而filters使用默认配置，所以这两个配置可以不同时使用
+#                  # filters: stat,wall
+##            aop-patterns: com.   # Spring 监控路径
+
 ## 该配置节点为独立的节点，有很多同学容易将这个配置放在spring的节点下，导致配置无法被识别
 mybatis:
   mapper-locations: classpath:mapper/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
